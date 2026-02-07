@@ -27,6 +27,7 @@ Every attack has a defense. Every payload is annotated, defanged, and educationa
 | ⚙️ | [Claude Code Skill Architecture](notes/05_Claude_Code_Skill_Architecture.md) | How Claude Code's extensibility (skills, hooks, MCP) creates attack surface |
 | 👻 | [LLM Hallucination Prevention](notes/06_LLM_Hallucination_Prevention.md) | Why models invent things, how to detect it, and how to stop it |
 | 🌐 | [AI Coding Language Performance](notes/07_AI_Coding_Language_Performance.md) | Multilingual benchmarks, token efficiency, and language-steering attacks |
+| 🔓 | [LLM Jailbreaking Deep Dive](notes/08_LLM_Jailbreaking_Deep_Dive.md) | Full taxonomy: DAN to GCG to Crescendo, defenses, benchmarks, agent implications |
 
 ---
 
