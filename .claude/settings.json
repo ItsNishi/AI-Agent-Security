@@ -1,0 +1,24 @@
+{
+	"hooks": {
+		"PreToolUse": [
+			{
+				"matcher": "Bash",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "bash -c 'INPUT=$(cat); CMD=$(echo \"$INPUT\" | python3 -c \"import sys,json; print(json.load(sys.stdin).get(\\\"input\\\",{}).get(\\\"command\\\",\\\"\\\"))\" 2>/dev/null); WARN=\"\"; if echo \"$CMD\" | grep -qEi \"(curl|wget|fetch)\\s.*\\|\\s*(bash|sh|python|node)\"; then WARN=\"${WARN}Pipe-to-shell execution detected. \"; fi; if echo \"$CMD\" | grep -qEi \"rm\\s+(-rf?\\s+)?/\"; then WARN=\"${WARN}Recursive delete from root. \"; fi; if echo \"$CMD\" | grep -qEi \"chmod\\s+777\"; then WARN=\"${WARN}World-writable permissions. \"; fi; if echo \"$CMD\" | grep -qEi \"eval\\s.*\\$\"; then WARN=\"${WARN}Eval with variable expansion. \"; fi; if echo \"$CMD\" | grep -qEi \"base64.*\\|\\s*(bash|sh|python|eval)\"; then WARN=\"${WARN}Base64 decode to execution. \"; fi; if [ -n \"$WARN\" ]; then echo \"{\\\"hookSpecificOutput\\\":{\\\"message\\\":\\\"[SECURITY] $WARN Review command before approving.\\\"}}\"; fi'"
+					}
+				]
+			},
+			{
+				"matcher": "Write",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "bash -c 'INPUT=$(cat); FPATH=$(echo \"$INPUT\" | python3 -c \"import sys,json; print(json.load(sys.stdin).get(\\\"input\\\",{}).get(\\\"file_path\\\",\\\"\\\"))\" 2>/dev/null); WARN=\"\"; if echo \"$FPATH\" | grep -qEi \"(\\.ssh/|\\.aws/|\\.gnupg/|\\.kube/)\"; then WARN=\"${WARN}Write to credential directory. \"; fi; if echo \"$FPATH\" | grep -qEi \"\\.claude/settings\\.json$\"; then WARN=\"${WARN}Write to Claude settings. \"; fi; if echo \"$FPATH\" | grep -qEi \"(\\.bashrc|\\.zshrc|\\.profile|\\.bash_profile)$\"; then WARN=\"${WARN}Write to shell profile. \"; fi; if [ -n \"$WARN\" ]; then echo \"{\\\"hookSpecificOutput\\\":{\\\"message\\\":\\\"[SECURITY] $WARN Review file path before approving.\\\"}}\"; fi'"
+					}
+				]
+			}
+		]
+	}
+}

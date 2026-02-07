@@ -66,14 +66,66 @@ Hands-on annotated scenarios -- each one shows the attack **and** the fix.
 
 ---
 
+## 🔧 Security Skill Suite
+
+Working defensive tooling built on Claude Code's skill + hook architecture. These turn the research above into practical detection.
+
+### Prerequisites
+
+- **Python 3.10+** -- the scanner scripts are Python; no third-party packages required (stdlib only)
+- **Claude Code** -- skills are invoked via `/skill-name` in a Claude Code session
+
+### Skills
+
+| Skill | Invocation | What It Does |
+|---|---|---|
+| **vet-repo** | `/vet-repo` | Scans `.claude/`, `.mcp.json`, `CLAUDE.md`, VS Code/Cursor configs for hook abuse, injection, MCP poisoning |
+| **scan-skill** | `/scan-skill <dir>` | Deep analysis of a single skill before installation -- frontmatter, HTML comments, persistence triggers, supporting scripts |
+| **audit-code** | `/audit-code [path]` | Code security review -- hardcoded secrets, dangerous calls, SQL injection, `.env` files, file permissions |
+
+### Hooks
+
+Advisory `PreToolUse` guards in `.claude/settings.json` that warn (not block) on:
+
+- **Bash**: pipe-to-shell, `rm -rf /`, `chmod 777`, eval with variables, base64-to-execution
+- **Write**: writes to `~/.ssh/`, `~/.aws/`, `.claude/settings.json`, shell profiles
+
+### Shared Pattern Database
+
+70+ detection patterns across 10 categories in `.claude/skills/vet-repo/scripts/patterns.py`:
+
+```
+skill_injection | hook_abuse | mcp_config | secrets | dangerous_calls
+exfiltration | encoding_obfuscation | instruction_override | supply_chain | file_permissions
+```
+
+All patterns derived from the research notes and examples in this repo.
+
+---
+
 ## 📁 Project Structure
 
 ```
 AI-Agent-Security/
 ├── 📄 README.md
-├── 📝 notes/            # Research writeups and analysis
-├── 🧪 examples/         # Annotated attack/defense pairs
-└── 🔧 tools/            # Detection & sanitization scripts (planned)
+├── 📝 notes/                           # Research writeups and analysis
+├── 🧪 examples/                        # Annotated attack/defense pairs
+└── 🔧 .claude/
+    ├── settings.json                    # Hook configurations
+    └── skills/
+        ├── vet-repo/                    # Repository agent config scanner
+        │   ├── SKILL.md
+        │   └── scripts/
+        │       ├── patterns.py          # Shared pattern database
+        │       └── vet_repo.py
+        ├── scan-skill/                  # Individual skill analyzer
+        │   ├── SKILL.md
+        │   └── scripts/
+        │       └── scan_skill.py
+        └── audit-code/                  # Code security auditor
+            ├── SKILL.md
+            └── scripts/
+                └── audit_code.py
 ```
 
 ---
