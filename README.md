@@ -70,18 +70,50 @@ Hands-on annotated scenarios -- each one shows the attack **and** the fix.
 
 Working defensive tooling built on Claude Code's skill + hook architecture. These turn the research above into practical detection.
 
+### Install from ClawHub
+
+The fastest way to install -- each link goes to the ClawHub listing:
+
+| Skill | ClawHub | What It Does |
+|---|---|---|
+| **vet-repo** | [clawhub.ai/ItsNishi/vet-repo](https://clawhub.ai/ItsNishi/vet-repo) | Scans `.claude/`, `.mcp.json`, `CLAUDE.md`, VS Code/Cursor configs for hook abuse, injection, MCP poisoning |
+| **scan-skill** | [clawhub.ai/ItsNishi/scan-skill](https://clawhub.ai/ItsNishi/scan-skill) | Deep analysis of a single skill before installation -- frontmatter, HTML comments, persistence triggers, supporting scripts |
+| **audit-code** | [clawhub.ai/ItsNishi/audit-code](https://clawhub.ai/ItsNishi/audit-code) | Code security review -- hardcoded secrets, dangerous calls, SQL injection, `.env` files, file permissions |
+
+### Install from Source
+
+If you prefer to install manually from this repo:
+
+```bash
+# Clone the repo
+git clone git@github.com:ItsNishi/AI-Agent-Security.git
+
+# Copy the skills you want into your project or personal skills directory
+# Project-level (scoped to one repo):
+cp -r AI-Agent-Security/.claude/skills/vet-repo /path/to/your/project/.claude/skills/
+cp -r AI-Agent-Security/.claude/skills/scan-skill /path/to/your/project/.claude/skills/
+cp -r AI-Agent-Security/.claude/skills/audit-code /path/to/your/project/.claude/skills/
+
+# Personal-level (available in all projects):
+cp -r AI-Agent-Security/.claude/skills/vet-repo ~/.claude/skills/
+cp -r AI-Agent-Security/.claude/skills/scan-skill ~/.claude/skills/
+cp -r AI-Agent-Security/.claude/skills/audit-code ~/.claude/skills/
+```
+
+### Usage
+
+Once installed, invoke in any Claude Code session:
+
+```
+/vet-repo              # Scan current repo's agent configs
+/scan-skill <dir>      # Analyze a skill before installing it
+/audit-code [path]     # Security review of project code (defaults to project root)
+```
+
 ### Prerequisites
 
-- **Python 3.10+** -- the scanner scripts are Python; no third-party packages required (stdlib only)
+- **Python 3.10+** -- scanner scripts use stdlib only, no third-party packages
 - **Claude Code** -- skills are invoked via `/skill-name` in a Claude Code session
-
-### Skills
-
-| Skill | Invocation | What It Does |
-|---|---|---|
-| **vet-repo** | `/vet-repo` | Scans `.claude/`, `.mcp.json`, `CLAUDE.md`, VS Code/Cursor configs for hook abuse, injection, MCP poisoning |
-| **scan-skill** | `/scan-skill <dir>` | Deep analysis of a single skill before installation -- frontmatter, HTML comments, persistence triggers, supporting scripts |
-| **audit-code** | `/audit-code [path]` | Code security review -- hardcoded secrets, dangerous calls, SQL injection, `.env` files, file permissions |
 
 ### Hooks
 
@@ -89,6 +121,8 @@ Advisory `PreToolUse` guards in `.claude/settings.json` that warn (not block) on
 
 - **Bash**: pipe-to-shell, `rm -rf /`, `chmod 777`, eval with variables, base64-to-execution
 - **Write**: writes to `~/.ssh/`, `~/.aws/`, `.claude/settings.json`, shell profiles
+
+To install the hooks, copy `.claude/settings.json` into your project's `.claude/` directory.
 
 ### Shared Pattern Database
 

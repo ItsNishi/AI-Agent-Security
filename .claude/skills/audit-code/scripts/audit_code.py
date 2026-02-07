@@ -12,10 +12,9 @@ import os
 import stat
 from pathlib import Path
 
-# Add vet-repo scripts dir to path for shared patterns.py
+# Add local scripts dir to path for patterns.py
 Script_Dir = Path(__file__).parent
-Vet_Repo_Scripts = Script_Dir.parent.parent / "vet-repo" / "scripts"
-sys.path.insert(0, str(Vet_Repo_Scripts))
+sys.path.insert(0, str(Script_Dir))
 
 from patterns import (
 	Audit_Code_Patterns,
