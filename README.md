@@ -126,7 +126,7 @@ To install the hooks, copy `.claude/settings.json` into your project's `.claude/
 
 ### Shared Pattern Database
 
-70+ detection patterns across 10 categories in `.claude/skills/vet-repo/scripts/patterns.py`:
+70+ detection patterns across 10 categories. Each skill bundles its own copy of `patterns.py` so it works standalone:
 
 ```
 skill_injection | hook_abuse | mcp_config | secrets | dangerous_calls
@@ -150,15 +150,17 @@ AI-Agent-Security/
         ├── vet-repo/                    # Repository agent config scanner
         │   ├── SKILL.md
         │   └── scripts/
-        │       ├── patterns.py          # Shared pattern database
+        │       ├── patterns.py          # Pattern database
         │       └── vet_repo.py
         ├── scan-skill/                  # Individual skill analyzer
         │   ├── SKILL.md
         │   └── scripts/
+        │       ├── patterns.py          # Pattern database
         │       └── scan_skill.py
         └── audit-code/                  # Code security auditor
             ├── SKILL.md
             └── scripts/
+                ├── patterns.py          # Pattern database
                 └── audit_code.py
 ```
 
