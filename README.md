@@ -28,6 +28,7 @@ Every attack has a defense. Every payload is annotated, defanged, and educationa
 | 👻 | [LLM Hallucination Prevention](notes/06_LLM_Hallucination_Prevention.md) | Why models invent things, how to detect it, and how to stop it |
 | 🌐 | [AI Coding Language Performance](notes/07_AI_Coding_Language_Performance.md) | Multilingual benchmarks, token efficiency, and language-steering attacks |
 | 🔓 | [LLM Jailbreaking Deep Dive](notes/08_LLM_Jailbreaking_Deep_Dive.md) | Full taxonomy: DAN to GCG to Crescendo, defenses, benchmarks, agent implications |
+| 🔍 | [Skill Scanning & Detection Landscape](notes/09_Skill_Scanning_And_Detection_Landscape.md) | Cisco Skill Scanner, VirusTotal, ToxicSkills audit, gap analysis, what to build next |
 
 ---
 
