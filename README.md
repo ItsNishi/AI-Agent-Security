@@ -21,7 +21,7 @@ Every attack has a defense. Every payload is annotated, defanged, and educationa
 | | Topic | What You'll Learn |
 |---|-------|-------------------|
 | 🎯 | [Prompt Injection Overview](notes/01_Prompt_Injection_Overview.md) | The foundational attack -- how untrusted input hijacks agent behavior |
-| 💉 | [Skill Injection Analysis](notes/02_Skill_Injection_Analysis.md) | Real-world trojanized skill teardown (ZackKorman `security-review` case) |
+| 💉 | [Skill Injection Analysis](notes/02_Skill_Injection_Analysis.md) | Real-world trojanized skill teardowns, injection vectors, and detection strategies |
 | 🧱 | [Defense Patterns](notes/03_Defense_Patterns.md) | Sanitization, sandboxing, and mitigation strategies with working code |
 | 🔬 | [Research Findings](notes/04_Research_Findings.md) | Cutting-edge attacks (2024-2026): MCP poisoning, memory corruption, vibe coding risks |
 | ⚙️ | [Claude Code Skill Architecture](notes/05_Claude_Code_Skill_Architecture.md) | How Claude Code's extensibility (skills, hooks, MCP) creates attack surface |

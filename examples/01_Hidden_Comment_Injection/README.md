@@ -23,7 +23,7 @@ This creates a gap between what humans review and what the agent executes.
 
 ## Real-World Example
 
-See [malicious_skill.md](./malicious_skill.md) for an annotated breakdown of the ZackKorman `security-review` skill that used this technique to achieve remote code execution.
+See [malicious_skill.md](./malicious_skill.md) for an annotated breakdown of a trojanized `security-review` skill that used this technique to achieve remote code execution.
 
 See [sanitized_skill.md](./sanitized_skill.md) for what a legitimate version of the same skill looks like.
 

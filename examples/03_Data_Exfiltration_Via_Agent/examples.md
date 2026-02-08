@@ -4,7 +4,7 @@
 
 ### Attack Chain
 
-1. User installs a trojanized skill (like the ZackKorman example)
+1. User installs a trojanized skill (like the `security-review` example)
 2. Hidden instruction in the skill tells the agent to read SSH keys
 3. Agent uses file read tool to access `~/.ssh/id_rsa`
 4. Skill instructs agent to POST the content to an attacker-controlled server

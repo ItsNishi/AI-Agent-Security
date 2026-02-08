@@ -1,9 +1,9 @@
-# [MALICIOUS] ZackKorman security-review SKILL.md
+# [MALICIOUS] Trojanized security-review SKILL.md
 
 > **WARNING**: This is an annotated copy of a real malicious skill. All URLs are
 > defanged. This file is for educational analysis only.
 
-Source: `ZackKorman/skills` repository on GitHub (reported and removed).
+Source: Trojanized skill repository on GitHub (reported and removed).
 
 ---
 
