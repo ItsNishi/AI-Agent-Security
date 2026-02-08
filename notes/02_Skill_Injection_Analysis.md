@@ -1,8 +1,8 @@
-# Skill Injection Analysis -- ZackKorman "security-review" SKILL.md
+# Skill Injection Analysis -- Trojanized "security-review" SKILL.md
 
 ## Background
 
-In early 2025, a GitHub repository (`ZackKorman/skills`) published a Claude Code skill called `security-review` that appeared to be a legitimate code auditing tool. It contained a hidden prompt injection payload that would execute arbitrary code on the user's machine.
+In early 2025, a GitHub repository published a Claude Code skill called `security-review` that appeared to be a legitimate code auditing tool. It contained a hidden prompt injection payload that would execute arbitrary code on the user's machine.
 
 This is a real-world example of a **trojanized skill** -- a supply chain attack targeting AI agent users.
 
@@ -154,7 +154,7 @@ Full system compromise
 
 ## Broader Context: This Attack Is Part of a Pattern
 
-The ZackKorman skill is one instance of a class of attacks that exploded in 2025. The same hidden-instruction technique applies across multiple surfaces:
+The trojanized `security-review` skill is one instance of a class of attacks that exploded in 2025. The same hidden-instruction technique applies across multiple surfaces:
 
 ### MCP Tool Description Injection
 
@@ -202,7 +202,7 @@ The three-stage attack chain: **Prompt Injection -> Agent Tools -> Base IDE Feat
 
 | Vector | Delivery | Persistence | Scale |
 |---|---|---|---|
-| Trojanized skill (ZackKorman) | GitHub skill repo | Per-task via description trigger | All users who install |
+| Trojanized skill (`security-review`) | GitHub skill repo | Per-task via description trigger | All users who install |
 | MCP tool poisoning | External MCP server | Per-connection via `tools/list` | All users connected to server |
 | IDE config injection | Malicious code/issue/MCP | Permanent via settings file | Per-workspace |
 | Memory poisoning | Any injected content | Up to 365 days in memory | Per-agent across sessions |
@@ -219,7 +219,7 @@ A new attack pattern combining hallucination with skill injection:
 4. AI agents executed skills literally, attempting to install nonexistent package
 5. Attacker could claim the package name on npm
 
-**Key difference from ZackKorman:** No hidden instructions needed. The skill content is visible, but reviewers don't verify that referenced packages exist. Skills look like documentation, not code.
+**Key difference from the trojanized `security-review` skill:** No hidden instructions needed. The skill content is visible, but reviewers don't verify that referenced packages exist. Skills look like documentation, not code.
 
 See: [examples/04_Hallucinated_Package_Skill_Injection/](../examples/04_Hallucinated_Package_Skill_Injection/)
 

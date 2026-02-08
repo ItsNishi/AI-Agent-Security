@@ -377,7 +377,7 @@ Cisco's behavioral analyzer plans CFG-based static dataflow analysis. Runtime ta
 - **Audit trail** -- every version published, every change logged, every review recorded
 - **Reputation scoring** -- download counts, user reviews, security audit history, publisher track record
 
-**Why it matters:** The ZackKorman attack (see `02_Skill_Injection_Analysis.md`) worked because there was no verification of who published the skill or whether it had been tampered with. Package signing is table stakes in every other software ecosystem.
+**Why it matters:** The trojanized `security-review` attack (see `02_Skill_Injection_Analysis.md`) worked because there was no verification of who published the skill or whether it had been tampered with. Package signing is table stakes in every other software ecosystem.
 
 **Gap it fills:** Supply chain trust. Currently zero skill ecosystems have signing or provenance verification.
 

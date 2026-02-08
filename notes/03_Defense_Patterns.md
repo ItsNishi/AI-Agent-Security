@@ -4,7 +4,7 @@
 
 ### Strip HTML Comments
 
-The most direct defense against the ZackKorman-style attack. Before the LLM processes any skill or context file, strip HTML comments.
+The most direct defense against trojanized skill attacks. Before the LLM processes any skill or context file, strip HTML comments.
 
 ```python
 import re
