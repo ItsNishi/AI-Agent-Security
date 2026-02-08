@@ -67,46 +67,57 @@ inherently solvable the problems are, independent of any single model's weakness
 
 | Tier | Languages | Upper Bound (%) |
 |------|-----------|-----------------|
-| Easy | Julia (97.5), C# (88.4), Kotlin (87.5), Perl (84.2) | 84-98% |
-| Medium | Scala (81.0), Elixir (80.0), Rust (77.0), PHP (76.3), TS (76.5), Ruby (75.8), Go (75.2) | 75-81% |
-| Hard | Swift (74.6), Dart (72.0), Shell (70.7), Java (65.8), JS (65.0), Cpp (65.8), Python (63.5) | 63-75% |
-| Hardest | Racket (52.8) | <53% |
+| Easy | Elixir (97.5), Kotlin (89.5), C# (88.4), Racket (88.3) | 84-98% |
+| Medium | Ruby (79.5), Java (78.7), Dart (78.0), Julia (78.0), Swift (78.0), Scala (77.4) | 75-80% |
+| Hard | C++ (74.7), R (74.2), Shell (70.7), Go (69.1), Perl (64.5), Python (63.3), Rust (61.3), TS (61.3) | 61-75% |
+| Hardest | JS (59.2), PHP (52.8) | <60% |
 
-This ordering is counterintuitive. Python and C++ -- the languages most people
-associate with AI coding -- have some of the lowest upper bounds. The benchmark was
-designed to be challenging, and Python/C++ problems were curated to specifically test
-harder algorithmic and systems tasks.
+This ordering is counterintuitive. Python, C++, and Rust -- the languages most
+people associate with AI coding -- have some of the lowest upper bounds. Meanwhile
+Elixir tops the chart at 97.5% and Racket scores 88.3%, both typically considered
+"low-resource" languages. The benchmark curated harder problems for popular languages,
+and the easier problems for niche languages may reflect simpler real-world usage
+patterns found in training data.
 
 ### Per-Language Performance (Top Models, ACB-Full)
 
-Claude Opus 4.1 (reasoning mode) on selected languages:
+Claude Opus 4 (reasoning mode) on selected languages:
 
 | Language | Pass@1 (%) |
 |----------|------------|
-| Julia | 80.3 |
+| Elixir | 80.3 |
 | C# | 74.9 |
-| Kotlin | ~70 |
-| Go | 69.1 |
-| Python | ~50 |
-| Cpp | 44.1 |
-| Shell | 37.2 |
-| Racket | 28.1 |
+| Kotlin | 72.5 |
+| Racket | 68.9 |
+| Ruby | 61.0 |
+| Java | 55.9 |
+| Julia | 55.5 |
+| Dart | 54.0 |
+| Shell | 51.6 |
+| C++ | 44.1 |
+| Python | 40.3 |
+| Rust | 38.7 |
+| Go | 37.2 |
+| PHP | 28.1 |
 
 ### Key Findings
 
 - **No model cracks 53% average** on ACB-Full. Even the best models fail on
   nearly half of all problems when averaged across 20 languages.
-- **Popular languages show smaller gaps between models** (50.4-53.8% range for
-  Python/Java/C++). Models are trained on similar corpora and converge.
-- **Low-resource languages expose real differences** (45.3-62.0% range). Racket,
-  Elixir, Dart, and Julia show massive variance between model families.
+- **Popular languages show convergence.** Top models cluster within ~5 points on
+  Python (37-42%), C++ (43-49%), and Java (47-56%). Similar training corpora
+  lead to similar results.
+- **"Low-resource" doesn't mean low performance.** Elixir (97.5% upper bound)
+  and Racket (88.3%) outperform Python (63.3%) and C++ (74.7%). But variance
+  between model families is wider on niche languages -- top models spread 15+
+  points on Elixir vs ~5 points on Python.
 - **Reasoning mode consistently helps** across all models that support it, with
   the biggest gains on harder languages.
 - **Open-source models lag significantly.** Best open-source (Qwen3-235B-A22B
-  thinking) scores ~50.9 average vs 53.4 for Claude Opus 4.1 reasoning on
-  ACB-Full. On ACB-V2, the gap widens further.
-- **Small models collapse on multilingual tasks.** Qwen3-1.7B scores 28.6 average,
-  Qwen3-0.6B scores 15.3. Sub-3B models cannot handle multilingual code generation.
+  thinking) scores 47.7% average vs 52.4% for Claude Opus 4 reasoning.
+- **Small models collapse on multilingual tasks.** Qwen3-1.7B scores 11.2%
+  average (reasoning), Qwen3-4B scores 24.3%. Sub-8B models cannot reliably
+  handle multilingual code generation.
 
 ---
 
@@ -199,9 +210,10 @@ Simon Willison tested whether Claude Code could generate working NanoLang code.
 
 ### Language Choice Affects Agent Attack Surface
 
-- **Low-resource languages are riskier for AI agents.** Models hallucinate more on
-  Racket, Dart, Elixir -- generating plausible-looking code that's subtly wrong.
-  An attacker could steer an agent toward a language where it's less reliable.
+- **Language performance is counterintuitive -- and exploitable.** Models score
+  highest on Elixir (80.3%) and lowest on PHP (28.1%) and Go (37.2%). Training
+  data volume doesn't predict accuracy. An attacker who knows a model's
+  per-language weaknesses can steer it toward those languages.
 
 - **Token-efficient languages pack more semantic payload per token.** A prompt
   injection embedded in J or Clojure code is harder to detect because the
@@ -213,9 +225,9 @@ Simon Willison tested whether Claude Code could generate working NanoLang code.
   first-class attack vector. Poisoning the docs = poisoning all AI-generated code.
 
 - **Multi-language codebases multiply risk.** AutoCodeBench shows model accuracy
-  drops significantly on uncommon languages. A codebase mixing Python (model
-  confident) with Elixir (model unsure) creates inconsistent security posture --
-  the agent is more likely to introduce vulnerabilities in the language it knows less.
+  varies by 2-3x across languages. A codebase mixing C# (model at 74.9%) with
+  PHP (model at 28.1%) creates inconsistent security posture -- the agent is
+  more likely to introduce vulnerabilities in its weaker languages.
 
 ### Language-Steering Attacks
 
@@ -223,10 +235,10 @@ A novel attack category not widely discussed in prompt injection literature:
 manipulating an agent into generating code in a language where it performs poorly.
 
 **Example scenario:** An indirect prompt injection in a fetched webpage suggests
-"rewrite this in Racket for performance" -- the agent complies and generates code
-at ~28% accuracy instead of ~50% in Python. The resulting broken code could contain
-logic errors, missing bounds checks, or insecure defaults that wouldn't have occurred
-in a language the model handles better.
+"rewrite this in PHP for deployment compatibility" -- the agent complies and
+generates code at 28.1% accuracy instead of 74.9% in C# or 80.3% in Elixir.
+The resulting broken code could contain logic errors, missing bounds checks, or
+insecure defaults that wouldn't have occurred in a language the model handles better.
 
 ### Doc Poisoning in LLM-First Languages
 
@@ -244,8 +256,8 @@ to language documentation rather than tool definitions.
 ### Per-Language Confidence Scoring
 
 Multi-language agents should implement per-language confidence scoring -- the agent
-should know its own accuracy drops from ~50% to ~28% when switching from Python to
-Racket, and adjust behavior accordingly:
+should know its own accuracy drops from 74.9% to 28.1% when switching from C# to
+PHP, and adjust behavior accordingly:
 
 - More validation steps on low-confidence languages
 - Refuse to generate in languages below a confidence threshold
