@@ -14,6 +14,8 @@ A growing collection of research, annotated attack examples, and defense strateg
 
 Every attack has a defense. Every payload is annotated, defanged, and educational.
 
+> **Note:** This project is actively maintained and frequently updated as new findings emerge, attack surfaces evolve, and AI-assisted research uncovers new patterns. Expect content to change regularly.
+
 ---
 
 ## 📝 Research Notes
@@ -29,6 +31,8 @@ Every attack has a defense. Every payload is annotated, defanged, and educationa
 | 🌐 | [AI Coding Language Performance](notes/07_AI_Coding_Language_Performance.md) | Multilingual benchmarks, token efficiency, and language-steering attacks |
 | 🔓 | [LLM Jailbreaking Deep Dive](notes/08_LLM_Jailbreaking_Deep_Dive.md) | Full taxonomy: DAN to GCG to Crescendo, defenses, benchmarks, agent implications |
 | 🔍 | [Skill Scanning & Detection Landscape](notes/09_Skill_Scanning_And_Detection_Landscape.md) | Cisco Skill Scanner, VirusTotal, ToxicSkills audit, gap analysis, what to build next |
+| 📋 | [AI GRC & Policy Landscape](notes/10_AI_GRC_And_Policy_Landscape.md) | NIST AI RMF, EU AI Act, ISO 42001, state laws, agentic governance, OWASP Agentic Top 10 |
+| 🧠 | [AI Memory & Corruption](notes/11_AI_Memory_And_Corruption.md) | Memory architectures, RAG poisoning, MINJA, persistence risks, real-world case studies, defenses |
 
 ---
 
@@ -48,20 +52,20 @@ Hands-on annotated scenarios -- each one shows the attack **and** the fix.
 ## 🗂️ Attack Taxonomy
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                  AI Agent Attacks                    │
-├──────────────┬──────────────┬───────────────────────┤
-│ 🎯 Injection │ 🔗 Supply    │ 📤 Exfiltration       │
-│              │    Chain     │                       │
-│ Direct       │ Trojan       │ Secrets & keys        │
-│ Indirect     │  skills      │ Source code           │
-│ Hidden       │ Hallucinated │ Environment           │
-│  comments    │  packages    │  variables            │
-│ MCP tool     │ Poisoned     │ Credentials           │
-│  poisoning   │  docs        │                       │
-│ Language-    │              │                       │
-│  steering    │              │                       │
-└──────────────┴──────────────┴───────────────────────┘
+┌──────────────────────────────────────────────────────────────────────┐
+│                         AI Agent Attacks                             │
+├──────────────┬──────────────┬───────────────────┬───────────────────┤
+│ 🎯 Injection │ 🔗 Supply    │ 📤 Exfiltration   │ 🧠 Memory &      │
+│              │    Chain     │                   │    Persistence    │
+│ Direct       │ Trojan       │ Secrets & keys    │ RAG poisoning    │
+│ Indirect     │  skills      │ Source code       │ Memory injection │
+│ Hidden       │ Hallucinated │ Environment       │ Context window   │
+│  comments    │  packages    │  variables        │  manipulation    │
+│ MCP tool     │ Poisoned     │ Credentials       │ Persistent       │
+│  poisoning   │  docs        │                   │  backdoors       │
+│ Language-    │              │                   │                   │
+│  steering    │              │                   │                   │
+└──────────────┴──────────────┴───────────────────┴───────────────────┘
 ```
 
 ---
