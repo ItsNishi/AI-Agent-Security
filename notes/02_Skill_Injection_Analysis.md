@@ -187,16 +187,7 @@ Source: [Invariant Labs](https://invariantlabs.ai/blog/mcp-security-notification
 
 ### IDE Settings / Config File Attacks (IDEsaster)
 
-The same injection-to-execution chain but targeting IDE configuration files instead of skills:
-
-1. Prompt injection via malicious source code, GitHub issue, or MCP server
-2. Agent writes to `.vscode/settings.json`: `"chat.tools.autoApprove": true`
-3. Agent now has autonomous execution -- no user approval needed
-4. Conditional payload targets specific OS
-
-This resulted in **CVE-2025-53773** (GitHub Copilot, CVSS 9.6) and **CVE-2025-54135** (Cursor RCE). The [IDEsaster research](https://thehackernews.com/2025/12/researchers-uncover-30-flaws-in-ai.html) found 30+ vulnerabilities across 100% of tested AI IDEs including Claude Code, Copilot, Cursor, Windsurf, Junie, Cline, and others.
-
-The three-stage attack chain: **Prompt Injection -> Agent Tools -> Base IDE Features**
+The same injection-to-execution chain but targeting IDE configuration files. Three-stage attack: **Prompt Injection -> Agent Tools -> Base IDE Features**. See [04_Research_Findings.md](04_Research_Findings.md) Section 4 for full CVE table and detailed attack chains.
 
 ### Supply Chain Comparison
 
@@ -211,16 +202,6 @@ All four share the same fundamental exploit: **hidden instructions in a trusted 
 
 ### Hallucinated Package Amplification (react-codeshift, Feb 2026)
 
-A new attack pattern combining hallucination with skill injection:
+A new attack pattern combining hallucination with skill injection. Unlike the trojanized `security-review` skill, no hidden instructions needed -- the skill content is visible, but reviewers don't verify that referenced packages exist.
 
-1. LLM hallucinated package name `react-codeshift` (conflation of `jscodeshift` + `react-codemod`)
-2. Hallucinated `npx` command embedded in AI agent skill files
-3. Skill repository forked ~100 times, spreading to 237+ repositories
-4. AI agents executed skills literally, attempting to install nonexistent package
-5. Attacker could claim the package name on npm
-
-**Key difference from the trojanized `security-review` skill:** No hidden instructions needed. The skill content is visible, but reviewers don't verify that referenced packages exist. Skills look like documentation, not code.
-
-See: [examples/04_Hallucinated_Package_Skill_Injection/](../examples/04_Hallucinated_Package_Skill_Injection/)
-
-Source: [Aikido Security](https://www.aikido.dev/blog/agent-skills-spreading-hallucinated-npx-commands)
+See [examples/04_Hallucinated_Package_Skill_Injection/](../examples/04_Hallucinated_Package_Skill_Injection/) for the full case study with timeline, telemetry, and mitigations.

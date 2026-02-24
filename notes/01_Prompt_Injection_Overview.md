@@ -58,11 +58,11 @@ Agents are more vulnerable than plain chat LLMs because they have:
 
 5. **User Input** -- The classic vector. Social engineering the agent through conversation.
 
-6. **MCP Tool Descriptions** -- External servers register tools with the agent. Tool descriptions and parameter schemas are injected into the LLM context as trusted instructions. A malicious server can embed hidden directives in `description` fields that the LLM follows. See [Invariant Labs research](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks).
+6. **MCP Tool Descriptions** -- External servers register tools with the agent. Tool descriptions are injected into the LLM context as trusted instructions. See [02_Skill_Injection_Analysis.md](02_Skill_Injection_Analysis.md) for detailed MCP tool poisoning analysis.
 
-7. **Agent Memory** -- Long-term memory systems (e.g., Amazon Bedrock Agents) can be poisoned via indirect injection. Malicious instructions get stored in memory and persist for up to 365 days, executing in future sessions when semantically triggered. Classified as ASI06 in OWASP Agentic AI Top 10 (2026). See [Unit 42 research](https://unit42.paloaltonetworks.com/indirect-prompt-injection-poisons-ai-longterm-memory/).
+7. **Agent Memory** -- Long-term memory systems can be poisoned via indirect injection. See [04_Research_Findings.md](04_Research_Findings.md) Section 3 and [11_AI_Memory_And_Corruption.md](11_AI_Memory_And_Corruption.md) for detailed analysis.
 
-8. **IDE Features** -- AI coding tools (Copilot, Cursor, Claude Code) can be exploited via a three-stage chain: prompt injection -> agent tool access -> base IDE feature exploitation. Settings files, workspace configs, and MCP server configs are all writable attack targets. The [IDEsaster research](https://thehackernews.com/2025/12/researchers-uncover-30-flaws-in-ai.html) found 30+ vulnerabilities across 100% of tested AI IDEs.
+8. **IDE Features** -- AI coding tools can be exploited via prompt injection -> tool access -> IDE feature exploitation. See [04_Research_Findings.md](04_Research_Findings.md) Section 4 for comprehensive IDEsaster CVE analysis.
 
 ## Advanced Attack Techniques (2025-2026)
 
@@ -72,11 +72,11 @@ Unlike single-shot injection, these attacks build context over multiple interact
 
 ### Tool Poisoning via MCP
 
-Malicious instructions embedded in MCP tool `description` fields, wrapped in `<IMPORTANT>` tags or similar. The tool confirmation dialog only shows simplified summaries, concealing the actual malicious parameters. Invariant Labs demonstrated exfiltrating entire WhatsApp histories through this technique.
+Malicious instructions embedded in MCP tool `description` fields, concealed from users in the UI. See [02_Skill_Injection_Analysis.md](02_Skill_Injection_Analysis.md) for tool poisoning details and [04_Research_Findings.md](04_Research_Findings.md) Section 2 for the WhatsApp exfiltration case study.
 
 ### Tool Shadowing / Cross-Server Contamination
 
-In multi-MCP environments, a malicious server registers tools that override or interfere with trusted server behavior. No namespace isolation exists in the MCP spec -- if two servers expose `read_file`, behavior depends entirely on client implementation.
+In multi-MCP environments, a malicious server registers tools that override or interfere with trusted server behavior. No namespace isolation exists in the MCP spec. See [04_Research_Findings.md](04_Research_Findings.md) Section 1 for the detailed attack demonstration.
 
 ### Rug Pull Attacks
 
@@ -96,31 +96,11 @@ Lakera demonstrated a Google Docs file triggering an IDE agent to fetch attacker
 
 ### Memory Poisoning
 
-Poison planted in agent long-term memory today executes weeks later when semantically triggered. Unlike session-scoped prompt injection, this persists across sessions for up to 365 days.
+Temporally decoupled injection -- poison planted today executes weeks later when semantically triggered. See [04_Research_Findings.md](04_Research_Findings.md) Section 3 for the full three-stage attack breakdown.
 
-## Real-World Incidents (2025-2026)
+## Real-World Incidents and Trends
 
-| Incident | Impact |
-|---|---|
-| **GitHub Copilot CVE-2025-53773** | RCE via prompt injection -> settings.json modification (CVSS 9.6) |
-| **Cursor CVE-2025-54135** | RCE via MCP config manipulation |
-| **IDEsaster** | 30+ CVEs across ALL AI IDEs (100% failure rate) |
-| **MCP Inspector** | Unauthenticated RCE in Anthropic's developer tool |
-| **GitHub MCP Server** | Malicious public issue exfiltrated private repos |
-| **Supabase Cursor Agent** | Support tickets with embedded SQL exfiltrated integration tokens |
-| **Moltbook** | Vibe-coded platform leaked 1.5M API keys, 35K emails via missing RLS |
-| **WhatsApp MCP** | Tool poisoning exfiltrated entire chat histories |
-
-## Q4 2025 Attack Trends (Lakera)
-
-From Lakera's analysis of attacks across customer environments during a 30-day Q4 window:
-
-- **Indirect attacks required fewer attempts than direct injections** -- external data sources are the primary risk vector
-- **Hypothetical scenarios** dominate: "Let's imagine you're a developer reviewing the system configuration"
-- **Obfuscation**: malicious instructions hidden within JSON parameters or code-like formatting
-- **Indirect framing**: harmful requests positioned as analysis tasks, fictional evaluations, role-play scenarios
-
-Source: [Lakera Q4 2025 Report](https://www.lakera.ai/blog/the-year-of-the-agent-what-recent-attacks-revealed-in-q4-2025-and-what-it-means-for-2026)
+For detailed coverage of specific incidents, CVE tables, and case studies, see [04_Research_Findings.md](04_Research_Findings.md). Key incidents include IDEsaster (30+ CVEs across all AI IDEs), MCP protocol attacks (WhatsApp exfiltration, GitHub MCP server hijack), and the Moltbook vibe-coding breach.
 
 ## Why Agents Are Harder to Secure
 

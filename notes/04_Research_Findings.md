@@ -252,56 +252,7 @@ Platform reported 1.5M AI agents but analysis showed only 17K human accounts (88
 
 ## 7. Detection and Defense Tools
 
-### Commercial
-
-**Lakera Guard**
-- Ultra-low latency detection (<50ms)
-- Learns from 100K+ new adversarial samples per day via Gandalf platform
-- Catches instruction overrides, jailbreaks, indirect injections, obfuscated prompts
-- Adaptive calibration for low false positives
-
-**Rebuff (ProtectAI)**
-- Open-source, multi-layered: heuristic filters + LLM-based detector + vector DB of known attack signatures
-- **Canary token injection** -- invisible tokens in prompts; if they appear in output, indicates successful manipulation. Triggers immediate block.
-- Self-hardening: learns from detected attacks
-
-**Invariant Labs MCP Scanner**
-- `https://github.com/invariantlabs-ai/mcp-scan`
-- Scans MCP server tool definitions for injection payloads
-- Analyzes tool descriptions, parameter descriptions, and schemas
-
-### Architectural Defenses
-
-**Microsoft Spotlighting**
-- Separates system instructions from data content using special delimiters
-- Reduces success of indirect prompt injection
-
-**Instruction Hierarchy (OpenAI)**
-- Formal trust levels for different instruction sources
-- System > developer > user > tool output
-
-**Dual-LLM Pattern**
-- One LLM processes the task, a second monitors for injection indicators
-- High overhead but catches many attacks
-
-**Immune System-Inspired Defense**
-- Multi-layer defense inspired by biological immune systems
-- Combines pattern matching (innate) with adaptive detection (learned)
-
-### Standards
-
-- **OWASP Top 10 for LLM Applications 2025** -- prompt injection is #1 risk
-- **OWASP Agentic AI Top 10 (2026)** -- covers coding agents specifically
-- **NIST AI Risk Management Framework** -- general AI security guidance
-- **AIVSS (AI Vulnerability Scoring System)** -- OWASP scoring system for agentic AI risks
-
-### Key Research
-
-- **Invariant Labs** -- MCP tool poisoning, cross-server attacks, WhatsApp exfiltration
-- **Palo Alto Unit 42** -- Memory poisoning, MCP sampling attacks, vibe coding security
-- **Embrace The Red (Johann Rehberger)** -- Copilot RCE, Claude Computer Use injection
-- **Lakera AI** -- Q4 2025 attack analysis, zero-click MCP RCE
-- **Ari Marzouk** -- IDEsaster (30+ CVEs across all AI IDEs)
+For detection tools (Lakera Guard, Rebuff, MCP Scanner), architectural defenses (Spotlighting, Instruction Hierarchy, Dual-LLM), and standards (OWASP, NIST, AIVSS), see [03_Defense_Patterns.md](03_Defense_Patterns.md).
 
 ---
 
