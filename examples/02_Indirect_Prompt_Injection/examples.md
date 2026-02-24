@@ -151,8 +151,4 @@ An AI reviewer processing the PR might follow the instruction to auto-approve.
 
 ## General Defense Principles
 
-1. **Treat external data as untrusted input** -- always. Files, web pages, API responses, messages.
-2. **Strip hidden content** before processing -- HTML comments, invisible text, metadata tags.
-3. **Never auto-execute** instructions found in data -- only execute actions from the user or verified system instructions.
-4. **Validate outputs** -- check that agent responses don't contain data that wasn't in the visible source material.
-5. **Defense in depth** -- no single mitigation is sufficient. Layer them.
+See [03_Defense_Patterns.md](../../notes/03_Defense_Patterns.md) for the full defense framework including input sanitization, architectural defenses, detection patterns, and the fundamental problem analysis.

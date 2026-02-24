@@ -133,17 +133,4 @@ This is particularly dangerous because:
 
 ## General Defense Framework
 
-### Preventive Controls
-- **Least privilege**: Agent should only have access to files and tools it needs for the current task
-- **Network isolation**: No outbound network by default. Allowlist specific domains if needed.
-- **Path restrictions**: File operations limited to the project directory
-
-### Detective Controls
-- **Tool call logging**: Record every tool invocation with full parameters
-- **Anomaly detection**: Flag unusual patterns (bulk file reads, encoded data in URLs, commands that dump credentials)
-- **Output scanning**: Check agent responses for credential patterns before displaying to user
-
-### Response Controls
-- **Kill switch**: Ability to immediately terminate an agent session
-- **Rollback**: Undo file changes made by a compromised agent
-- **Incident review**: Tool call logs provide a full audit trail of what happened
+See [03_Defense_Patterns.md](../../notes/03_Defense_Patterns.md) for comprehensive preventive, detective, and response controls including sandboxing, permission models, runtime monitoring, and detection patterns.

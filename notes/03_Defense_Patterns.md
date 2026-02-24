@@ -219,11 +219,7 @@ Source: [Unit 42 -- Memory Poisoning](https://unit42.paloaltonetworks.com/indire
 
 ## 6. Vibe Coding Defenses
 
-Vibe-coded applications (built rapidly with AI, minimal human review) have consistently terrible security posture. Key stats from Veracode's GenAI Code Security Report 2025:
-
-- **45%** of AI-generated code introduces security vulnerabilities
-- **71%** of AI-generated auth code has vulnerabilities
-- **86%** XSS prevention failure rate
+Vibe-coded applications have consistently terrible security posture. See [04_Research_Findings.md](04_Research_Findings.md) Section 6 for vulnerability statistics and the Moltbook case study.
 
 ### Secure Development Practices
 
@@ -249,20 +245,6 @@ Vibe-coded applications (built rapidly with AI, minimal human review) have consi
 - **Client-side only security**: AI generates frontend auth checks but no backend validation (the Moltbook pattern)
 - **Hardcoded secrets**: API keys in client-side JavaScript
 - **Missing RLS/access control**: Database accessible without auth
-
-### Case Study: Moltbook (Jan 2026)
-
-A social platform for AI agents, built entirely by AI with zero manual code. [Wiz found](https://www.wiz.io/blog/exposed-moltbook-database-reveals-millions-of-api-keys) unauthenticated access to the entire production database within minutes:
-- Supabase API key hardcoded in client-side JS
-- Row-Level Security never implemented
-- 1.5M API tokens, 35K emails, private messages with plaintext OpenAI keys exposed
-- Enumerated via PostgREST errors and GraphQL introspection
-
-### Relevant Frameworks
-
-- [OWASP Agentic AI Top 10 (2026)](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) -- first enterprise implementation guide for AI agent security
-- [Palo Alto Networks Vibe Coding Security Framework](https://unit42.paloaltonetworks.com/securing-vibe-coding-tools/)
-- [Veracode GenAI Security Guide](https://www.veracode.com/blog/genai-security-and-vibe-coding/)
 
 ## 7. Detection Patterns
 

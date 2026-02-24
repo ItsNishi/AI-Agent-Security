@@ -51,7 +51,8 @@ grep -Pzo '<!--[\s\S]*?(curl|wget|bash|sh|exec)[\s\S]*?-->' *.md
 
 ## Mitigation
 
+See [03_Defense_Patterns.md](../../notes/03_Defense_Patterns.md) for comprehensive defenses. Key mitigations for this technique:
+
 1. **Always review raw source** of skills before installing -- not the rendered preview
 2. **Strip HTML comments** from skill files during loading
-3. **Sandbox skill execution** -- skills should not be able to make network requests or execute arbitrary commands
-4. **Permission gates** -- require user approval for any shell command a skill triggers
+3. **Sandbox and permission gates** -- restrict network access and require user approval for shell commands
