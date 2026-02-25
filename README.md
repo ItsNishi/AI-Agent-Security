@@ -34,6 +34,7 @@ Every attack has a defense. Every payload is annotated, defanged, and educationa
 | 📋 | [AI GRC & Policy Landscape](notes/10_AI_GRC_And_Policy_Landscape.md) | NIST AI RMF, EU AI Act, ISO 42001, state laws, agentic governance, OWASP Agentic Top 10 |
 | 🧠 | [AI Memory & Corruption](notes/11_AI_Memory_And_Corruption.md) | Memory architectures, RAG poisoning, MINJA, persistence risks, real-world case studies, defenses |
 | 📄 | [Agent Configuration Files](notes/12_Agent_MD_Configuration_Files.md) | CLAUDE.md/AGENTS.md attack surface, Rules File Backdoor, Unicode obfuscation, hardening recommendations |
+| 🧠 | [Chatbot & AI Psychosis](notes/13_Chatbot_And_AI_Psychosis.md) | AI-induced psychosis, sycophancy mechanisms, documented deaths, folie a deux, weaponization, RAND national security analysis |
 
 ---
 
