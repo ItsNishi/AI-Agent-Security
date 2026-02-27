@@ -159,7 +159,7 @@ AI security is increasingly integrated into GRC through complementary frameworks
 | Framework | Focus | AI Security Coverage |
 |-----------|-------|---------------------|
 | **OWASP Top 10 for LLMs 2025** | Risk taxonomy | Prompt injection (LLM01), insecure output handling, training data poisoning, etc. |
-| **OWASP Top 10 for Agentic Applications 2026** | Agent-specific risks | Goal hijacking, tool misuse, memory poisoning, rogue agents (see Note 11) |
+| **OWASP Top 10 for Agentic Applications 2026** | Agent-specific risks | Goal hijacking, tool misuse, memory poisoning, rogue agents (see [Note 11](./11_AI_Memory_And_Corruption.md)) |
 | **MITRE ATLAS** | Adversary tactics/techniques | 15 tactics, 66 techniques, 46 sub-techniques, 26 mitigations, 33 case studies (Oct 2025). Added 14 new techniques in 2025 for AI agents |
 | **NIST AI RMF + GenAI Profile** | Risk management | 200+ risk actions, supply chain assessment, model provenance |
 | **NIST Cyber AI Profile** | Cybersecurity | Securing AI systems, AI for defense, thwarting AI attacks |
@@ -323,58 +323,58 @@ Academic conference dedicated to AI governance -- indicates the field is maturin
 ## 9. Sources
 
 ### Frameworks and Standards
-- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
-- [NIST AI RMF 2025 Updates](https://www.ispartnersllc.com/blog/nist-ai-rmf-2025-updates-what-you-need-to-know-about-the-latest-framework-changes/)
-- [Draft NIST Cyber AI Profile (Dec 2025)](https://www.nist.gov/news-events/news/2025/12/draft-nist-guidelines-rethink-cybersecurity-ai-era)
-- [NIST Cyber AI Profile -- Preliminary Draft (Jan 2026)](https://www.globalpolicywatch.com/2026/01/nist-publishes-preliminary-draft-of-cybersecurity-framework-profile-for-artificial-intelligence-for-public-comment/)
-- [ISO/IEC 42001 and EU AI Act Pairing (ISACA)](https://www.isaca.org/resources/news-and-trends/industry-news/2025/isoiec-42001-and-eu-ai-act-a-practical-pairing-for-ai-governance)
-- [ISO 42001 -- Deloitte](https://www.deloitte.com/us/en/services/consulting/articles/iso-42001-standard-ai-governance-risk-management.html)
+- [NIST AI Risk Management Framework](hxxps://www[.]nist[.]gov/itl/ai-risk-management-framework)
+- [NIST AI RMF 2025 Updates](hxxps://www[.]ispartnersllc[.]com/blog/nist-ai-rmf-2025-updates-what-you-need-to-know-about-the-latest-framework-changes/)
+- [Draft NIST Cyber AI Profile (Dec 2025)](hxxps://www[.]nist[.]gov/news-events/news/2025/12/draft-nist-guidelines-rethink-cybersecurity-ai-era)
+- [NIST Cyber AI Profile -- Preliminary Draft (Jan 2026)](hxxps://www[.]globalpolicywatch[.]com/2026/01/nist-publishes-preliminary-draft-of-cybersecurity-framework-profile-for-artificial-intelligence-for-public-comment/)
+- [ISO/IEC 42001 and EU AI Act Pairing (ISACA)](hxxps://www[.]isaca[.]org/resources/news-and-trends/industry-news/2025/isoiec-42001-and-eu-ai-act-a-practical-pairing-for-ai-governance)
+- [ISO 42001 -- Deloitte](hxxps://www[.]deloitte[.]com/us/en/services/consulting/articles/iso-42001-standard-ai-governance-risk-management.html)
 
 ### EU AI Act
-- [EU AI Act Implementation Timeline](https://artificialintelligenceact.eu/implementation-timeline/)
-- [EU AI Act Service Desk Timeline](https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act)
-- [EU AI Act Summary (Jan 2026)](https://www.softwareimprovementgroup.com/blog/eu-ai-act-summary/)
-- [DLA Piper -- Aug 2025 Obligations](https://www.dlapiper.com/en-us/insights/publications/2025/08/latest-wave-of-obligations-under-the-eu-ai-act-take-effect)
+- [EU AI Act Implementation Timeline](hxxps://artificialintelligenceact[.]eu/implementation-timeline/)
+- [EU AI Act Service Desk Timeline](hxxps://ai-act-service-desk[.]ec[.]europa[.]eu/en/ai-act/timeline/timeline-implementation-eu-ai-act)
+- [EU AI Act Summary (Jan 2026)](hxxps://www[.]softwareimprovementgroup[.]com/blog/eu-ai-act-summary/)
+- [DLA Piper -- Aug 2025 Obligations](hxxps://www[.]dlapiper[.]com/en-us/insights/publications/2025/08/latest-wave-of-obligations-under-the-eu-ai-act-take-effect)
 
 ### US Regulation
-- [State AI Laws Effective Jan 2026 -- King & Spalding](https://www.kslaw.com/news-and-insights/new-state-ai-laws-are-effective-on-january-1-2026-but-a-new-executive-order-signals-disruption)
-- [Colorado AI Act Delay -- Seyfarth](https://www.seyfarth.com/news-insights/artificial-intelligence-legal-roundup-colorado-postpones-implementation-of-ai-law-as-california-finalizes-new-employment-discrimination-regulations-and-illinois-disclosure-law-set-to-take-effect.html)
-- [State AI Law Tracker -- White & Case](https://www.whitecase.com/insight-alert/california-kentucky-tracking-rise-state-ai-laws-2025)
-- [US AI Law Update -- Baker Botts](https://www.bakerbotts.com/thought-leadership/publications/2026/january/us-ai-law-update)
-- [State AI Laws Under Federal Scrutiny -- White & Case](https://www.whitecase.com/insight-alert/state-ai-laws-under-federal-scrutiny-key-takeaways-executive-order-establishing)
+- [State AI Laws Effective Jan 2026 -- King & Spalding](hxxps://www[.]kslaw[.]com/news-and-insights/new-state-ai-laws-are-effective-on-january-1-2026-but-a-new-executive-order-signals-disruption)
+- [Colorado AI Act Delay -- Seyfarth](hxxps://www[.]seyfarth[.]com/news-insights/artificial-intelligence-legal-roundup-colorado-postpones-implementation-of-ai-law-as-california-finalizes-new-employment-discrimination-regulations-and-illinois-disclosure-law-set-to-take-effect.html)
+- [State AI Law Tracker -- White & Case](hxxps://www[.]whitecase[.]com/insight-alert/california-kentucky-tracking-rise-state-ai-laws-2025)
+- [US AI Law Update -- Baker Botts](hxxps://www[.]bakerbotts[.]com/thought-leadership/publications/2026/january/us-ai-law-update)
+- [State AI Laws Under Federal Scrutiny -- White & Case](hxxps://www[.]whitecase[.]com/insight-alert/state-ai-laws-under-federal-scrutiny-key-takeaways-executive-order-establishing)
 
 ### International
-- [China AI Global Governance Action Plan](https://www.fmprc.gov.cn/mfa_eng/xw/zyxw/202507/t20250729_11679232.html)
-- [China Cybersecurity Law AI Amendments](http://english.scio.gov.cn/m/in-depth/2025-10/29/content_118147780.html)
-- [China AI Governance -- Mayer Brown](https://www.mayerbrown.com/en/insights/publications/2025/10/artificial-intelligence-a-brave-new-world-china-formulates-new-ai-global--governance-action-plan-and-issues-draft-ethics-rules-and-ai-labelling-rules)
-- [China Leading AI Governance -- Nature](https://www.nature.com/articles/d41586-025-03972-y)
-- [Global AI Governance Overview](https://sumsub.com/blog/comprehensive-guide-to-ai-laws-and-regulations-worldwide/)
+- [China AI Global Governance Action Plan](hxxps://www[.]fmprc[.]gov[.]cn/mfa_eng/xw/zyxw/202507/t20250729_11679232.html)
+- [China Cybersecurity Law AI Amendments](hxxp://english[.]scio[.]gov[.]cn/m/in-depth/2025-10/29/content_118147780.html)
+- [China AI Governance -- Mayer Brown](hxxps://www[.]mayerbrown[.]com/en/insights/publications/2025/10/artificial-intelligence-a-brave-new-world-china-formulates-new-ai-global--governance-action-plan-and-issues-draft-ethics-rules-and-ai-labelling-rules)
+- [China Leading AI Governance -- Nature](hxxps://www[.]nature[.]com/articles/d41586-025-03972-y)
+- [Global AI Governance Overview](hxxps://sumsub[.]com/blog/comprehensive-guide-to-ai-laws-and-regulations-worldwide/)
 
 ### AI Security Frameworks
-- [OWASP Top 10 for Agentic Applications 2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/)
-- [OWASP LLM01 Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
-- [MITRE ATLAS Framework](https://atlas.mitre.org/)
-- [MITRE ATLAS Overview -- NIST Presentation](https://csrc.nist.gov/csrc/media/Presentations/2025/mitre-atlas/TuePM2.1-MITRE%20ATLAS%20Overview%20Sept%202025.pdf)
-- [AI Security Standards -- SentinelOne](https://www.sentinelone.com/cybersecurity-101/data-and-ai/ai-security-standards/)
+- [OWASP Top 10 for Agentic Applications 2026](hxxps://genai[.]owasp[.]org/resource/owasp-top-10-for-agentic-applications-for-2026/)
+- [OWASP LLM01 Prompt Injection](hxxps://genai[.]owasp[.]org/llmrisk/llm01-prompt-injection/)
+- [MITRE ATLAS Framework](hxxps://atlas[.]mitre[.]org/)
+- [MITRE ATLAS Overview -- NIST Presentation](hxxps://csrc[.]nist[.]gov/csrc/media/Presentations/2025/mitre-atlas/TuePM2.1-MITRE%20ATLAS%20Overview%20Sept%202025.pdf)
+- [AI Security Standards -- SentinelOne](hxxps://www[.]sentinelone[.]com/cybersecurity-101/data-and-ai/ai-security-standards/)
 
 ### Enterprise Governance
-- [Enterprise AI Governance Guide -- Liminal](https://www.liminal.ai/blog/enterprise-ai-governance-guide)
-- [Model Registry Governance -- Introl](https://introl.com/blog/model-registry-governance-mlops-production-ai-2025)
-- [Databricks AI Governance Framework](https://www.databricks.com/blog/introducing-databricks-ai-governance-framework)
-- [AI Governance Best Practices -- Glean](https://www.glean.com/perspectives/ai-governance-best-practices)
+- [Enterprise AI Governance Guide -- Liminal](hxxps://www[.]liminal[.]ai/blog/enterprise-ai-governance-guide)
+- [Model Registry Governance -- Introl](hxxps://introl[.]com/blog/model-registry-governance-mlops-production-ai-2025)
+- [Databricks AI Governance Framework](hxxps://www[.]databricks[.]com/blog/introducing-databricks-ai-governance-framework)
+- [AI Governance Best Practices -- Glean](hxxps://www[.]glean[.]com/perspectives/ai-governance-best-practices)
 
 ### GRC Trends
-- [AI Redefining GRC 2026 -- Governance Intelligence](https://www.governance-intelligence.com/regulatory-compliance/how-ai-will-redefine-compliance-risk-and-governance-2026)
-- [GRC Trends 2026 -- MetricStream](https://www.metricstream.com/blog/top-grc-trends-agentic-ai-enterprise-cyber-grc-2026.html)
-- [Top 20 AI GRC Software -- AIMultiple](https://research.aimultiple.com/ai-grc/)
+- [AI Redefining GRC 2026 -- Governance Intelligence](hxxps://www[.]governance-intelligence[.]com/regulatory-compliance/how-ai-will-redefine-compliance-risk-and-governance-2026)
+- [GRC Trends 2026 -- MetricStream](hxxps://www[.]metricstream[.]com/blog/top-grc-trends-agentic-ai-enterprise-cyber-grc-2026.html)
+- [Top 20 AI GRC Software -- AIMultiple](hxxps://research[.]aimultiple[.]com/ai-grc/)
 
 ### Policy Debates
-- [Frontier AI Open Source -- AI Frontiers](https://ai-frontiers.org/articles/frontier-ai-should-be-open-source)
-- [Case for AI Liability -- AI Frontiers](https://ai-frontiers.org/articles/case-for-ai-liability)
-- [2026 AI Regulatory Preview -- Wilson Sonsini](https://www.wsgr.com/en/insights/2026-year-in-preview-ai-regulatory-developments-for-companies-to-watch-out-for.html)
-- [2026 and AI -- CFR](https://www.cfr.org/articles/how-2026-could-decide-future-artificial-intelligence)
+- [Frontier AI Open Source -- AI Frontiers](hxxps://ai-frontiers[.]org/articles/frontier-ai-should-be-open-source)
+- [Case for AI Liability -- AI Frontiers](hxxps://ai-frontiers[.]org/articles/case-for-ai-liability)
+- [2026 AI Regulatory Preview -- Wilson Sonsini](hxxps://www[.]wsgr[.]com/en/insights/2026-year-in-preview-ai-regulatory-developments-for-companies-to-watch-out-for.html)
+- [2026 and AI -- CFR](hxxps://www[.]cfr[.]org/articles/how-2026-could-decide-future-artificial-intelligence)
 
 ### Agentic AI Governance
-- [AI Agents Misbehave -- Baker Botts](https://ourtake.bakerbotts.com/post/102me2l/when-ai-agents-misbehave-governance-and-security-for-autonomous-ai)
-- [Agentic AI Governance Wake-Up Call -- NACD](https://www.nacdonline.org/all-governance/governance-resources/directorship-magazine/online-exclusives/2025/q3-2025/autonomous-artificial-intelligence-oversight/)
-- [AWS Agentic AI Security Scoping Matrix](https://aws.amazon.com/blogs/security/the-agentic-ai-security-scoping-matrix-a-framework-for-securing-autonomous-ai-systems/)
+- [AI Agents Misbehave -- Baker Botts](hxxps://ourtake[.]bakerbotts[.]com/post/102me2l/when-ai-agents-misbehave-governance-and-security-for-autonomous-ai)
+- [Agentic AI Governance Wake-Up Call -- NACD](hxxps://www[.]nacdonline[.]org/all-governance/governance-resources/directorship-magazine/online-exclusives/2025/q3-2025/autonomous-artificial-intelligence-oversight/)
+- [AWS Agentic AI Security Scoping Matrix](hxxps://aws[.]amazon[.]com/blogs/security/the-agentic-ai-security-scoping-matrix-a-framework-for-securing-autonomous-ai-systems/)

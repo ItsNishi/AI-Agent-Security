@@ -183,7 +183,7 @@ This is arguably worse than the SKILL.md attack because:
 
 Invariant Labs demonstrated this by poisoning an `add` tool to redirect all emails from a trusted `send_email` tool to attacker-controlled addresses. The user explicitly specified a different recipient and it was silently overridden.
 
-Source: [Invariant Labs](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks)
+Source: [Invariant Labs](hxxps://invariantlabs[.]ai/blog/mcp-security-notification-tool-poisoning-attacks)
 
 ### IDE Settings / Config File Attacks (IDEsaster)
 
