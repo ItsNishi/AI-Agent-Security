@@ -80,7 +80,7 @@ Query-only interaction attack that corrupts long-term memory through normal agen
 - **Success rate**: Over 95% injection success rate, 70% attack success rate under idealized conditions
 - **Key insight**: No need to compromise the memory store directly -- the agent itself writes the poisoned memory
 
-Paper: [Memory Injection Attacks on LLM Agents via Query-Only Interaction](https://arxiv.org/html/2503.03704) (Mar 2025)
+Paper: [Memory Injection Attacks on LLM Agents via Query-Only Interaction](hxxps://arxiv[.]org/html/2503.03704) (Mar 2025)
 
 ### MemoryGraft
 
@@ -93,7 +93,7 @@ Novel indirect injection attack targeting experience-based memory in LLM agents.
 - **Persistence**: Induced behavioral drift continues until memory store is explicitly cleaned or rebuilt
 - **Key distinction**: Unlike transient prompt injections or factual RAG poisoning, MemoryGraft exploits the agent's tendency to imitate past successes
 
-Paper: [MemoryGraft: Persistent Compromise of LLM Agents via Poisoned Experience Retrieval](https://arxiv.org/abs/2512.16962) (Dec 2025)
+Paper: [MemoryGraft: Persistent Compromise of LLM Agents via Poisoned Experience Retrieval](hxxps://arxiv[.]org/abs/2512.16962) (Dec 2025)
 
 ### Indirect Prompt Injection via Memory
 
@@ -112,7 +112,7 @@ Malicious instructions embedded in external content (webpages, documents, emails
 
 Knowledge corruption attack achieving **97% attack success rate** by injecting just 5 malicious texts per target question into a knowledge base of 2.6M+ clean texts (black-box setting).
 
-Paper: [PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation](https://www.usenix.org/system/files/usenixsecurity25-zou-poisonedrag.pdf) (USENIX Security 2025)
+Paper: [PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation](hxxps://www[.]usenix[.]org/system/files/usenixsecurity25-zou-poisonedrag.pdf) (USENIX Security 2025)
 
 ### Vector Embedding Manipulation
 
@@ -127,7 +127,7 @@ Automated poisoning techniques achieved **74.4% attack success rate** across 357
 - Google NotebookLM
 - OpenAI Assistants
 
-Paper: [The Hidden Threat in Plain Text: Attacking RAG Data Loaders](https://dl.acm.org/doi/10.1145/3733799.3762976) (ACM AISec 2025)
+Paper: [The Hidden Threat in Plain Text: Attacking RAG Data Loaders](hxxps://dl[.]acm[.]org/doi/10.1145/3733799.3762976) (ACM AISec 2025)
 
 ### The Trust Paradox
 
@@ -384,46 +384,46 @@ New America OTI recommends memory portability as a fundamental right to prevent 
 ## 10. Sources
 
 ### Research Papers
-- [MemoryGraft: Persistent Compromise of LLM Agents (Dec 2025)](https://arxiv.org/abs/2512.16962)
-- [Memory Poisoning Attack and Defense on Memory-Based LLM Agents (Jan 2026)](https://arxiv.org/abs/2601.05504)
-- [Memory Injection Attacks on LLM Agents via Query-Only Interaction (Mar 2025)](https://arxiv.org/html/2503.03704)
-- [PoisonedRAG: Knowledge Corruption Attacks (USENIX Security 2025)](https://www.usenix.org/system/files/usenixsecurity25-zou-poisonedrag.pdf)
-- [Attacking RAG Data Loaders (ACM AISec 2025)](https://dl.acm.org/doi/10.1145/3733799.3762976)
-- [Prompt Persistence Attacks: Long-Term Memory Poisoning (SSRN)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5995215)
-- [Agentic AI Security: Threats, Defenses, Evaluation (arXiv)](https://arxiv.org/html/2510.23883v1)
+- [MemoryGraft: Persistent Compromise of LLM Agents (Dec 2025)](hxxps://arxiv[.]org/abs/2512.16962)
+- [Memory Poisoning Attack and Defense on Memory-Based LLM Agents (Jan 2026)](hxxps://arxiv[.]org/abs/2601.05504)
+- [Memory Injection Attacks on LLM Agents via Query-Only Interaction (Mar 2025)](hxxps://arxiv[.]org/html/2503.03704)
+- [PoisonedRAG: Knowledge Corruption Attacks (USENIX Security 2025)](hxxps://www[.]usenix[.]org/system/files/usenixsecurity25-zou-poisonedrag.pdf)
+- [Attacking RAG Data Loaders (ACM AISec 2025)](hxxps://dl[.]acm[.]org/doi/10.1145/3733799.3762976)
+- [Prompt Persistence Attacks: Long-Term Memory Poisoning (SSRN)](hxxps://papers[.]ssrn[.]com/sol3/papers.cfm?abstract_id=5995215)
+- [Agentic AI Security: Threats, Defenses, Evaluation (arXiv)](hxxps://arxiv[.]org/html/2510.23883v1)
 
 ### Industry Research and Threat Intelligence
-- [Unit 42: When AI Remembers Too Much -- Persistent Behaviors in Agents' Memory](https://unit42.paloaltonetworks.com/indirect-prompt-injection-poisons-ai-longterm-memory/)
-- [Unit 42: AI Agents Are Here. So Are the Threats.](https://unit42.paloaltonetworks.com/agentic-ai-threats/)
-- [Unit 42: MCP Attack Vectors Through Sampling](https://unit42.paloaltonetworks.com/model-context-protocol-attack-vectors/)
-- [Microsoft: AI Recommendation Poisoning (Feb 10, 2026)](https://www.microsoft.com/en-us/security/blog/2026/02/10/ai-recommendation-poisoning/)
-- [Microsoft AI Recommendation Poisoning -- The Register](https://www.theregister.com/2026/02/12/microsoft_ai_recommendation_poisoning)
-- [Microsoft AI Recommendation Poisoning -- Help Net Security](https://www.helpnetsecurity.com/2026/02/11/ai-recommendation-memory-poisoning-attacks/)
+- [Unit 42: When AI Remembers Too Much -- Persistent Behaviors in Agents' Memory](hxxps://unit42[.]paloaltonetworks[.]com/indirect-prompt-injection-poisons-ai-longterm-memory/)
+- [Unit 42: AI Agents Are Here. So Are the Threats.](hxxps://unit42[.]paloaltonetworks[.]com/agentic-ai-threats/)
+- [Unit 42: MCP Attack Vectors Through Sampling](hxxps://unit42[.]paloaltonetworks[.]com/model-context-protocol-attack-vectors/)
+- [Microsoft: AI Recommendation Poisoning (Feb 10, 2026)](hxxps://www[.]microsoft[.]com/en-us/security/blog/2026/02/10/ai-recommendation-poisoning/)
+- [Microsoft AI Recommendation Poisoning -- The Register](hxxps://www[.]theregister[.]com/2026/02/12/microsoft_ai_recommendation_poisoning)
+- [Microsoft AI Recommendation Poisoning -- Help Net Security](hxxps://www[.]helpnetsecurity[.]com/2026/02/11/ai-recommendation-memory-poisoning-attacks/)
 
 ### Policy and Governance
-- [New America OTI: AI Agents and Memory in the MCP Era](https://www.newamerica.org/oti/briefs/ai-agents-and-memory/)
-- [OpenClaw AI Agent Attack Surface Analysis -- Security Boulevard](https://securityboulevard.com/2026/02/openclaw-open-source-ai-agent-application-attack-surface-and-security-risk-system-analysis/)
-- [AWS Agentic AI Security Scoping Matrix](https://aws.amazon.com/blogs/security/the-agentic-ai-security-scoping-matrix-a-framework-for-securing-autonomous-ai-systems/)
+- [New America OTI: AI Agents and Memory in the MCP Era](hxxps://www[.]newamerica[.]org/oti/briefs/ai-agents-and-memory/)
+- [OpenClaw AI Agent Attack Surface Analysis -- Security Boulevard](hxxps://securityboulevard[.]com/2026/02/openclaw-open-source-ai-agent-application-attack-surface-and-security-risk-system-analysis/)
+- [AWS Agentic AI Security Scoping Matrix](hxxps://aws[.]amazon[.]com/blogs/security/the-agentic-ai-security-scoping-matrix-a-framework-for-securing-autonomous-ai-systems/)
 
 ### Memory Architecture and Security
-- [Redis: AI Agent Memory -- Build Stateful Systems](https://redis.io/blog/ai-agent-memory-stateful-systems/)
-- [The New Stack: Memory for AI Agents -- Context Engineering](https://thenewstack.io/memory-for-ai-agents-a-new-paradigm-of-context-engineering/)
-- [InfoWorld: AI Memory Is a Database Problem](https://www.infoworld.com/article/4101981/ai-memory-is-just-another-database-problem.html)
-- [Acuvity: What Is Memory Governance](https://acuvity.ai/what-is-memory-governance-why-important-for-ai-security/)
-- [AI Agent Memory Security Requires More Observability](https://medium.com/@oracle_43885/ai-agent-memory-security-requires-more-observability-b12053e39ff0)
+- [Redis: AI Agent Memory -- Build Stateful Systems](hxxps://redis[.]io/blog/ai-agent-memory-stateful-systems/)
+- [The New Stack: Memory for AI Agents -- Context Engineering](hxxps://thenewstack[.]io/memory-for-ai-agents-a-new-paradigm-of-context-engineering/)
+- [InfoWorld: AI Memory Is a Database Problem](hxxps://www[.]infoworld[.]com/article/4101981/ai-memory-is-just-another-database-problem.html)
+- [Acuvity: What Is Memory Governance](hxxps://acuvity[.]ai/what-is-memory-governance-why-important-for-ai-security/)
+- [AI Agent Memory Security Requires More Observability](hxxps://medium[.]com/@oracle_43885/ai-agent-memory-security-requires-more-observability-b12053e39ff0)
 
 ### Attack Surface Analysis
-- [RAG Attack Surfaces -- DeconvoluteAI](https://deconvoluteai.com/blog/attack-surfaces-rag)
-- [RAG Poisoning via Vector Embeddings -- Prompt Security](https://prompt.security/blog/the-embedded-threat-in-your-llm-poisoning-rag-pipelines-via-vector-embeddings)
-- [RAG Data Poisoning Explained -- Promptfoo](https://www.promptfoo.dev/blog/rag-poisoning/)
-- [Data Poisoning 2025 Perspective -- Lakera](https://www.lakera.ai/blog/training-data-poisoning)
-- [Lakera: Agentic AI Threats -- Memory Poisoning (Part 1)](https://www.lakera.ai/blog/agentic-ai-threats-p1)
-- [Agentic Memory Poisoning -- MintMCP](https://www.mintmcp.com/blog/ai-agent-memory-poisoning)
-- [LLM Security Risks 2026 -- SombraInc](https://sombrainc.com/blog/llm-security-risks-2026)
+- [RAG Attack Surfaces -- DeconvoluteAI](hxxps://deconvoluteai[.]com/blog/attack-surfaces-rag)
+- [RAG Poisoning via Vector Embeddings -- Prompt Security](hxxps://prompt[.]security/blog/the-embedded-threat-in-your-llm-poisoning-rag-pipelines-via-vector-embeddings)
+- [RAG Data Poisoning Explained -- Promptfoo](hxxps://www[.]promptfoo[.]dev/blog/rag-poisoning/)
+- [Data Poisoning 2025 Perspective -- Lakera](hxxps://www[.]lakera[.]ai/blog/training-data-poisoning)
+- [Lakera: Agentic AI Threats -- Memory Poisoning (Part 1)](hxxps://www[.]lakera[.]ai/blog/agentic-ai-threats-p1)
+- [Agentic Memory Poisoning -- MintMCP](hxxps://www[.]mintmcp[.]com/blog/ai-agent-memory-poisoning)
+- [LLM Security Risks 2026 -- SombraInc](hxxps://sombrainc[.]com/blog/llm-security-risks-2026)
 
 ### Defense and Best Practices
-- [EPAM: Agentic AI Security](https://solutionshub.epam.com/blog/post/agentic-ai-security)
-- [Top 10 Agentic AI Security Threats 2025 -- Lasso Security](https://www.lasso.security/blog/agentic-ai-security-threats-2025)
-- [Agentic AI Security Deep Analysis -- Collabnix](https://collabnix.com/agentic-ai-and-security-a-deep-technical-analysis/)
-- [Agentic AI Security -- Stellar Cyber](https://stellarcyber.ai/learn/agentic-ai-securiry-threats/)
-- [AI Agent Security Risks -- Mindgard](https://mindgard.ai/blog/ai-agent-security-challenges)
+- [EPAM: Agentic AI Security](hxxps://solutionshub[.]epam[.]com/blog/post/agentic-ai-security)
+- [Top 10 Agentic AI Security Threats 2025 -- Lasso Security](hxxps://www[.]lasso[.]security/blog/agentic-ai-security-threats-2025)
+- [Agentic AI Security Deep Analysis -- Collabnix](hxxps://collabnix[.]com/agentic-ai-and-security-a-deep-technical-analysis/)
+- [Agentic AI Security -- Stellar Cyber](hxxps://stellarcyber[.]ai/learn/agentic-ai-securiry-threats/)
+- [AI Agent Security Risks -- Mindgard](hxxps://mindgard[.]ai/blog/ai-agent-security-challenges)

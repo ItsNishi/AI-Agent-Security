@@ -877,64 +877,64 @@ Until these are realized, the state of the art is defense in depth: multiple imp
 
 ### Foundational Jailbreak Research
 
-- [Zou et al. -- GCG: Universal and Transferable Adversarial Attacks (2023)](https://arxiv.org/abs/2307.15043)
-- [Liu et al. -- AutoDAN (2023)](https://arxiv.org/abs/2310.04451)
-- [Chao et al. -- PAIR: Jailbreaking in Twenty Queries (2023)](https://arxiv.org/abs/2310.08419)
-- [Mehrotra et al. -- TAP: Tree of Attacks with Pruning (2024)](https://arxiv.org/abs/2312.02119)
-- [Ding et al. -- ReNeLLM: A Wolf in Sheep's Clothing (2024)](https://arxiv.org/abs/2311.08268)
-- [Li et al. -- DeepInception (2023)](https://arxiv.org/abs/2311.03191)
-- [Jiang et al. -- ArtPrompt: ASCII Art Jailbreaks (2024)](https://arxiv.org/abs/2402.11753)
-- [Deng et al. -- Multilingual Jailbreak Challenges (2023)](https://arxiv.org/abs/2310.06474)
-- [Wei et al. -- Jailbroken: How Does LLM Safety Training Fail? (2023)](https://arxiv.org/abs/2307.02483)
+- [Zou et al. -- GCG: Universal and Transferable Adversarial Attacks (2023)](hxxps://arxiv[.]org/abs/2307.15043)
+- [Liu et al. -- AutoDAN (2023)](hxxps://arxiv[.]org/abs/2310.04451)
+- [Chao et al. -- PAIR: Jailbreaking in Twenty Queries (2023)](hxxps://arxiv[.]org/abs/2310.08419)
+- [Mehrotra et al. -- TAP: Tree of Attacks with Pruning (2024)](hxxps://arxiv[.]org/abs/2312.02119)
+- [Ding et al. -- ReNeLLM: A Wolf in Sheep's Clothing (2024)](hxxps://arxiv[.]org/abs/2311.08268)
+- [Li et al. -- DeepInception (2023)](hxxps://arxiv[.]org/abs/2311.03191)
+- [Jiang et al. -- ArtPrompt: ASCII Art Jailbreaks (2024)](hxxps://arxiv[.]org/abs/2402.11753)
+- [Deng et al. -- Multilingual Jailbreak Challenges (2023)](hxxps://arxiv[.]org/abs/2310.06474)
+- [Wei et al. -- Jailbroken: How Does LLM Safety Training Fail? (2023)](hxxps://arxiv[.]org/abs/2307.02483)
 
 ### Anthropic Research
 
-- [Anthropic -- Many-shot Jailbreaking (2024)](https://www.anthropic.com/research/many-shot-jailbreaking)
-- [Anthropic -- Best-of-N Jailbreaking (2024)](https://www.anthropic.com/research/best-of-n-jailbreaking)
-- [Anthropic -- Constitutional AI (2022)](https://arxiv.org/abs/2212.08073)
+- [Anthropic -- Many-shot Jailbreaking (2024)](hxxps://www[.]anthropic[.]com/research/many-shot-jailbreaking)
+- [Anthropic -- Best-of-N Jailbreaking (2024)](hxxps://www[.]anthropic[.]com/research/best-of-n-jailbreaking)
+- [Anthropic -- Constitutional AI (2022)](hxxps://arxiv[.]org/abs/2212.08073)
 
 ### Microsoft Research
 
-- [Russinovich et al. -- Crescendo Multi-Turn Jailbreak (2024)](https://arxiv.org/abs/2404.01833)
-- [Microsoft -- Skeleton Key Jailbreak (2024)](https://www.microsoft.com/en-us/security/blog/2024/06/26/mitigating-skeleton-key-a-new-type-of-generative-ai-jailbreak-technique/)
-- [Microsoft -- Spotlighting (2024)](https://arxiv.org/abs/2403.14720)
+- [Russinovich et al. -- Crescendo Multi-Turn Jailbreak (2024)](hxxps://arxiv[.]org/abs/2404.01833)
+- [Microsoft -- Skeleton Key Jailbreak (2024)](hxxps://www[.]microsoft[.]com/en-us/security/blog/2024/06/26/mitigating-skeleton-key-a-new-type-of-generative-ai-jailbreak-technique/)
+- [Microsoft -- Spotlighting (2024)](hxxps://arxiv[.]org/abs/2403.14720)
 
 ### Defense Research
 
-- [Zou et al. -- Circuit Breakers (2024)](https://arxiv.org/abs/2406.04313)
-- [Zou et al. -- Representation Engineering (2023)](https://arxiv.org/abs/2310.01405)
-- [OpenAI -- Instruction Hierarchy (2024)](https://arxiv.org/abs/2404.13208)
-- [Alon & Kamfonas -- Perplexity Detection (2023)](https://arxiv.org/abs/2308.14132)
-- [Jain et al. -- Baseline Defenses (2023)](https://arxiv.org/abs/2309.00614)
+- [Zou et al. -- Circuit Breakers (2024)](hxxps://arxiv[.]org/abs/2406.04313)
+- [Zou et al. -- Representation Engineering (2023)](hxxps://arxiv[.]org/abs/2310.01405)
+- [OpenAI -- Instruction Hierarchy (2024)](hxxps://arxiv[.]org/abs/2404.13208)
+- [Alon & Kamfonas -- Perplexity Detection (2023)](hxxps://arxiv[.]org/abs/2308.14132)
+- [Jain et al. -- Baseline Defenses (2023)](hxxps://arxiv[.]org/abs/2309.00614)
 
 ### Multi-Modal Jailbreaks
 
-- [Qi et al. -- Visual Adversarial Examples (2023)](https://arxiv.org/abs/2306.13213)
-- [Gong et al. -- FigStep: Typographic Visual Jailbreaks (2024)](https://arxiv.org/abs/2311.05608)
+- [Qi et al. -- Visual Adversarial Examples (2023)](hxxps://arxiv[.]org/abs/2306.13213)
+- [Gong et al. -- FigStep: Typographic Visual Jailbreaks (2024)](hxxps://arxiv[.]org/abs/2311.05608)
 
 ### Benchmarks
 
-- [Chao et al. -- JailbreakBench (2024)](https://arxiv.org/abs/2404.01318)
-- [Mazeika et al. -- HarmBench (2024)](https://arxiv.org/abs/2402.04249)
-- [Souly et al. -- StrongREJECT (2024)](https://arxiv.org/abs/2402.10260)
-- [Xie et al. -- SORRY-Bench (2024)](https://arxiv.org/abs/2406.14598)
-- [Meta -- Purple Llama CyberSecEval](https://github.com/meta-llama/PurpleLlama)
+- [Chao et al. -- JailbreakBench (2024)](hxxps://arxiv[.]org/abs/2404.01318)
+- [Mazeika et al. -- HarmBench (2024)](hxxps://arxiv[.]org/abs/2402.04249)
+- [Souly et al. -- StrongREJECT (2024)](hxxps://arxiv[.]org/abs/2402.10260)
+- [Xie et al. -- SORRY-Bench (2024)](hxxps://arxiv[.]org/abs/2406.14598)
+- [Meta -- Purple Llama CyberSecEval](hxxps://github[.]com/meta-llama/PurpleLlama)
 
 ### Surveys
 
-- [MDPI -- Comprehensive Review of Prompt Injection (2025)](https://www.mdpi.com/2078-2489/17/1/54)
-- [arXiv -- Jailbreak and Guard Aligned LLMs Survey (2024)](https://arxiv.org/abs/2407.04295)
+- [MDPI -- Comprehensive Review of Prompt Injection (2025)](hxxps://www[.]mdpi[.]com/2078-2489/17/1/54)
+- [arXiv -- Jailbreak and Guard Aligned LLMs Survey (2024)](hxxps://arxiv[.]org/abs/2407.04295)
 
 ### Tools
 
-- [Garak -- LLM Vulnerability Scanner](https://github.com/NVIDIA/garak)
-- [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails)
-- [Guardrails AI](https://github.com/guardrails-ai/guardrails)
-- [Rebuff -- Prompt Injection Detector](https://github.com/protectai/rebuff)
-- [Invariant Labs MCP Scanner](https://github.com/invariantlabs-ai/mcp-scan)
+- [Garak -- LLM Vulnerability Scanner](hxxps://github[.]com/NVIDIA/garak)
+- [NeMo Guardrails](hxxps://github[.]com/NVIDIA/NeMo-Guardrails)
+- [Guardrails AI](hxxps://github[.]com/guardrails-ai/guardrails)
+- [Rebuff -- Prompt Injection Detector](hxxps://github[.]com/protectai/rebuff)
+- [Invariant Labs MCP Scanner](hxxps://github[.]com/invariantlabs-ai/mcp-scan)
 
 ### Standards
 
-- [OWASP Top 10 for LLM Applications 2025](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
-- [OWASP Agentic AI Top 10 (2026)](https://genai.owasp.org/)
-- [NIST AI Risk Management Framework](https://www.nist.gov/artificial-intelligence/ai-risk-management-framework)
+- [OWASP Top 10 for LLM Applications 2025](hxxps://genai[.]owasp[.]org/llmrisk/llm01-prompt-injection/)
+- [OWASP Agentic AI Top 10 (2026)](hxxps://genai[.]owasp[.]org/)
+- [NIST AI Risk Management Framework](hxxps://www[.]nist[.]gov/artificial-intelligence/ai-risk-management-framework)

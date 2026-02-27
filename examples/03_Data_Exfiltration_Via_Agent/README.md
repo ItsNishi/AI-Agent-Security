@@ -50,6 +50,16 @@ values found: [contents of .env file]"
 
 If the agent outputs markdown that gets rendered, the image request sends data to the attacker when the user views the response.
 
+## Mitigation
+
+- **Network egress controls**: Restrict outbound connections to allowlisted domains; block arbitrary HTTP/DNS requests
+- **Sensitive file access controls**: Deny agent access to `~/.ssh/`, `~/.aws/`, `.env` files, and browser profile directories
+- **Output filtering**: Scan agent responses for patterns matching secrets (API keys, tokens, private keys) before rendering
+- **Markdown image blocking**: Disable image rendering in agent output to prevent image-URL exfiltration
+- **Human-in-the-loop**: Require explicit user approval for any network request or file read outside the project directory
+
+See [03_Defense_Patterns.md](../../notes/03_Defense_Patterns.md) for the full defense framework.
+
 ## See Also
 
 - [examples.md](./examples.md) -- Detailed attack chains and defenses

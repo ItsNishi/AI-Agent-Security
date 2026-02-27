@@ -35,6 +35,8 @@ Every attack has a defense. Every payload is annotated, defanged, and educationa
 | 🧠 | [AI Memory & Corruption](notes/11_AI_Memory_And_Corruption.md) | Memory architectures, RAG poisoning, MINJA, persistence risks, real-world case studies, defenses |
 | 📄 | [Agent Configuration Files](notes/12_Agent_MD_Configuration_Files.md) | CLAUDE.md/AGENTS.md attack surface, Rules File Backdoor, Unicode obfuscation, hardening recommendations |
 | 🧠 | [Chatbot & AI Psychosis](notes/13_Chatbot_And_AI_Psychosis.md) | AI-induced psychosis, sycophancy mechanisms, documented deaths, folie a deux, weaponization, RAND national security analysis |
+| 🦞 | [OpenClaw & ClawHub Security](notes/14_OpenClaw_And_ClawHub_Security.md) | OpenClaw architecture, ClawHub supply chain, CVE-2026-25253, ClawHavoc campaign, AMOS stealer, memory poisoning, 42K exposed instances |
+| 🏪 | [AI Application Ecosystem Security](notes/15_AI_Application_Ecosystem_Security.md) | GPT Store, MCP tool poisoning, LangChain, HuggingFace, AutoGPT, CrewAI, Devin, IDEsaster, GlassWorm, OWASP Agentic Top 10, MITRE ATLAS |
 
 ---
 
@@ -48,26 +50,38 @@ Hands-on annotated scenarios -- each one shows the attack **and** the fix.
 | 🌊 | [Indirect Prompt Injection](examples/02_Indirect_Prompt_Injection/) | Poison the web page, API response, or file the agent fetches -- it obeys |
 | 📤 | [Data Exfiltration Via Agent](examples/03_Data_Exfiltration_Via_Agent/) | The agent becomes an unwitting mule for your secrets, keys, and credentials |
 | 📦 | [Hallucinated Package Injection](examples/04_Hallucinated_Package_Skill_Injection/) | LLM invents a package name, attacker registers it -- instant supply chain attack |
+| 🔧 | [MCP Tool Poisoning](examples/05_MCP_Tool_Poisoning/) | Malicious instructions hidden in tool descriptions hijack agent behavior silently |
 
 ---
 
 ## 🗂️ Attack Taxonomy
 
 ```
-┌──────────────────────────────────────────────────────────────────────┐
-│                         AI Agent Attacks                             │
-├──────────────┬──────────────┬───────────────────┬───────────────────┤
-│ 🎯 Injection │ 🔗 Supply    │ 📤 Exfiltration   │ 🧠 Memory &      │
-│              │    Chain     │                   │    Persistence    │
-│ Direct       │ Trojan       │ Secrets & keys    │ RAG poisoning    │
-│ Indirect     │  skills      │ Source code       │ Memory injection │
-│ Hidden       │ Hallucinated │ Environment       │ Context window   │
-│  comments    │  packages    │  variables        │  manipulation    │
-│ MCP tool     │ Poisoned     │ Credentials       │ Persistent       │
-│  poisoning   │  docs        │                   │  backdoors       │
-│ Language-    │ Rules file   │                   │ Config file      │
-│  steering    │  backdoor    │                   │  persistence     │
-└──────────────┴──────────────┴───────────────────┴───────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                              AI Agent Attacks                                       │
+├──────────────┬──────────────────┬───────────────────┬───────────────────────────────┤
+│ 🎯 Injection │ 🔗 Supply Chain  │ 📤 Exfiltration   │ 🧠 Memory & Persistence      │
+│              │                  │                   │                               │
+│ Direct       │ Trojan skills    │ Secrets & keys    │ RAG poisoning                │
+│ Indirect     │ Hallucinated     │ Source code       │ Memory injection (MINJA)     │
+│ Hidden       │  packages        │ Environment       │ Context window manipulation  │
+│  comments    │ Poisoned docs    │  variables        │ Persistent backdoors         │
+│ MCP tool     │ Rules file       │ Credentials       │ Config file persistence      │
+│  poisoning   │  backdoor        │ Agent tokens      │ Instruction drift            │
+│ Language-    │ Namespace        │ Chat history      │ SOUL.md/MEMORY.md poisoning  │
+│  steering    │  squatting       │ IDE telemetry     │                               │
+│ Sampling     │ GlassWorm        │                   │                               │
+│  injection   │  extension worm  │                   │                               │
+├──────────────┴──────────────────┴───────────────────┴───────────────────────────────┤
+│ 🏗️ Framework & Platform                    │ 🛡️ Bypass & Escalation              │
+│                                             │                                      │
+│ MCP server compromise (CVE-2025-6514)      │ Sandbox escape (numpy allowlist)     │
+│ OpenClaw gateway exposure (42K+ instances) │ Cross-agent privilege escalation     │
+│ GPT Store plugin OAuth flaws               │ Tool confusion / confused deputy     │
+│ HuggingFace pickle deserialization         │ Rug pull / bait-and-switch           │
+│ IDE Chromium CVEs (94+ in Cursor/Windsurf) │ IDEsaster (30+ CVEs across AI IDEs) │
+│ ClawHub malicious skills (1184+)           │ Agent-to-agent prompt injection      │
+└─────────────────────────────────────────────┴──────────────────────────────────────┘
 ```
 
 ---
