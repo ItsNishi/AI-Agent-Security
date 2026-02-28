@@ -296,10 +296,10 @@ PHP, and adjust behavior accordingly:
 
 ## 6. Sources
 
-- [AutoCodeBenchmark -- Tencent Hunyuan (GitHub)](hxxps://github[.]com/Tencent-Hunyuan/AutoCodeBenchmark)
-- [AutoCodeBench paper (arXiv)](hxxps://arxiv[.]org/abs/2508.09101)
-- [AutoCodeBench leaderboard](hxxps://autocodebench[.]github[.]io/leaderboard.html)
-- [Which Programming Languages Are Most Token Efficient? -- Martin Alderson](hxxps://martinalderson[.]com/posts/which-programming-languages-are-most-token-efficient/)
-- [NanoLang -- Simon Willison](hxxps://simonwillison[.]net/2026/Jan/19/nanolang/#atom-everything)
-- [AutoCodeBench: How Tencent Hunyuan Revolutionizes AI Programming Evaluation -- Medium](hxxps://medium[.]com/@leivadiazjulio/autocodebench-how-tencent-hunyuan-revolutionizes-ai-programming-evaluation-78addbb1e364)
-- [The Great AI Coding Showdown -- Communeify](hxxps://www[.]communeify[.]com/en/blog/tencent-autocodebench-ai-coding-model-ranking/)
+- [AutoCodeBenchmark -- Tencent Hunyuan (GitHub)](https://github[.]com/Tencent-Hunyuan/AutoCodeBenchmark)
+- [AutoCodeBench paper (arXiv)](https://arxiv[.]org/abs/2508.09101)
+- [AutoCodeBench leaderboard](https://autocodebench[.]github[.]io/leaderboard.html)
+- [Which Programming Languages Are Most Token Efficient? -- Martin Alderson](https://martinalderson[.]com/posts/which-programming-languages-are-most-token-efficient/)
+- [NanoLang -- Simon Willison](https://simonwillison[.]net/2026/Jan/19/nanolang/#atom-everything)
+- [AutoCodeBench: How Tencent Hunyuan Revolutionizes AI Programming Evaluation -- Medium](https://medium[.]com/@leivadiazjulio/autocodebench-how-tencent-hunyuan-revolutionizes-ai-programming-evaluation-78addbb1e364)
+- [The Great AI Coding Showdown -- Communeify](https://www[.]communeify[.]com/en/blog/tencent-autocodebench-ai-coding-model-ranking/)

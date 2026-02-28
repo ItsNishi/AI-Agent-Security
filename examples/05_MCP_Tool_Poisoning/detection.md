@@ -195,7 +195,7 @@ Capabilities:
 - Logs all tool registrations and description changes for security audit
 - Currently in beta
 
-Source: hxxps://blog[.]trailofbits[.]com/2025/07/28/we-built-the-security-layer-mcp-always-needed/
+Source: https://blog[.]trailofbits[.]com/2025/07/28/we-built-the-security-layer-mcp-always-needed/
 
 ### 3.2 Elastic Security Labs Findings (September 2025)
 
@@ -205,7 +205,7 @@ Systematic testing of MCP server implementations revealed:
 - **30% permitted unrestricted URL fetching** -- no domain or protocol restrictions
 - Recommended defenses: input validation on all tool parameters, sandboxed execution, network egress filtering
 
-Source: hxxps://www[.]elastic[.]co/security-labs/mcp-tools-attack-defense-recommendations
+Source: https://www[.]elastic[.]co/security-labs/mcp-tools-attack-defense-recommendations
 
 ### 3.3 OWASP MCP Top 10
 
@@ -224,16 +224,16 @@ The OWASP MCP Top 10 provides a ranked list of the most critical security risks 
 | 9 | Logging and Monitoring Gaps |
 | 10 | Lack of Transport Security |
 
-Source: hxxps://owasp[.]org/www-project-mcp-top-10/
+Source: https://owasp[.]org/www-project-mcp-top-10/
 
 ### 3.4 Additional References
 
-- Invariant Labs (original tool poisoning research): hxxps://invariantlabs[.]ai/blog/mcp-security-notification-tool-poisoning-attacks
-- Invariant Labs (reproduction code): hxxps://github[.]com/invariantlabs-ai/mcp-injection-experiments
-- MCPTox Benchmark (academic testing framework): hxxps://arxiv[.]org/html/2508.14925v1
-- Adversa AI MCP Security Top 25: hxxps://adversa[.]ai/mcp-security-top-25-mcp-vulnerabilities/
-- Vulnerable MCP Project (CVE database): hxxps://vulnerablemcp[.]info/
-- MCP Security Best Practices (official spec): hxxps://modelcontextprotocol[.]io/specification/draft/basic/security_best_practices
+- Invariant Labs (original tool poisoning research): https://invariantlabs[.]ai/blog/mcp-security-notification-tool-poisoning-attacks
+- Invariant Labs (reproduction code): https://github[.]com/invariantlabs-ai/mcp-injection-experiments
+- MCPTox Benchmark (academic testing framework): https://arxiv[.]org/html/2508.14925v1
+- Adversa AI MCP Security Top 25: https://adversa[.]ai/mcp-security-top-25-mcp-vulnerabilities/
+- Vulnerable MCP Project (CVE database): https://vulnerablemcp[.]info/
+- MCP Security Best Practices (official spec): https://modelcontextprotocol[.]io/specification/draft/basic/security_best_practices
 
 ---
 

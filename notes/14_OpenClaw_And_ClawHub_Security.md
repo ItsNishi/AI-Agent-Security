@@ -104,7 +104,7 @@ Core specification:
 - A skill is a **directory** containing at minimum a SKILL.md file
 - SKILL.md contains **YAML frontmatter** (metadata) followed by **Markdown content** (instructions)
 - No format restrictions on the Markdown body -- "write whatever helps agents perform the task effectively"
-- The specification is at [agentskills[.]io](hxxps://agentskills[.]io/specification) and [github[.]com/agentskills/agentskills](hxxps://github[.]com/agentskills/agentskills)
+- The specification is at [agentskills[.]io](https://agentskills[.]io/specification) and [github[.]com/agentskills/agentskills](https://github[.]com/agentskills/agentskills)
 
 This is the same format used by both Claude Code and OpenClaw. The security implications of this shared standard are significant -- a malicious skill written for one platform can potentially affect any agent that implements the standard.
 
@@ -206,7 +206,7 @@ Skills are discovered, loaded, and injected into the system prompt at boot time.
 **CWE**: CWE-669 (Incorrect Resource Transfer Between Spheres)
 **Affected**: OpenClaw (all versions before 2026.1.29)
 **Patched**: Version 2026.1.29 (January 30, 2026)
-**NVD**: [nvd[.]nist[.]gov/vuln/detail/CVE-2026-25253](hxxps://nvd[.]nist[.]gov/vuln/detail/CVE-2026-25253)
+**NVD**: [nvd[.]nist[.]gov/vuln/detail/CVE-2026-25253](https://nvd[.]nist[.]gov/vuln/detail/CVE-2026-25253)
 
 ### The Kill Chain
 
@@ -289,7 +289,7 @@ Koi created **Clawdex** -- a defensive skill that OpenClaw bots can install to p
 
 **Published**: February 5, 2026
 **Scope**: 3,984 skills from ClawHub and skills.sh (largest publicly available corpus)
-**Repository**: [github[.]com/snyk-labs/toxicskills-goof](hxxps://github[.]com/snyk-labs/toxicskills-goof)
+**Repository**: [github[.]com/snyk-labs/toxicskills-goof](https://github[.]com/snyk-labs/toxicskills-goof)
 
 ### Key Findings
 
@@ -591,8 +591,8 @@ Skill verification process:
 - **Clawdex** (Koi Security): Defensive skill for OpenClaw bots
 - **SecureClaw** (Adversa AI): 55 automated audit/hardening checks, maps to OWASP Agentic Security Top 10
 - **Bitdefender AI Skills Checker**: Consumer-facing skill scanner
-- **Snyk agent-scan**: [github[.]com/snyk/agent-scan](hxxps://github[.]com/snyk/agent-scan) -- security scanner for AI agents, MCP servers, and agent skills
-- **OpenClaw Security Monitor**: [github[.]com/adibirzu/openclaw-security-monitor](hxxps://github[.]com/adibirzu/openclaw-security-monitor) -- detects ClawHavoc, AMOS, CVE-2026-25253, memory poisoning
+- **Snyk agent-scan**: [github[.]com/snyk/agent-scan](https://github[.]com/snyk/agent-scan) -- security scanner for AI agents, MCP servers, and agent skills
+- **OpenClaw Security Monitor**: [github[.]com/adibirzu/openclaw-security-monitor](https://github[.]com/adibirzu/openclaw-security-monitor) -- detects ClawHavoc, AMOS, CVE-2026-25253, memory poisoning
 
 ---
 
@@ -694,7 +694,7 @@ OpenClaw and Claude Code are **separate products** from different developers tha
 
 ### Anthropic's Skills Repository
 
-Anthropic maintains an official skills repository at [github[.]com/anthropics/skills](hxxps://github[.]com/anthropics/skills) -- curated, reviewed skills that demonstrate the format. This is a controlled distribution channel, unlike the open ClawHub marketplace.
+Anthropic maintains an official skills repository at [github[.]com/anthropics/skills](https://github[.]com/anthropics/skills) -- curated, reviewed skills that demonstrate the format. This is a controlled distribution channel, unlike the open ClawHub marketplace.
 
 ---
 
@@ -775,88 +775,88 @@ The fragmentation compounds supply chain risk. Each platform has different (or n
 
 ### Primary Research
 
-- [ClawHavoc: 341 Malicious Clawed Skills Found by the Bot They Were Targeting](hxxps://www[.]koi[.]ai/blog/clawhavoc-341-malicious-clawedbot-skills-found-by-the-bot-they-were-targeting) -- Koi Security
-- [Snyk ToxicSkills: Malicious AI Agent Skills on ClawHub](hxxps://snyk[.]io/blog/toxicskills-malicious-ai-agent-skills-clawhub/) -- Snyk
-- [Inside the 'clawdhub' Malicious Campaign: AI Agent Skills Drop Reverse Shells](hxxps://snyk[.]io/articles/clawdhub-malicious-campaign-ai-agent-skills/) -- Snyk
-- [From SKILL.md to Shell Access in Three Lines of Markdown](hxxps://snyk[.]io/articles/skill-md-shell-access/) -- Snyk
-- [Why Your "Skill Scanner" Is Just False Security (and Maybe Malware)](hxxps://snyk[.]io/blog/skill-scanner-false-security/) -- Snyk
-- [How a Malicious Google Skill on ClawHub Tricks Users Into Installing Malware](hxxps://snyk[.]io/blog/clawhub-malicious-google-skill-openclaw-malware/) -- Snyk
-- [280+ Leaky Skills: How OpenClaw and ClawHub Are Exposing API Keys and PII](hxxps://snyk[.]io/blog/openclaw-skills-credential-leaks-research/) -- Snyk
-- [Malicious OpenClaw Skills Used to Distribute Atomic MacOS Stealer](hxxps://www[.]trendmicro[.]com/en_us/research/26/b/openclaw-skills-used-to-distribute-atomic-macos-stealer.html) -- Trend Micro
-- [Memory Poisoning and Instruction Drift: From Discord Chat to Reverse Shell](hxxps://www[.]lakera[.]ai/blog/memory-poisoning-instruction-drift-from-discord-chat-to-reverse-shell) -- Lakera AI
-- [From Automation to Infection: How OpenClaw AI Agent Skills Are Being Weaponized](hxxps://blog[.]virustotal[.]com/2026/02/from-automation-to-infection-how.html) -- VirusTotal Blog
-- [Malicious OpenClaw Skills Exposed: A Full Teardown](hxxps://repello[.]ai/blog/malicious-openclaw-skills-exposed-a-full-teardown) -- Repello AI
-- [OpenClaw in the Wild: Mapping the Public Exposure of a Viral AI Assistant](hxxps://censys[.]com/blog/openclaw-in-the-wild-mapping-the-public-exposure-of-a-viral-ai-assistant/) -- Censys
-- [Threat Intelligence: Analysis of ClawHub Malicious Skills Poisoning](hxxps://slowmist[.]medium[.]com/threat-intelligence-analysis-of-clawhub-malicious-skills-poisoning-0448ffd49c80) -- SlowMist
+- [ClawHavoc: 341 Malicious Clawed Skills Found by the Bot They Were Targeting](https://www[.]koi[.]ai/blog/clawhavoc-341-malicious-clawedbot-skills-found-by-the-bot-they-were-targeting) -- Koi Security
+- [Snyk ToxicSkills: Malicious AI Agent Skills on ClawHub](https://snyk[.]io/blog/toxicskills-malicious-ai-agent-skills-clawhub/) -- Snyk
+- [Inside the 'clawdhub' Malicious Campaign: AI Agent Skills Drop Reverse Shells](https://snyk[.]io/articles/clawdhub-malicious-campaign-ai-agent-skills/) -- Snyk
+- [From SKILL.md to Shell Access in Three Lines of Markdown](https://snyk[.]io/articles/skill-md-shell-access/) -- Snyk
+- [Why Your "Skill Scanner" Is Just False Security (and Maybe Malware)](https://snyk[.]io/blog/skill-scanner-false-security/) -- Snyk
+- [How a Malicious Google Skill on ClawHub Tricks Users Into Installing Malware](https://snyk[.]io/blog/clawhub-malicious-google-skill-openclaw-malware/) -- Snyk
+- [280+ Leaky Skills: How OpenClaw and ClawHub Are Exposing API Keys and PII](https://snyk[.]io/blog/openclaw-skills-credential-leaks-research/) -- Snyk
+- [Malicious OpenClaw Skills Used to Distribute Atomic MacOS Stealer](https://www[.]trendmicro[.]com/en_us/research/26/b/openclaw-skills-used-to-distribute-atomic-macos-stealer.html) -- Trend Micro
+- [Memory Poisoning and Instruction Drift: From Discord Chat to Reverse Shell](https://www[.]lakera[.]ai/blog/memory-poisoning-instruction-drift-from-discord-chat-to-reverse-shell) -- Lakera AI
+- [From Automation to Infection: How OpenClaw AI Agent Skills Are Being Weaponized](https://blog[.]virustotal[.]com/2026/02/from-automation-to-infection-how.html) -- VirusTotal Blog
+- [Malicious OpenClaw Skills Exposed: A Full Teardown](https://repello[.]ai/blog/malicious-openclaw-skills-exposed-a-full-teardown) -- Repello AI
+- [OpenClaw in the Wild: Mapping the Public Exposure of a Viral AI Assistant](https://censys[.]com/blog/openclaw-in-the-wild-mapping-the-public-exposure-of-a-viral-ai-assistant/) -- Censys
+- [Threat Intelligence: Analysis of ClawHub Malicious Skills Poisoning](https://slowmist[.]medium[.]com/threat-intelligence-analysis-of-clawhub-malicious-skills-poisoning-0448ffd49c80) -- SlowMist
 
 ### Vendor Security Advisories
 
-- [Running OpenClaw Safely: Identity, Isolation, and Runtime Risk](hxxps://www[.]microsoft[.]com/en-us/security/blog/2026/02/19/running-openclaw-safely-identity-isolation-runtime-risk/) -- Microsoft Security Blog
-- [Personal AI Agents like OpenClaw Are a Security Nightmare](hxxps://blogs[.]cisco[.]com/ai/personal-ai-agents-like-openclaw-are-a-security-nightmare) -- Cisco
-- [Key OpenClaw Risks](hxxps://www[.]kaspersky[.]com/blog/moltbot-enterprise-risk-management/55317/) -- Kaspersky
-- [The OpenClaw Experiment Is a Warning Shot for Enterprise AI Security](hxxps://www[.]sophos[.]com/en-us/blog/the-openclaw-experiment-is-a-warning-shot-for-enterprise-ai-security) -- Sophos
-- [OpenClaw Security 101: Vulnerabilities and Hardening 2026](hxxps://adversa[.]ai/blog/openclaw-security-101-vulnerabilities-hardening-2026/) -- Adversa AI
-- [OpenClaw Security: Risks of Exposed AI Agents](hxxps://www[.]bitsight[.]com/blog/openclaw-ai-security-risks-exposed-instances) -- Bitsight
+- [Running OpenClaw Safely: Identity, Isolation, and Runtime Risk](https://www[.]microsoft[.]com/en-us/security/blog/2026/02/19/running-openclaw-safely-identity-isolation-runtime-risk/) -- Microsoft Security Blog
+- [Personal AI Agents like OpenClaw Are a Security Nightmare](https://blogs[.]cisco[.]com/ai/personal-ai-agents-like-openclaw-are-a-security-nightmare) -- Cisco
+- [Key OpenClaw Risks](https://www[.]kaspersky[.]com/blog/moltbot-enterprise-risk-management/55317/) -- Kaspersky
+- [The OpenClaw Experiment Is a Warning Shot for Enterprise AI Security](https://www[.]sophos[.]com/en-us/blog/the-openclaw-experiment-is-a-warning-shot-for-enterprise-ai-security) -- Sophos
+- [OpenClaw Security 101: Vulnerabilities and Hardening 2026](https://adversa[.]ai/blog/openclaw-security-101-vulnerabilities-hardening-2026/) -- Adversa AI
+- [OpenClaw Security: Risks of Exposed AI Agents](https://www[.]bitsight[.]com/blog/openclaw-ai-security-risks-exposed-instances) -- Bitsight
 
 ### CVE and Vulnerability Details
 
-- [NVD -- CVE-2026-25253](hxxps://nvd[.]nist[.]gov/vuln/detail/CVE-2026-25253) -- NIST
-- [CVE-2026-25253: 1-Click RCE in OpenClaw Through Auth Token Exfiltration](hxxps://socradar[.]io/blog/cve-2026-25253-rce-openclaw-auth-token/) -- SOCRadar
-- [CVE-2026-25253 Impact, Exploitability, and Mitigation Steps](hxxps://www[.]wiz[.]io/vulnerability-database/cve/cve-2026-25253) -- Wiz
-- [OpenClaw Bug Enables One-Click Remote Code Execution via Malicious Link](hxxps://thehackernews[.]com/2026/02/openclaw-bug-enables-one-click-remote.html) -- The Hacker News
-- [Hunting OpenClaw Exposures: CVE-2026-25253 in Internet-Facing AI Agent Gateways](hxxps://hunt[.]io/blog/cve-2026-25253-openclaw-ai-agent-exposure) -- Hunt.io
+- [NVD -- CVE-2026-25253](https://nvd[.]nist[.]gov/vuln/detail/CVE-2026-25253) -- NIST
+- [CVE-2026-25253: 1-Click RCE in OpenClaw Through Auth Token Exfiltration](https://socradar[.]io/blog/cve-2026-25253-rce-openclaw-auth-token/) -- SOCRadar
+- [CVE-2026-25253 Impact, Exploitability, and Mitigation Steps](https://www[.]wiz[.]io/vulnerability-database/cve/cve-2026-25253) -- Wiz
+- [OpenClaw Bug Enables One-Click Remote Code Execution via Malicious Link](https://thehackernews[.]com/2026/02/openclaw-bug-enables-one-click-remote.html) -- The Hacker News
+- [Hunting OpenClaw Exposures: CVE-2026-25253 in Internet-Facing AI Agent Gateways](https://hunt[.]io/blog/cve-2026-25253-openclaw-ai-agent-exposure) -- Hunt.io
 
 ### News Coverage
 
-- [Researchers Find 341 Malicious ClawHub Skills Stealing Data from OpenClaw Users](hxxps://thehackernews[.]com/2026/02/researchers-find-341-malicious-clawhub.html) -- The Hacker News
-- [Infostealer Steals OpenClaw AI Agent Configuration Files and Gateway Tokens](hxxps://thehackernews[.]com/2026/02/infostealer-steals-openclaw-ai-agent.html) -- The Hacker News
-- [OpenClaw Integrates VirusTotal Scanning to Detect Malicious ClawHub Skills](hxxps://thehackernews[.]com/2026/02/openclaw-integrates-virustotal-scanning.html) -- The Hacker News
-- [From Clawdbot to Moltbot to OpenClaw: Meet the AI Agent Generating Buzz and Fear Globally](hxxps://www[.]cnbc[.]com/2026/02/02/openclaw-open-source-ai-agent-rise-controversy-clawdbot-moltbot-moltbook.html) -- CNBC
-- [Why the OpenClaw AI Assistant Is a 'Privacy Nightmare'](hxxps://news[.]northeastern[.]edu/2026/02/10/open-claw-ai-assistant/) -- Northeastern University
-- [OpenClaw Creator Peter Steinberger Joins OpenAI](hxxps://techcrunch[.]com/2026/02/15/openclaw-creator-peter-steinberger-joins-openai/) -- TechCrunch
-- [The OpenClaw Hype: Analysis of Chatter from Open-Source Deep and Dark Web](hxxps://www[.]bleepingcomputer[.]com/news/security/the-openclaw-hype-analysis-of-chatter-from-open-source-deep-and-dark-web/) -- Bleeping Computer
-- [Hundreds of Malicious Skills Found in OpenClaw's ClawHub](hxxps://www[.]esecurityplanet[.]com/threats/hundreds-of-malicious-skills-found-in-openclaws-clawhub/) -- eSecurity Planet
-- [The OpenClaw Security Crisis](hxxps://conscia[.]com/blog/the-openclaw-security-crisis/) -- Conscia
-- [The OpenClaw Security Saga: How AI Adoption Outpaced Security Boundaries](hxxps://www[.]cyera[.]com/research-labs/the-openclaw-security-saga-how-ai-adoption-outpaced-security-boundaries) -- Cyera
+- [Researchers Find 341 Malicious ClawHub Skills Stealing Data from OpenClaw Users](https://thehackernews[.]com/2026/02/researchers-find-341-malicious-clawhub.html) -- The Hacker News
+- [Infostealer Steals OpenClaw AI Agent Configuration Files and Gateway Tokens](https://thehackernews[.]com/2026/02/infostealer-steals-openclaw-ai-agent.html) -- The Hacker News
+- [OpenClaw Integrates VirusTotal Scanning to Detect Malicious ClawHub Skills](https://thehackernews[.]com/2026/02/openclaw-integrates-virustotal-scanning.html) -- The Hacker News
+- [From Clawdbot to Moltbot to OpenClaw: Meet the AI Agent Generating Buzz and Fear Globally](https://www[.]cnbc[.]com/2026/02/02/openclaw-open-source-ai-agent-rise-controversy-clawdbot-moltbot-moltbook.html) -- CNBC
+- [Why the OpenClaw AI Assistant Is a 'Privacy Nightmare'](https://news[.]northeastern[.]edu/2026/02/10/open-claw-ai-assistant/) -- Northeastern University
+- [OpenClaw Creator Peter Steinberger Joins OpenAI](https://techcrunch[.]com/2026/02/15/openclaw-creator-peter-steinberger-joins-openai/) -- TechCrunch
+- [The OpenClaw Hype: Analysis of Chatter from Open-Source Deep and Dark Web](https://www[.]bleepingcomputer[.]com/news/security/the-openclaw-hype-analysis-of-chatter-from-open-source-deep-and-dark-web/) -- Bleeping Computer
+- [Hundreds of Malicious Skills Found in OpenClaw's ClawHub](https://www[.]esecurityplanet[.]com/threats/hundreds-of-malicious-skills-found-in-openclaws-clawhub/) -- eSecurity Planet
+- [The OpenClaw Security Crisis](https://conscia[.]com/blog/the-openclaw-security-crisis/) -- Conscia
+- [The OpenClaw Security Saga: How AI Adoption Outpaced Security Boundaries](https://www[.]cyera[.]com/research-labs/the-openclaw-security-saga-how-ai-adoption-outpaced-security-boundaries) -- Cyera
 
 ### Documentation and Standards
 
-- [OpenClaw Wikipedia](hxxps://en[.]wikipedia[.]org/wiki/OpenClaw) -- Wikipedia
-- [OpenClaw Official Docs: Skills](hxxps://docs[.]openclaw[.]ai/tools/skills) -- OpenClaw
-- [OpenClaw Official Docs: ClawHub](hxxps://docs[.]openclaw[.]ai/tools/clawhub) -- OpenClaw
-- [OpenClaw Trust Page](hxxps://trust[.]openclaw[.]ai/) -- OpenClaw
-- [OpenClaw Partners with VirusTotal for Skill Security](hxxps://openclaw[.]ai/blog/virustotal-partnership) -- OpenClaw Blog
-- [Agent Skills Specification](hxxps://agentskills[.]io/specification) -- Agent Skills
-- [Agent Skills GitHub](hxxps://github[.]com/agentskills/agentskills) -- Agent Skills
-- [Anthropic Skills Repository](hxxps://github[.]com/anthropics/skills) -- Anthropic
-- [Claude Code Skills Documentation](hxxps://code[.]claude[.]com/docs/en/skills) -- Anthropic
-- [ClawHub Skill Format Documentation](hxxps://github[.]com/openclaw/clawhub/blob/main/docs/skill-format.md) -- OpenClaw
+- [OpenClaw Wikipedia](https://en[.]wikipedia[.]org/wiki/OpenClaw) -- Wikipedia
+- [OpenClaw Official Docs: Skills](https://docs[.]openclaw[.]ai/tools/skills) -- OpenClaw
+- [OpenClaw Official Docs: ClawHub](https://docs[.]openclaw[.]ai/tools/clawhub) -- OpenClaw
+- [OpenClaw Trust Page](https://trust[.]openclaw[.]ai/) -- OpenClaw
+- [OpenClaw Partners with VirusTotal for Skill Security](https://openclaw[.]ai/blog/virustotal-partnership) -- OpenClaw Blog
+- [Agent Skills Specification](https://agentskills[.]io/specification) -- Agent Skills
+- [Agent Skills GitHub](https://github[.]com/agentskills/agentskills) -- Agent Skills
+- [Anthropic Skills Repository](https://github[.]com/anthropics/skills) -- Anthropic
+- [Claude Code Skills Documentation](https://code[.]claude[.]com/docs/en/skills) -- Anthropic
+- [ClawHub Skill Format Documentation](https://github[.]com/openclaw/clawhub/blob/main/docs/skill-format.md) -- OpenClaw
 
 ### Community and Analysis
 
-- [OpenClaw vs Claude Code: Complete Comparison Guide](hxxps://claudefa[.]st/blog/tools/extensions/openclaw-vs-claude-code) -- ClaudeFast
-- [OpenClaw vs Claude Code: Which Agentic Tool Should You Use](hxxps://www[.]datacamp[.]com/blog/openclaw-vs-claude-code) -- DataCamp
-- [Decoding ClawHub.ai: The Official Skill Store of 220K-Star OpenClaw](hxxps://help[.]apiyi[.]com/en/clawhub-ai-openclaw-skills-registry-guide-en.html) -- Apiyi
-- [The Agent Skills Gold Rush Has a Malware Problem](hxxps://dev[.]to/meimakes/the-agent-skills-gold-rush-has-a-malware-problem-2jai) -- DEV Community
-- [The Ultimate Guide to AI Agents in 2026: OpenClaw vs. Claude Cowork vs. Claude Code](hxxps://dev[.]to/tech_croc_f32fbb6ea8ed4/the-ultimate-guide-to-ai-agents-in-2026-openclaw-vs-claude-cowork-vs-claude-code-395h) -- DEV Community
-- [OpenClaw Creator: "I Ship Code I Don't Read"](hxxps://newsletter[.]pragmaticengineer[.]com/p/the-creator-of-clawd-i-ship-code) -- The Pragmatic Engineer
-- [Why Trying to Secure OpenClaw is Ridiculous](hxxps://www[.]aikido[.]dev/blog/why-trying-to-secure-openclaw-is-ridiculous) -- Aikido
-- [OpenClaw Soul and Evil: Identity Files as Attack Surfaces](hxxps://www[.]mmntm[.]net/articles/openclaw-soul-evil) -- MMNTM
-- [Trust Without Verification](hxxps://dougseven[.]com/2026/02/09/trust-without-verification/) -- Doug Seven
+- [OpenClaw vs Claude Code: Complete Comparison Guide](https://claudefa[.]st/blog/tools/extensions/openclaw-vs-claude-code) -- ClaudeFast
+- [OpenClaw vs Claude Code: Which Agentic Tool Should You Use](https://www[.]datacamp[.]com/blog/openclaw-vs-claude-code) -- DataCamp
+- [Decoding ClawHub.ai: The Official Skill Store of 220K-Star OpenClaw](https://help[.]apiyi[.]com/en/clawhub-ai-openclaw-skills-registry-guide-en.html) -- Apiyi
+- [The Agent Skills Gold Rush Has a Malware Problem](https://dev[.]to/meimakes/the-agent-skills-gold-rush-has-a-malware-problem-2jai) -- DEV Community
+- [The Ultimate Guide to AI Agents in 2026: OpenClaw vs. Claude Cowork vs. Claude Code](https://dev[.]to/tech_croc_f32fbb6ea8ed4/the-ultimate-guide-to-ai-agents-in-2026-openclaw-vs-claude-cowork-vs-claude-code-395h) -- DEV Community
+- [OpenClaw Creator: "I Ship Code I Don't Read"](https://newsletter[.]pragmaticengineer[.]com/p/the-creator-of-clawd-i-ship-code) -- The Pragmatic Engineer
+- [Why Trying to Secure OpenClaw is Ridiculous](https://www[.]aikido[.]dev/blog/why-trying-to-secure-openclaw-is-ridiculous) -- Aikido
+- [OpenClaw Soul and Evil: Identity Files as Attack Surfaces](https://www[.]mmntm[.]net/articles/openclaw-soul-evil) -- MMNTM
+- [Trust Without Verification](https://dougseven[.]com/2026/02/09/trust-without-verification/) -- Doug Seven
 
 ### GitHub Repositories
 
-- [openclaw/openclaw](hxxps://github[.]com/openclaw/openclaw) -- Main repository (220K+ stars)
-- [openclaw/clawhub](hxxps://github[.]com/openclaw/clawhub) -- Skill Directory
-- [snyk-labs/toxicskills-goof](hxxps://github[.]com/snyk-labs/toxicskills-goof) -- ToxicSkills research corpus
-- [snyk/agent-scan](hxxps://github[.]com/snyk/agent-scan) -- Security scanner for AI agents and skills
-- [adversa-ai/secureclaw](hxxps://github[.]com/adversa-ai/secureclaw) -- OWASP-aligned security plugin
-- [adibirzu/openclaw-security-monitor](hxxps://github[.]com/adibirzu/openclaw-security-monitor) -- Security monitoring tool
-- [VoltAgent/awesome-openclaw-skills](hxxps://github[.]com/VoltAgent/awesome-openclaw-skills) -- Curated skill collection
+- [openclaw/openclaw](https://github[.]com/openclaw/openclaw) -- Main repository (220K+ stars)
+- [openclaw/clawhub](https://github[.]com/openclaw/clawhub) -- Skill Directory
+- [snyk-labs/toxicskills-goof](https://github[.]com/snyk-labs/toxicskills-goof) -- ToxicSkills research corpus
+- [snyk/agent-scan](https://github[.]com/snyk/agent-scan) -- Security scanner for AI agents and skills
+- [adversa-ai/secureclaw](https://github[.]com/adversa-ai/secureclaw) -- OWASP-aligned security plugin
+- [adibirzu/openclaw-security-monitor](https://github[.]com/adibirzu/openclaw-security-monitor) -- Security monitoring tool
+- [VoltAgent/awesome-openclaw-skills](https://github[.]com/VoltAgent/awesome-openclaw-skills) -- Curated skill collection
 
 ### Hacker News
 
-- [Running OpenClaw safely: identity, isolation, and runtime risk](hxxps://news[.]ycombinator[.]com/item?id=47082933) -- HN discussion of Microsoft advisory
+- [Running OpenClaw safely: identity, isolation, and runtime risk](https://news[.]ycombinator[.]com/item?id=47082933) -- HN discussion of Microsoft advisory
 
 ---
 

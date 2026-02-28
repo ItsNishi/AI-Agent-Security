@@ -135,7 +135,7 @@ The gibberish suffix is optimized to shift the model's output distribution towar
 **Defense:** Perplexity-based filtering detects GCG suffixes trivially (they have extremely high perplexity). Adaptive attacks can produce lower-perplexity variants, but at reduced effectiveness.
 
 **Paper:** Zou et al., "Universal and Transferable Adversarial Attacks on Aligned Language Models" (2023)
-Source: `hxxps://arxiv[.]org/abs/2307.15043`
+Source: `https://arxiv[.]org/abs/2307.15043`
 
 #### AutoDAN
 
@@ -148,7 +148,7 @@ Published by Liu et al. (2023). Addresses GCG's main weakness: unnatural-looking
 **Success rates:** 80-95% on open-source models, 40-60% on GPT-4 class.
 
 **Paper:** Liu et al., "AutoDAN: Generating Stealthy Jailbreak Prompts on Aligned Large Language Models" (2023)
-Source: `hxxps://arxiv[.]org/abs/2310.04451`
+Source: `https://arxiv[.]org/abs/2310.04451`
 
 #### PAIR (Prompt Automatic Iterative Refinement)
 
@@ -171,7 +171,7 @@ Repeat until success (typically <20 iterations)
 **Success rates:** 60-80% on open-source, 40-70% on GPT-4 class. Average ~20 queries to success.
 
 **Paper:** Chao et al., "Jailbreaking Black Box Large Language Models in Twenty Queries" (2023)
-Source: `hxxps://arxiv[.]org/abs/2310.08419`
+Source: `https://arxiv[.]org/abs/2310.08419`
 
 #### TAP (Tree of Attacks with Pruning)
 
@@ -184,7 +184,7 @@ Published by Mehrotra et al. (2024). Builds on PAIR with tree-search optimizatio
 **Success rates:** 70-90% on open-source, 50-80% on GPT-4 class.
 
 **Paper:** Mehrotra et al., "Tree of Attacks: Jailbreaking Black-Box LLMs with Crafted Prompts" (2024)
-Source: `hxxps://arxiv[.]org/abs/2312.02119`
+Source: `https://arxiv[.]org/abs/2312.02119`
 
 #### ReNeLLM (Rewrite-Nested LLM)
 
@@ -201,7 +201,7 @@ Published by Ding et al. (2024). Uses the target model to rewrite its own jailbr
 **Key insight:** The model knows its own blind spots. When asked to rephrase harmful content, it unconsciously generates phrasings that bypass its own safety training.
 
 **Paper:** Ding et al., "A Wolf in Sheep's Clothing: Generalized Nested Jailbreak Prompts" (2024)
-Source: `hxxps://arxiv[.]org/abs/2311.08268`
+Source: `https://arxiv[.]org/abs/2311.08268`
 
 ### 2.3 Multi-Turn / Escalation Attacks
 
@@ -229,7 +229,7 @@ Each turn is a legitimate question. The model answers helpfully. By turn 5, the 
 - Human-crafted attacks achieve higher success than automated ones (currently)
 
 **Paper:** Russinovich et al., "Great, Now Write an Article About That: The Crescendo Multi-Turn LLM Jailbreak Attack" (2024)
-Source: `hxxps://arxiv[.]org/abs/2404.01833`
+Source: `https://arxiv[.]org/abs/2404.01833`
 
 #### Contextual Steering
 
@@ -283,7 +283,7 @@ Published by Deng et al. (2023).
 **Effectiveness:** Declining as providers add multilingual safety training, but a persistent gap remains for truly low-resource languages.
 
 **Paper:** Deng et al., "Multilingual Jailbreak Challenges in Large Language Models" (2023)
-Source: `hxxps://arxiv[.]org/abs/2310.06474`
+Source: `https://arxiv[.]org/abs/2310.06474`
 
 ### 2.6 Multi-Modal Attacks
 
@@ -298,8 +298,8 @@ Harmful instructions rendered as images (screenshots of text, embedded in photog
 **Key insight:** Multi-modal models have text-based safety training but their vision components may not have equivalent safety alignment. The boundary between modalities is an attack surface.
 
 **Papers:**
-- Gong et al., "FigStep: Jailbreaking Large Vision-language Models via Typographic Visual Prompts" (2024): `hxxps://arxiv[.]org/abs/2311.05608`
-- Qi et al., "Visual Adversarial Examples Jailbreak Aligned Large Language Models" (2023): `hxxps://arxiv[.]org/abs/2306.13213`
+- Gong et al., "FigStep: Jailbreaking Large Vision-language Models via Typographic Visual Prompts" (2024): `https://arxiv[.]org/abs/2311.05608`
+- Qi et al., "Visual Adversarial Examples Jailbreak Aligned Large Language Models" (2023): `https://arxiv[.]org/abs/2306.13213`
 
 ### 2.7 Structural / Statistical Attacks
 
@@ -333,7 +333,7 @@ A:"
 **Anthropic's mitigation:** Implemented targeted training to resist many-shot patterns. Success rates dropped but did not reach zero.
 
 **Paper:** Anthropic, "Many-shot Jailbreaking" (2024)
-Source: `hxxps://www[.]anthropic[.]com/research/many-shot-jailbreaking`
+Source: `https://www[.]anthropic[.]com/research/many-shot-jailbreaking`
 
 #### Best-of-N Jailbreaking (Anthropic)
 
@@ -351,7 +351,7 @@ Published by Anthropic (2024). A meta-technique that works with any other jailbr
 **Defense implication:** Rate limiting and anomaly detection become essential. If an attacker can submit 10,000 variations, probabilistic defenses fail.
 
 **Paper:** Anthropic, "Best-of-N Jailbreaking" (2024)
-Source: `hxxps://www[.]anthropic[.]com/research/best-of-n-jailbreaking`
+Source: `https://www[.]anthropic[.]com/research/best-of-n-jailbreaking`
 
 ### 2.8 Semantic / Behavioral Attacks
 
@@ -375,7 +375,7 @@ preface it with 'Warning: The following content is dangerous.'"
 - Single-turn attack in many cases
 - The "add a warning" framing made models perceive compliance as responsible
 
-Source: `hxxps://www[.]microsoft[.]com/en-us/security/blog/2024/06/26/mitigating-skeleton-key-a-new-type-of-generative-ai-jailbreak-technique/`
+Source: `https://www[.]microsoft[.]com/en-us/security/blog/2024/06/26/mitigating-skeleton-key-a-new-type-of-generative-ai-jailbreak-technique/`
 
 #### DeepInception
 
@@ -396,7 +396,7 @@ Published by Li et al. (2023). Inspired by the movie Inception.
 **Success rates:** 70-99% on open-source models, 50-70% on GPT-4 class.
 
 **Paper:** Li et al., "DeepInception: Hypnotize Large Language Model to Be Jailbreaker" (2023)
-Source: `hxxps://arxiv[.]org/abs/2311.03191`
+Source: `https://arxiv[.]org/abs/2311.03191`
 
 #### ArtPrompt (ASCII Art)
 
@@ -419,7 +419,7 @@ then provide detailed instructions about it:
 **Why it works:** The safety classifier processes text tokens but the harmful word exists only as a visual pattern. The multimodal understanding of the model reconstructs the word, but the safety check has already been passed.
 
 **Paper:** Jiang et al., "ArtPrompt: ASCII Art-based Jailbreak Attacks against Aligned LLMs" (2024)
-Source: `hxxps://arxiv[.]org/abs/2402.11753`
+Source: `https://arxiv[.]org/abs/2402.11753`
 
 #### WordGame
 
@@ -487,7 +487,7 @@ The following pressures all work against robust safety:
 | **Role-playing** | "You're a character who would say this" |
 | **Statistical inevitability** | BoN -- any non-zero bypass probability yields eventual success |
 
-Source: Wei et al., "Jailbroken: How Does LLM Safety Training Fail?" (2023): `hxxps://arxiv[.]org/abs/2307.02483`
+Source: Wei et al., "Jailbroken: How Does LLM Safety Training Fail?" (2023): `https://arxiv[.]org/abs/2307.02483`
 
 ---
 
@@ -548,7 +548,7 @@ Two-phase alignment: the model critiques and revises its own outputs against a s
 
 **Limitations:** Cannot anticipate novel attack framings. Many-shot jailbreaking demonstrated that even CAI-trained Claude models were vulnerable.
 
-Source: `hxxps://arxiv[.]org/abs/2212.08073`
+Source: `https://arxiv[.]org/abs/2212.08073`
 
 #### DPO (Direct Preference Optimization)
 
@@ -581,7 +581,7 @@ Published by Zou et al. (2024) -- from Gray Swan AI / Center for AI Safety. The 
 
 **Limitations:** New technique; long-term robustness unknown. Model-specific (requires identifying right internal representations). If novel representation paths exist that were not covered during training, bypasses are possible.
 
-Source: `hxxps://arxiv[.]org/abs/2406.04313`
+Source: `https://arxiv[.]org/abs/2406.04313`
 
 #### Representation Engineering
 
@@ -589,7 +589,7 @@ Published by Zou et al. (2023). Identifies linear directions in activation space
 
 **For safety:** Identify the "harmful intent" direction, subtract it during inference or amplify the "refusal" direction. Circuit breakers (above) build directly on RepE.
 
-Source: `hxxps://arxiv[.]org/abs/2310.01405`
+Source: `https://arxiv[.]org/abs/2310.01405`
 
 ### 5.2 System-Level (Inference Time)
 
@@ -616,7 +616,7 @@ Run the model's completed output through a safety classifier before returning to
 
 Calculate input perplexity. GCG adversarial suffixes have extremely high perplexity (gibberish). Normal text has low-to-moderate perplexity. Effective against gradient-based attacks. Does not catch natural-language attacks (Crescendo, PAIR, persona-based).
 
-Source: Alon & Kamfonas (2023): `hxxps://arxiv[.]org/abs/2308.14132`
+Source: Alon & Kamfonas (2023): `https://arxiv[.]org/abs/2308.14132`
 
 #### Guardrails Frameworks
 
@@ -644,7 +644,7 @@ Tool outputs (lowest trust)
 
 Lower-trust instructions cannot override higher-trust ones. Significant improvement but not perfect against sophisticated attacks.
 
-Source: `hxxps://arxiv[.]org/abs/2404.13208`
+Source: `https://arxiv[.]org/abs/2404.13208`
 
 #### Dual-LLM / Monitor Pattern
 
@@ -654,7 +654,7 @@ One LLM generates, a second monitors for safety violations. Doubles compute cost
 
 Separates system instructions from data content using special delimiters and encoding. Techniques: delimiting, data-marking, encoding.
 
-Source: `hxxps://arxiv[.]org/abs/2403.14720`
+Source: `https://arxiv[.]org/abs/2403.14720`
 
 ### 5.4 Production Defense-in-Depth
 
@@ -691,7 +691,7 @@ Standardized benchmark for evaluating jailbreak attacks and defenses.
 - Leaderboard tracking ASR across models and defenses
 - Uses fine-tuned Llama-based classifier for evaluation
 
-Source: `hxxps://jailbreakbench[.]github[.]io/`, `hxxps://arxiv[.]org/abs/2404.01318`
+Source: `https://jailbreakbench[.]github[.]io/`, `https://arxiv[.]org/abs/2404.01318`
 
 ### HarmBench
 
@@ -701,7 +701,7 @@ Comprehensive framework standardizing both attack and evaluation sides.
 - Functional categories: standard, contextual, multimodal
 - **Key finding:** No single defense is robust against all attack categories
 
-Source: `hxxps://arxiv[.]org/abs/2402.04249`
+Source: `https://arxiv[.]org/abs/2402.04249`
 
 ### StrongREJECT
 
@@ -711,7 +711,7 @@ Addresses the overestimation problem in jailbreak evaluation.
 - Scores 0 (complete refusal) to 1 (fully detailed harmful response)
 - **Key finding:** Many previously reported "successes" turn out to be empty -- the model superficially complied but gave useless content
 
-Source: `hxxps://arxiv[.]org/abs/2402.10260`
+Source: `https://arxiv[.]org/abs/2402.10260`
 
 ### Other Evaluation Frameworks
 
@@ -877,64 +877,64 @@ Until these are realized, the state of the art is defense in depth: multiple imp
 
 ### Foundational Jailbreak Research
 
-- [Zou et al. -- GCG: Universal and Transferable Adversarial Attacks (2023)](hxxps://arxiv[.]org/abs/2307.15043)
-- [Liu et al. -- AutoDAN (2023)](hxxps://arxiv[.]org/abs/2310.04451)
-- [Chao et al. -- PAIR: Jailbreaking in Twenty Queries (2023)](hxxps://arxiv[.]org/abs/2310.08419)
-- [Mehrotra et al. -- TAP: Tree of Attacks with Pruning (2024)](hxxps://arxiv[.]org/abs/2312.02119)
-- [Ding et al. -- ReNeLLM: A Wolf in Sheep's Clothing (2024)](hxxps://arxiv[.]org/abs/2311.08268)
-- [Li et al. -- DeepInception (2023)](hxxps://arxiv[.]org/abs/2311.03191)
-- [Jiang et al. -- ArtPrompt: ASCII Art Jailbreaks (2024)](hxxps://arxiv[.]org/abs/2402.11753)
-- [Deng et al. -- Multilingual Jailbreak Challenges (2023)](hxxps://arxiv[.]org/abs/2310.06474)
-- [Wei et al. -- Jailbroken: How Does LLM Safety Training Fail? (2023)](hxxps://arxiv[.]org/abs/2307.02483)
+- [Zou et al. -- GCG: Universal and Transferable Adversarial Attacks (2023)](https://arxiv[.]org/abs/2307.15043)
+- [Liu et al. -- AutoDAN (2023)](https://arxiv[.]org/abs/2310.04451)
+- [Chao et al. -- PAIR: Jailbreaking in Twenty Queries (2023)](https://arxiv[.]org/abs/2310.08419)
+- [Mehrotra et al. -- TAP: Tree of Attacks with Pruning (2024)](https://arxiv[.]org/abs/2312.02119)
+- [Ding et al. -- ReNeLLM: A Wolf in Sheep's Clothing (2024)](https://arxiv[.]org/abs/2311.08268)
+- [Li et al. -- DeepInception (2023)](https://arxiv[.]org/abs/2311.03191)
+- [Jiang et al. -- ArtPrompt: ASCII Art Jailbreaks (2024)](https://arxiv[.]org/abs/2402.11753)
+- [Deng et al. -- Multilingual Jailbreak Challenges (2023)](https://arxiv[.]org/abs/2310.06474)
+- [Wei et al. -- Jailbroken: How Does LLM Safety Training Fail? (2023)](https://arxiv[.]org/abs/2307.02483)
 
 ### Anthropic Research
 
-- [Anthropic -- Many-shot Jailbreaking (2024)](hxxps://www[.]anthropic[.]com/research/many-shot-jailbreaking)
-- [Anthropic -- Best-of-N Jailbreaking (2024)](hxxps://www[.]anthropic[.]com/research/best-of-n-jailbreaking)
-- [Anthropic -- Constitutional AI (2022)](hxxps://arxiv[.]org/abs/2212.08073)
+- [Anthropic -- Many-shot Jailbreaking (2024)](https://www[.]anthropic[.]com/research/many-shot-jailbreaking)
+- [Anthropic -- Best-of-N Jailbreaking (2024)](https://www[.]anthropic[.]com/research/best-of-n-jailbreaking)
+- [Anthropic -- Constitutional AI (2022)](https://arxiv[.]org/abs/2212.08073)
 
 ### Microsoft Research
 
-- [Russinovich et al. -- Crescendo Multi-Turn Jailbreak (2024)](hxxps://arxiv[.]org/abs/2404.01833)
-- [Microsoft -- Skeleton Key Jailbreak (2024)](hxxps://www[.]microsoft[.]com/en-us/security/blog/2024/06/26/mitigating-skeleton-key-a-new-type-of-generative-ai-jailbreak-technique/)
-- [Microsoft -- Spotlighting (2024)](hxxps://arxiv[.]org/abs/2403.14720)
+- [Russinovich et al. -- Crescendo Multi-Turn Jailbreak (2024)](https://arxiv[.]org/abs/2404.01833)
+- [Microsoft -- Skeleton Key Jailbreak (2024)](https://www[.]microsoft[.]com/en-us/security/blog/2024/06/26/mitigating-skeleton-key-a-new-type-of-generative-ai-jailbreak-technique/)
+- [Microsoft -- Spotlighting (2024)](https://arxiv[.]org/abs/2403.14720)
 
 ### Defense Research
 
-- [Zou et al. -- Circuit Breakers (2024)](hxxps://arxiv[.]org/abs/2406.04313)
-- [Zou et al. -- Representation Engineering (2023)](hxxps://arxiv[.]org/abs/2310.01405)
-- [OpenAI -- Instruction Hierarchy (2024)](hxxps://arxiv[.]org/abs/2404.13208)
-- [Alon & Kamfonas -- Perplexity Detection (2023)](hxxps://arxiv[.]org/abs/2308.14132)
-- [Jain et al. -- Baseline Defenses (2023)](hxxps://arxiv[.]org/abs/2309.00614)
+- [Zou et al. -- Circuit Breakers (2024)](https://arxiv[.]org/abs/2406.04313)
+- [Zou et al. -- Representation Engineering (2023)](https://arxiv[.]org/abs/2310.01405)
+- [OpenAI -- Instruction Hierarchy (2024)](https://arxiv[.]org/abs/2404.13208)
+- [Alon & Kamfonas -- Perplexity Detection (2023)](https://arxiv[.]org/abs/2308.14132)
+- [Jain et al. -- Baseline Defenses (2023)](https://arxiv[.]org/abs/2309.00614)
 
 ### Multi-Modal Jailbreaks
 
-- [Qi et al. -- Visual Adversarial Examples (2023)](hxxps://arxiv[.]org/abs/2306.13213)
-- [Gong et al. -- FigStep: Typographic Visual Jailbreaks (2024)](hxxps://arxiv[.]org/abs/2311.05608)
+- [Qi et al. -- Visual Adversarial Examples (2023)](https://arxiv[.]org/abs/2306.13213)
+- [Gong et al. -- FigStep: Typographic Visual Jailbreaks (2024)](https://arxiv[.]org/abs/2311.05608)
 
 ### Benchmarks
 
-- [Chao et al. -- JailbreakBench (2024)](hxxps://arxiv[.]org/abs/2404.01318)
-- [Mazeika et al. -- HarmBench (2024)](hxxps://arxiv[.]org/abs/2402.04249)
-- [Souly et al. -- StrongREJECT (2024)](hxxps://arxiv[.]org/abs/2402.10260)
-- [Xie et al. -- SORRY-Bench (2024)](hxxps://arxiv[.]org/abs/2406.14598)
-- [Meta -- Purple Llama CyberSecEval](hxxps://github[.]com/meta-llama/PurpleLlama)
+- [Chao et al. -- JailbreakBench (2024)](https://arxiv[.]org/abs/2404.01318)
+- [Mazeika et al. -- HarmBench (2024)](https://arxiv[.]org/abs/2402.04249)
+- [Souly et al. -- StrongREJECT (2024)](https://arxiv[.]org/abs/2402.10260)
+- [Xie et al. -- SORRY-Bench (2024)](https://arxiv[.]org/abs/2406.14598)
+- [Meta -- Purple Llama CyberSecEval](https://github[.]com/meta-llama/PurpleLlama)
 
 ### Surveys
 
-- [MDPI -- Comprehensive Review of Prompt Injection (2025)](hxxps://www[.]mdpi[.]com/2078-2489/17/1/54)
-- [arXiv -- Jailbreak and Guard Aligned LLMs Survey (2024)](hxxps://arxiv[.]org/abs/2407.04295)
+- [MDPI -- Comprehensive Review of Prompt Injection (2025)](https://www[.]mdpi[.]com/2078-2489/17/1/54)
+- [arXiv -- Jailbreak and Guard Aligned LLMs Survey (2024)](https://arxiv[.]org/abs/2407.04295)
 
 ### Tools
 
-- [Garak -- LLM Vulnerability Scanner](hxxps://github[.]com/NVIDIA/garak)
-- [NeMo Guardrails](hxxps://github[.]com/NVIDIA/NeMo-Guardrails)
-- [Guardrails AI](hxxps://github[.]com/guardrails-ai/guardrails)
-- [Rebuff -- Prompt Injection Detector](hxxps://github[.]com/protectai/rebuff)
-- [Invariant Labs MCP Scanner](hxxps://github[.]com/invariantlabs-ai/mcp-scan)
+- [Garak -- LLM Vulnerability Scanner](https://github[.]com/NVIDIA/garak)
+- [NeMo Guardrails](https://github[.]com/NVIDIA/NeMo-Guardrails)
+- [Guardrails AI](https://github[.]com/guardrails-ai/guardrails)
+- [Rebuff -- Prompt Injection Detector](https://github[.]com/protectai/rebuff)
+- [Invariant Labs MCP Scanner](https://github[.]com/invariantlabs-ai/mcp-scan)
 
 ### Standards
 
-- [OWASP Top 10 for LLM Applications 2025](hxxps://genai[.]owasp[.]org/llmrisk/llm01-prompt-injection/)
-- [OWASP Agentic AI Top 10 (2026)](hxxps://genai[.]owasp[.]org/)
-- [NIST AI Risk Management Framework](hxxps://www[.]nist[.]gov/artificial-intelligence/ai-risk-management-framework)
+- [OWASP Top 10 for LLM Applications 2025](https://genai[.]owasp[.]org/llmrisk/llm01-prompt-injection/)
+- [OWASP Agentic AI Top 10 (2026)](https://genai[.]owasp[.]org/)
+- [NIST AI Risk Management Framework](https://www[.]nist[.]gov/artificial-intelligence/ai-risk-management-framework)

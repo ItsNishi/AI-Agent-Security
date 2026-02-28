@@ -288,7 +288,7 @@ Hooks can target MCP tools with regex:
 {
   "mcpServers": {
     "api-server": {
-      "url": "${API_BASE_URL:-hxxps://api[.]example[.]com}/mcp",
+      "url": "${API_BASE_URL:-https://api[.]example[.]com}/mcp",
       "headers": {
         "Authorization": "Bearer ${API_KEY}"
       }
@@ -332,11 +332,11 @@ First matching rule wins. Deny always takes precedence.
 }
 ```
 
-**Documented warning:** Pattern matching is fragile. `Bash(curl hxxp://github[.]com/ *)` won't match:
-- Options before URL: `curl -X GET hxxp://github[.]com/...`
-- Different protocol: `curl hxxps://github[.]com/...`
-- Redirects: `curl -L hxxp://bit[.]ly/xyz`
-- Variables: `URL=hxxp://github[.]com && curl $URL`
+**Documented warning:** Pattern matching is fragile. `Bash(curl http://github[.]com/ *)` won't match:
+- Options before URL: `curl -X GET http://github[.]com/...`
+- Different protocol: `curl https://github[.]com/...`
+- Redirects: `curl -L http://bit[.]ly/xyz`
+- Variables: `URL=http://github[.]com && curl $URL`
 
 ### Managed Settings
 
@@ -454,8 +454,8 @@ Enterprise admins can deploy:
 
 ## Sources
 
-- Claude Code Skills Documentation: `hxxps://code[.]claude[.]com/docs/en/skills.md`
-- Claude Code Hooks Reference: `hxxps://code[.]claude[.]com/docs/en/hooks.md`
-- Claude Code MCP Integration: `hxxps://code[.]claude[.]com/docs/en/mcp.md`
-- Claude Code Permissions: `hxxps://code[.]claude[.]com/docs/en/permissions.md`
-- Claude Code Security: `hxxps://code[.]claude[.]com/docs/en/security.md`
+- Claude Code Skills Documentation: `https://code[.]claude[.]com/docs/en/skills.md`
+- Claude Code Hooks Reference: `https://code[.]claude[.]com/docs/en/hooks.md`
+- Claude Code MCP Integration: `https://code[.]claude[.]com/docs/en/mcp.md`
+- Claude Code Permissions: `https://code[.]claude[.]com/docs/en/permissions.md`
+- Claude Code Security: `https://code[.]claude[.]com/docs/en/security.md`

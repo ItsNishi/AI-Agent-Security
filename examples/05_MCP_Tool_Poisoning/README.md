@@ -34,14 +34,14 @@ Invariant Labs demonstrated the first public tool poisoning attack:
 
 The attack required no exploitation of software vulnerabilities -- only a crafted tool description that the agent followed as if it were legitimate instructions.
 
-Source: hxxps://invariantlabs[.]ai/blog/mcp-security-notification-tool-poisoning-attacks
+Source: https://invariantlabs[.]ai/blog/mcp-security-notification-tool-poisoning-attacks
 
 ### CVE-2025-6514: mcp-remote OS Command Injection (CVSS 9.6)
 
 While not a tool poisoning attack per se, CVE-2025-6514 demonstrates the severity of trusting untrusted MCP servers. The `mcp-remote` package (437K+ downloads) had an OS command injection vulnerability via a crafted `authorization_endpoint` URL. An untrusted MCP server could achieve full RCE on the client's operating system -- the first real-world demonstration of an MCP server compromising a client machine.
 
 - Fixed in mcp-remote v0.1.16
-- Source: hxxps://jfrog[.]com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/
+- Source: https://jfrog[.]com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/
 
 ### Elastic Security Labs Findings (September 2025)
 
@@ -49,7 +49,7 @@ Testing of MCP implementations revealed:
 
 - **43%** contained command injection flaws
 - **30%** permitted unrestricted URL fetching
-- Source: hxxps://www[.]elastic[.]co/security-labs/mcp-tools-attack-defense-recommendations
+- Source: https://www[.]elastic[.]co/security-labs/mcp-tools-attack-defense-recommendations
 
 ## Cross-References
 
@@ -58,9 +58,9 @@ Testing of MCP implementations revealed:
 
 ## Key Sources
 
-- Invariant Labs (Tool Poisoning): hxxps://invariantlabs[.]ai/blog/mcp-security-notification-tool-poisoning-attacks
-- JFrog (CVE-2025-6514): hxxps://jfrog[.]com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/
-- Trail of Bits (mcp-context-protector): hxxps://blog[.]trailofbits[.]com/2025/07/28/we-built-the-security-layer-mcp-always-needed/
-- OWASP MCP Top 10: hxxps://owasp[.]org/www-project-mcp-top-10/
-- Elastic Security Labs: hxxps://www[.]elastic[.]co/security-labs/mcp-tools-attack-defense-recommendations
-- Vulnerable MCP Project: hxxps://vulnerablemcp[.]info/
+- Invariant Labs (Tool Poisoning): https://invariantlabs[.]ai/blog/mcp-security-notification-tool-poisoning-attacks
+- JFrog (CVE-2025-6514): https://jfrog[.]com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/
+- Trail of Bits (mcp-context-protector): https://blog[.]trailofbits[.]com/2025/07/28/we-built-the-security-layer-mcp-always-needed/
+- OWASP MCP Top 10: https://owasp[.]org/www-project-mcp-top-10/
+- Elastic Security Labs: https://www[.]elastic[.]co/security-labs/mcp-tools-attack-defense-recommendations
+- Vulnerable MCP Project: https://vulnerablemcp[.]info/
