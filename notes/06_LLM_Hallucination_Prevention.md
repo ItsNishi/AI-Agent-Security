@@ -299,7 +299,7 @@ In Feb 2026, Aikido Security documented a hallucinated package `react-codeshift`
 - Persistent in version control
 - Viral through repository forks
 
-Source: [Aikido Security](hxxps://www[.]aikido[.]dev/blog/agent-skills-spreading-hallucinated-npx-commands)
+Source: [Aikido Security](https://www[.]aikido[.]dev/blog/agent-skills-spreading-hallucinated-npx-commands)
 
 ### Real-World Examples
 
@@ -419,28 +419,28 @@ npx tailwindcss --help  # Ensure valid config
 ## 9. Sources
 
 ### Academic Research
-- [OpenAI - Why Language Models Hallucinate (Sept 2025)](hxxps://openai[.]com/index/why-language-models-hallucinate/)
-- [arXiv 2401.11817 - Hallucination is Inevitable](hxxps://arxiv[.]org/abs/2401.11817)
-- [arXiv 2502.12187 - Counterpoint on Hallucination Inevitability](hxxps://arxiv[.]org/abs/2502.12187)
-- [ACM ISSTA 2025 - LLM Hallucinations in Practical Code Generation](hxxps://dl[.]acm[.]org/doi/10.1145/3728894)
-- [arXiv 2408.08333 - CodeMirage](hxxps://arxiv[.]org/abs/2408.08333)
-- [arXiv 2510.24476 - Mitigating Hallucination Survey](hxxps://arxiv[.]org/abs/2510.24476)
-- [MIT Press TACL - Know Your Limits: Abstention Survey](hxxps://direct[.]mit[.]edu/tacl/article/doi/10.1162/tacl_a_00754/131566/)
-- [MDPI Mathematics 2025 - Hallucination Mitigation for RAG](hxxps://www[.]mdpi[.]com/2227-7390/13/5/856)
+- [OpenAI - Why Language Models Hallucinate (Sept 2025)](https://openai[.]com/index/why-language-models-hallucinate/)
+- [arXiv 2401.11817 - Hallucination is Inevitable](https://arxiv[.]org/abs/2401.11817)
+- [arXiv 2502.12187 - Counterpoint on Hallucination Inevitability](https://arxiv[.]org/abs/2502.12187)
+- [ACM ISSTA 2025 - LLM Hallucinations in Practical Code Generation](https://dl[.]acm[.]org/doi/10.1145/3728894)
+- [arXiv 2408.08333 - CodeMirage](https://arxiv[.]org/abs/2408.08333)
+- [arXiv 2510.24476 - Mitigating Hallucination Survey](https://arxiv[.]org/abs/2510.24476)
+- [MIT Press TACL - Know Your Limits: Abstention Survey](https://direct[.]mit[.]edu/tacl/article/doi/10.1162/tacl_a_00754/131566/)
+- [MDPI Mathematics 2025 - Hallucination Mitigation for RAG](https://www[.]mdpi[.]com/2227-7390/13/5/856)
 
 ### Security Research
-- [USENIX Security 2025 - Package Hallucinations](hxxps://www[.]usenix[.]org/publications/loginonline/we-have-package-you-comprehensive-analysis-package-hallucinations-code)
-- [Trend Micro - Slopsquatting](hxxps://www[.]trendmicro[.]com/vinfo/us/security/news/cybercrime-and-digital-threats/slopsquatting-when-ai-agents-hallucinate-malicious-packages)
-- [Snyk - Package Hallucination](hxxps://snyk[.]io/articles/package-hallucinations/)
+- [USENIX Security 2025 - Package Hallucinations](https://www[.]usenix[.]org/publications/loginonline/we-have-package-you-comprehensive-analysis-package-hallucinations-code)
+- [Trend Micro - Slopsquatting](https://www[.]trendmicro[.]com/vinfo/us/security/news/cybercrime-and-digital-threats/slopsquatting-when-ai-agents-hallucinate-malicious-packages)
+- [Snyk - Package Hallucination](https://snyk[.]io/articles/package-hallucinations/)
 
 ### Tools and Frameworks
-- [vLLM Blog - HaluGate](hxxps://blog[.]vllm[.]ai/2025/12/14/halugate.html)
-- [arXiv 2303.08896 - SelfCheckGPT](hxxps://arxiv[.]org/abs/2303.08896)
-- [arXiv 2502.15844 - MetaQA Framework](hxxps://arxiv[.]org/abs/2502.15844)
-- [Hugging Face - CodeMirage Dataset](hxxps://huggingface[.]co/datasets/HanxiGuo/CodeMirage)
+- [vLLM Blog - HaluGate](https://blog[.]vllm[.]ai/2025/12/14/halugate.html)
+- [arXiv 2303.08896 - SelfCheckGPT](https://arxiv[.]org/abs/2303.08896)
+- [arXiv 2502.15844 - MetaQA Framework](https://arxiv[.]org/abs/2502.15844)
+- [Hugging Face - CodeMirage Dataset](https://huggingface[.]co/datasets/HanxiGuo/CodeMirage)
 
 ### Industry Guides
-- [Lakera - LLM Hallucinations Guide](hxxps://www[.]lakera[.]ai/blog/guide-to-hallucinations-in-large-language-models)
-- [PromptHub - Prompt Engineering Methods](hxxps://www[.]prompthub[.]us/blog/three-prompt-engineering-methods-to-reduce-hallucinations)
-- [Sapien.io - Reducing Hallucinations](hxxps://www[.]sapien[.]io/blog/reducing-hallucinations-in-llms)
-- [AWS Blog - Amazon Bedrock Agents](hxxps://aws[.]amazon[.]com/blogs/machine-learning/reducing-hallucinations-in-large-language-models-with-custom-intervention-using-amazon-bedrock-agents/)
+- [Lakera - LLM Hallucinations Guide](https://www[.]lakera[.]ai/blog/guide-to-hallucinations-in-large-language-models)
+- [PromptHub - Prompt Engineering Methods](https://www[.]prompthub[.]us/blog/three-prompt-engineering-methods-to-reduce-hallucinations)
+- [Sapien.io - Reducing Hallucinations](https://www[.]sapien[.]io/blog/reducing-hallucinations-in-llms)
+- [AWS Blog - Amazon Bedrock Agents](https://aws[.]amazon[.]com/blogs/machine-learning/reducing-hallucinations-in-large-language-models-with-custom-intervention-using-amazon-bedrock-agents/)

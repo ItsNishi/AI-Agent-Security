@@ -9,7 +9,7 @@ This attack combines:
 2. **Skill Injection** -- Hallucinated command embedded in agent skills
 3. **Supply Chain Attack** -- Attacker claims the nonexistent package name
 
-Source: [Aikido Security Blog](hxxps://www[.]aikido[.]dev/blog/agent-skills-spreading-hallucinated-npx-commands)
+Source: [Aikido Security Blog](https://www[.]aikido[.]dev/blog/agent-skills-spreading-hallucinated-npx-commands)
 
 ---
 

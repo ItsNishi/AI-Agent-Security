@@ -185,7 +185,7 @@ Isolate each server's tool descriptions so they cannot influence how other serve
 
 ### MCP Scanner (Pre-Connection)
 
-Invariant Labs' [`mcp-scan`](hxxps://github[.]com/invariantlabs-ai/mcp-scan) scans MCP tool definitions for injection payloads before connecting. Analyzes descriptions, parameter schemas, and metadata for suspicious content. Should be part of any MCP server vetting process.
+Invariant Labs' [`mcp-scan`](https://github[.]com/invariantlabs-ai/mcp-scan) scans MCP tool definitions for injection payloads before connecting. Analyzes descriptions, parameter schemas, and metadata for suspicious content. Should be part of any MCP server vetting process.
 
 ### What the MCP Spec Should Address
 
@@ -196,7 +196,7 @@ The protocol currently lacks:
 - Audit logging requirements
 - Isolation model for multi-server environments
 
-Source: [AuthZed MCP Breach Timeline](hxxps://authzed[.]com/blog/timeline-mcp-breaches), [Practical DevSecOps MCP Security](hxxps://www[.]practical-devsecops[.]com/mcp-security-vulnerabilities/)
+Source: [AuthZed MCP Breach Timeline](https://authzed[.]com/blog/timeline-mcp-breaches), [Practical DevSecOps MCP Security](https://www[.]practical-devsecops[.]com/mcp-security-vulnerabilities/)
 
 ## 5. Memory Poisoning Defenses
 
@@ -215,7 +215,7 @@ Memory poisoning is classified as ASI06 in OWASP Agentic AI Top 10 (2026). Unlik
 
 The attack exploits forged XML tags placed outside `<conversation>` blocks. The summarization LLM interprets these as system instructions rather than user content. Defense requires treating ALL content entering the memory pipeline as untrusted input -- including the output of the summarization step itself.
 
-Source: [Unit 42 -- Memory Poisoning](hxxps://unit42[.]paloaltonetworks[.]com/indirect-prompt-injection-poisons-ai-longterm-memory/)
+Source: [Unit 42 -- Memory Poisoning](https://unit42[.]paloaltonetworks[.]com/indirect-prompt-injection-poisons-ai-longterm-memory/)
 
 ## 6. Vibe Coding Defenses
 
@@ -293,20 +293,20 @@ Watch for suspicious agent behavior during execution:
 
 ### Commercial Detection Tools
 
-**[Lakera Guard](hxxps://www[.]lakera[.]ai/blog/guide-to-prompt-injection)**
+**[Lakera Guard](https://www[.]lakera[.]ai/blog/guide-to-prompt-injection)**
 - Commercial API, ultra-low latency (<50ms)
 - Learns from 100K+ new adversarial samples per day via Gandalf red-teaming platform
 - Catches instruction overrides, jailbreaks, indirect injections, obfuscated prompts
 - Adaptive calibration for low false positives
 - Filters for prompt injection, PII leakage, and content toxicity in both inputs and outputs
 
-**[Rebuff (ProtectAI)](hxxps://github[.]com/protectai/rebuff)**
+**[Rebuff (ProtectAI)](https://github[.]com/protectai/rebuff)**
 - Open-source, multi-layered defense
 - Heuristic filters + dedicated LLM-based detector + vector DB of known attack signatures
 - **Canary token injection**: invisible tokens placed in prompts. If they appear in output, indicates successful manipulation -- triggers immediate block.
 - Self-hardening: learns from detected attacks over time
 
-**[Invariant MCP Scanner](hxxps://github[.]com/invariantlabs-ai/mcp-scan)**
+**[Invariant MCP Scanner](https://github[.]com/invariantlabs-ai/mcp-scan)**
 - Open-source tool to scan MCP server tool definitions for injection payloads
 - Analyzes tool descriptions, parameter descriptions, and schemas for suspicious content
 - Should run before connecting to any new MCP server
@@ -337,7 +337,7 @@ Prompt injection is unsolved. All current defenses are mitigations, not solution
 
 Every defense pattern above can be bypassed by a sufficiently creative attacker. The current best practice is **defense in depth** -- layer multiple mitigations so that bypassing one doesn't compromise the entire system.
 
-As [AuthZed noted](hxxps://authzed[.]com/blog/timeline-mcp-breaches): "MCP presents a cutting-edge threat surface, yet the breaches detailed are rooted in timeless flaws: over-privilege, inadequate input validation, and insufficient isolation. AI changes the interface, not the fundamentals of security."
+As [AuthZed noted](https://authzed[.]com/blog/timeline-mcp-breaches): "MCP presents a cutting-edge threat surface, yet the breaches detailed are rooted in timeless flaws: over-privilege, inadequate input validation, and insufficient isolation. AI changes the interface, not the fundamentals of security."
 
 The most promising research directions:
 - **Formal instruction boundaries** -- architectural changes to LLMs that create a hard separation between system instructions and user/data content
@@ -349,22 +349,22 @@ The most promising research directions:
 
 ### Standards and Frameworks
 
-- **[OWASP Top 10 for LLM Applications 2025](hxxps://genai[.]owasp[.]org/llmrisk/llm01-prompt-injection/)** -- prompt injection is #1 risk
+- **[OWASP Top 10 for LLM Applications 2025](https://genai[.]owasp[.]org/llmrisk/llm01-prompt-injection/)** -- prompt injection is #1 risk
 - **OWASP Agentic AI Top 10 (2026)** -- covers AI coding agents, memory poisoning (ASI06), tool poisoning
-- **[AIVSS](hxxps://aivss[.]owasp[.]org/)** -- AI Vulnerability Scoring System for agentic AI risks
+- **[AIVSS](https://aivss[.]owasp[.]org/)** -- AI Vulnerability Scoring System for agentic AI risks
 - **NIST AI Risk Management Framework** -- general AI security guidance
-- **[Vulnerable MCP Project](hxxps://vineethsai[.]github[.]io/vulnerablemcp/)** -- comprehensive MCP security database
+- **[Vulnerable MCP Project](https://vineethsai[.]github[.]io/vulnerablemcp/)** -- comprehensive MCP security database
 
 ### Key Research Sources
 
-- [Invariant Labs -- MCP Tool Poisoning](hxxps://invariantlabs[.]ai/blog/mcp-security-notification-tool-poisoning-attacks)
-- [Simon Willison -- MCP Has Prompt Injection Problems](hxxps://simonwillison[.]net/2025/Apr/9/mcp-prompt-injection/)
-- [Embrace The Red -- Copilot RCE (CVE-2025-53773)](hxxps://embracethered[.]com/blog/posts/2025/github-copilot-remote-code-execution-via-prompt-injection/)
-- [Unit 42 -- Memory Poisoning](hxxps://unit42[.]paloaltonetworks[.]com/indirect-prompt-injection-poisons-ai-longterm-memory/)
-- [Unit 42 -- MCP Attack Vectors](hxxps://unit42[.]paloaltonetworks[.]com/model-context-protocol-attack-vectors/)
-- [Lakera -- Q4 2025 Attack Trends](hxxps://www[.]lakera[.]ai/blog/the-year-of-the-agent-what-recent-attacks-revealed-in-q4-2025-and-what-it-means-for-2026)
-- [The Hacker News -- IDEsaster 30+ CVEs](hxxps://thehackernews[.]com/2025/12/researchers-uncover-30-flaws-in-ai.html)
-- [Wiz -- Moltbook Breach](hxxps://www[.]wiz[.]io/blog/exposed-moltbook-database-reveals-millions-of-api-keys)
-- [arXiv -- Prompt Injection in Agentic Coding Assistants (Jan 2026 SoK)](hxxps://arxiv[.]org/html/2601.17548v1)
-- [MDPI -- Comprehensive Prompt Injection Review (2025)](hxxps://www[.]mdpi[.]com/2078-2489/17/1/54)
-- [AuthZed -- Timeline of MCP Breaches](hxxps://authzed[.]com/blog/timeline-mcp-breaches)
+- [Invariant Labs -- MCP Tool Poisoning](https://invariantlabs[.]ai/blog/mcp-security-notification-tool-poisoning-attacks)
+- [Simon Willison -- MCP Has Prompt Injection Problems](https://simonwillison[.]net/2025/Apr/9/mcp-prompt-injection/)
+- [Embrace The Red -- Copilot RCE (CVE-2025-53773)](https://embracethered[.]com/blog/posts/2025/github-copilot-remote-code-execution-via-prompt-injection/)
+- [Unit 42 -- Memory Poisoning](https://unit42[.]paloaltonetworks[.]com/indirect-prompt-injection-poisons-ai-longterm-memory/)
+- [Unit 42 -- MCP Attack Vectors](https://unit42[.]paloaltonetworks[.]com/model-context-protocol-attack-vectors/)
+- [Lakera -- Q4 2025 Attack Trends](https://www[.]lakera[.]ai/blog/the-year-of-the-agent-what-recent-attacks-revealed-in-q4-2025-and-what-it-means-for-2026)
+- [The Hacker News -- IDEsaster 30+ CVEs](https://thehackernews[.]com/2025/12/researchers-uncover-30-flaws-in-ai.html)
+- [Wiz -- Moltbook Breach](https://www[.]wiz[.]io/blog/exposed-moltbook-database-reveals-millions-of-api-keys)
+- [arXiv -- Prompt Injection in Agentic Coding Assistants (Jan 2026 SoK)](https://arxiv[.]org/html/2601.17548v1)
+- [MDPI -- Comprehensive Prompt Injection Review (2025)](https://www[.]mdpi[.]com/2078-2489/17/1/54)
+- [AuthZed -- Timeline of MCP Breaches](https://authzed[.]com/blog/timeline-mcp-breaches)
