@@ -1,6 +1,6 @@
 # Defense Patterns for AI Agent Security
 
-> **Related notes**: [07 -- Skill Scanning & Detection](07_Skill_Scanning_And_Detection_Landscape.md) (scanning tools that apply these patterns), [16 -- AI Blue Teaming & Defensive AI](16_AI_Blue_Teaming_And_Defensive_AI.md) (SOC-level defensive AI tools and operations)
+> **Related notes**: [07 -- Skill Scanning & Detection](07_Skill_Scanning_And_Detection_Landscape.md) (scanning tools that apply these patterns), [16 -- AI Blue Teaming & Defensive AI](16_AI_Blue_Teaming_And_Defensive_AI.md) (SOC-level defensive AI tools and operations), [17 -- Agent Subversion](17_Agent_Subversion.md) (infrastructure-level attack surface and sandbox hardening checklist)
 
 ## 1. Input Sanitization
 
@@ -83,7 +83,7 @@ Critical operations should always require explicit user approval:
 
 The Claude Code permission model already implements this partially -- tool calls can be configured to require approval. The defense gap is that skills/CLAUDE.md content is treated as pre-approved instructions.
 
-**Approval fatigue caveat**: Lakera's Q4 2025 data shows users routinely set "always allow" on tool calls, completely negating this defense. Permission models only work if they balance security with usability.
+**Approval fatigue caveat**: Lakera's Q4 2025 data shows users routinely set "always allow" on tool calls, completely negating this defense. Overly aggressive permission prompts drive users to disable them entirely.
 
 ### Microsoft Spotlighting
 
@@ -210,7 +210,7 @@ Memory poisoning is classified as ASI06 in OWASP Agentic AI Top 10 (2026). Unlik
 - **URL allowlists** restricting agent web access to known-good sources
 - **Guardrails with prompt-attack policies** -- e.g., Amazon Bedrock Guardrails
 - **Lambda pre-processing** -- custom validation rules before memory storage
-- **Comprehensive logging** -- Model Invocation Logs and Trace features for forensic analysis
+- **Full logging** -- Model Invocation Logs and Trace features for forensic analysis
 - **Real-time monitoring** -- detect anomalous memory writes
 
 ### Key Insight
@@ -355,7 +355,7 @@ The most promising research directions:
 - **OWASP Agentic AI Top 10 (2026)** -- covers AI coding agents, memory poisoning (ASI06), tool poisoning
 - **[AIVSS](https://aivss.owasp.org/)** -- AI Vulnerability Scoring System for agentic AI risks
 - **NIST AI Risk Management Framework** -- general AI security guidance
-- **[Vulnerable MCP Project](https://vineethsai.github.io/vulnerablemcp/)** -- comprehensive MCP security database
+- **[Vulnerable MCP Project](https://vineethsai.github.io/vulnerablemcp/)** -- full MCP security database
 
 ### Key Research Sources
 
