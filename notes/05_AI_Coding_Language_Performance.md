@@ -250,7 +250,7 @@ project could:
 2. The change looks like a documentation update (low review scrutiny)
 3. Every AI agent that reads the docs now generates compromised code
 
-This is the skill injection attack (see `02_Skill_Injection_Analysis.md`) applied
+This is the skill injection attack (see `01_Skill_Injection_Analysis.md`) applied
 to language documentation rather than tool definitions.
 
 ### Per-Language Confidence Scoring
@@ -296,10 +296,10 @@ PHP, and adjust behavior accordingly:
 
 ## 6. Sources
 
-- [AutoCodeBenchmark -- Tencent Hunyuan (GitHub)](https://github[.]com/Tencent-Hunyuan/AutoCodeBenchmark)
-- [AutoCodeBench paper (arXiv)](https://arxiv[.]org/abs/2508.09101)
-- [AutoCodeBench leaderboard](https://autocodebench[.]github[.]io/leaderboard.html)
-- [Which Programming Languages Are Most Token Efficient? -- Martin Alderson](https://martinalderson[.]com/posts/which-programming-languages-are-most-token-efficient/)
-- [NanoLang -- Simon Willison](https://simonwillison[.]net/2026/Jan/19/nanolang/#atom-everything)
-- [AutoCodeBench: How Tencent Hunyuan Revolutionizes AI Programming Evaluation -- Medium](https://medium[.]com/@leivadiazjulio/autocodebench-how-tencent-hunyuan-revolutionizes-ai-programming-evaluation-78addbb1e364)
-- [The Great AI Coding Showdown -- Communeify](https://www[.]communeify[.]com/en/blog/tencent-autocodebench-ai-coding-model-ranking/)
+- [AutoCodeBenchmark -- Tencent Hunyuan (GitHub)](https://github.com/Tencent-Hunyuan/AutoCodeBenchmark)
+- [AutoCodeBench paper (arXiv)](https://arxiv.org/abs/2508.09101)
+- [AutoCodeBench leaderboard](https://autocodebench.github.io/leaderboard.html)
+- [Which Programming Languages Are Most Token Efficient? -- Martin Alderson](https://martinalderson.com/posts/which-programming-languages-are-most-token-efficient/)
+- [NanoLang -- Simon Willison](https://simonwillison.net/2026/Jan/19/nanolang/#atom-everything)
+- [AutoCodeBench: How Tencent Hunyuan Revolutionizes AI Programming Evaluation -- Medium](https://medium.com/@leivadiazjulio/autocodebench-how-tencent-hunyuan-revolutionizes-ai-programming-evaluation-78addbb1e364)
+- [The Great AI Coding Showdown -- Communeify](https://www.communeify.com/en/blog/tencent-autocodebench-ai-coding-model-ranking/)
