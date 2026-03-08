@@ -153,7 +153,7 @@ Source: [OpenClaw Blog](https://openclaw.ai/blog/virustotal-partnership), [Cyber
 
 ## 4. The ToxicSkills Study
 
-Snyk's ToxicSkills (Feb 2026) is the first comprehensive security audit of the AI agent skills ecosystem. Scanned **3,984 skills** from ClawHub and skills.sh.
+Snyk's ToxicSkills (Feb 2026) is the first broad security audit of the AI agent skills ecosystem. Scanned **3,984 skills** from ClawHub and skills.sh.
 
 ### Key Statistics
 
@@ -226,7 +226,7 @@ Source: [Check Point Research](https://research.checkpoint.com/2025/ai-evasion-p
 
 ## 6. The Gap
 
-The current tooling landscape converges from two directions but neither fully covers the problem.
+Current tooling converges from two directions but neither fully covers the problem.
 
 ### What Traditional Security Tools Cover
 
@@ -460,7 +460,7 @@ No single layer is sufficient. Each layer catches what the others miss. This is 
 
 ### What You Could Build
 
-Given the current landscape, the highest-impact contributions would be:
+Given the current state of the field, the highest-impact contributions would be:
 
 1. **Capability manifest spec** -- Define a standard format for skill capability declarations. No tool enforces this because no standard exists. If you write the spec, tools can implement enforcement. This is a standards problem before it's a tools problem.
 
