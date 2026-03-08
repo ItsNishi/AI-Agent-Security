@@ -6,7 +6,7 @@
 
 Defensive AI has reached an inflection point in 2025-2026. The technology is genuinely capable -- AI triages alerts in seconds, reverse-engineers malware in hours instead of weeks, discovers vulnerabilities with 92% recall, and investigates security incidents end-to-end. But the field is younger and less mature than the offensive AI ecosystem. Most organizations lack the maturity to operationalize these capabilities. The hype-to-reality gap is real, with a 2.5:1 ratio between CISO enthusiasm and practitioner satisfaction.
 
-This note covers AI-powered defensive tools, commercial platforms, autonomous SOC agents, AI threat detection, vulnerability management, defensive research, AI-vs-AI defense, and the overall landscape assessment.
+This note covers AI-powered defensive tools, commercial platforms, autonomous SOC agents, AI threat detection, vulnerability management, defensive research, AI-vs-AI defense, and the overall field assessment.
 
 ---
 
@@ -269,7 +269,7 @@ Published March 2025, providing:
 ### Academic Research Highlights (2024-2026)
 
 Key papers:
-- **"A Survey of Agentic AI and Cybersecurity"** (arXiv, Jan 2026) -- Comprehensive survey of how agentic AI reshapes cyber defense through autonomy, reasoning, continuous adaptation
+- **"A Survey of Agentic AI and Cybersecurity"** (arXiv, Jan 2026) -- Broad survey of how agentic AI reshapes cyber defense through autonomy, reasoning, continuous adaptation
 - **"Design and Evaluation of an Autonomous Cyber Defence Agent using DRL and an Augmented LLM"** (Computer Networks, 2025) -- Practical agent design combining deep reinforcement learning with LLMs
 - **"Cybersecurity AI: Evaluating Agentic Cybersecurity in Attack/Defense CTFs"** (arXiv, 2025) -- Empirical finding that **defensive agents achieve 54.3% success vs 28.3% for offensive agents** under unconstrained conditions
 
@@ -313,7 +313,7 @@ Key defense strategies:
 - **Adversarial training**: Retraining models with adversarial examples
 - **Ensemble methods**: Using multiple models to reduce single-point failures
 - **Input validation**: Detecting and filtering adversarial inputs before they reach models
-- **Defensive distillation**: Training models to be more robust against gradient-based attacks
+- **Defensive distillation**: Training models to be more resistant to gradient-based attacks
 - **Anomaly detection on model outputs**: Monitoring for behavioral deviations indicating tampering
 - **Defense in depth**: Never relying solely on AI -- integrating traditional controls, human analysis, diverse detection mechanisms
 
@@ -325,7 +325,7 @@ Open-source defensive tools for AI systems:
 
 | Tool | Maintainer | Purpose |
 |------|-----------|---------|
-| **LLM Guard** | Protect AI | Comprehensive security toolkit for LLM interactions |
+| **LLM Guard** | Protect AI | Full security toolkit for LLM interactions |
 | **Vigil-LLM** | Community | Detects prompt injections, jailbreaks, risky LLM inputs |
 | **Rebuff** | Community | Self-hardening prompt injection detector |
 | **PurpleLlama** | Meta | Assess and improve LLM security |
@@ -429,7 +429,7 @@ Empirical research (2025 CTF study) provides nuanced answers:
 
 ---
 
-## Landscape Assessment
+## Field Assessment
 
 ### What's Working
 
@@ -442,7 +442,7 @@ Empirical research (2025 CTF study) provides nuanced answers:
 
 ### What's Overhyped
 
-- **"AI-generated malware apocalypse"**: LLMs produce derivative code, not novel attack paradigms. Bitdefender: "Listen to the malware researchers, not the marketing. They use AI to code faster, not to invent new attacks."
+- **"AI-generated malware apocalypse"**: LLMs produce derivative code, not novel attack patterns. Bitdefender: "Listen to the malware researchers, not the marketing. They use AI to code faster, not to invent new attacks."
 - **Full SOC automation**: Only 11% of companies have AI agents in production (Deloitte Tech Trends 2026). 90% lack maturity for AI threats.
 - **AI replacing analysts**: The workforce gap is real, but AI augments rather than replaces. Operators are far less enthusiastic than CISOs (25% vs 56%).
 
@@ -479,7 +479,7 @@ Empirical research (2025 CTF study) provides nuanced answers:
 
 ## The Bottom Line
 
-The defensive AI landscape is at an inflection point. The winning strategy is not to chase the latest AI buzzword but to:
+The defensive AI field is at an inflection point. The winning strategy is not to chase the latest AI buzzword but to:
 
 1. Get the fundamentals right first (defense-in-depth, patching, credential hygiene)
 2. Deploy AI where it delivers proven ROI (alert triage, detection engineering, malware analysis)
