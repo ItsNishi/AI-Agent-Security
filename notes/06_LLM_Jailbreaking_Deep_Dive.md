@@ -478,7 +478,7 @@ Attacks that avoid these patterns (encoding, multi-turn, semantic reframing, ASC
 
 ### Competing Pressures
 
-The following pressures all work against robust safety:
+The following pressures all work against effective safety:
 
 | Pressure | How It Undermines Safety |
 |---|---|
@@ -577,11 +577,11 @@ Published by Zou et al. (2024) -- from Gray Swan AI / Center for AI Safety. The 
 4. Model refuses naturally without needing external classifiers
 
 **Key findings:**
-- Near-complete robustness against GCG, AutoDAN, PAIR, and manual jailbreaks
+- Near-complete resistance to GCG, AutoDAN, PAIR, and manual jailbreaks
 - Maintained model capability (minimal alignment tax)
-- Robust against unseen attack types -- operates on representations, not patterns
+- Effective against unseen attack types -- operates on representations, not patterns
 
-**Limitations:** New technique; long-term robustness unknown. Model-specific (requires identifying right internal representations). If novel representation paths exist that were not covered during training, bypasses are possible.
+**Limitations:** New technique; long-term durability unknown. Model-specific (requires identifying right internal representations). If novel representation paths exist that were not covered during training, bypasses are possible.
 
 Source: `https://arxiv.org/abs/2406.04313`
 
@@ -697,11 +697,11 @@ Source: `https://jailbreakbench.github.io/`, `https://arxiv.org/abs/2404.01318`
 
 ### HarmBench
 
-Comprehensive framework standardizing both attack and evaluation sides.
+Full framework standardizing both attack and evaluation sides.
 - 510 harmful behaviors across 7 semantic categories
 - 18 automated red-teaming methods (GCG, AutoDAN, PAIR, TAP, etc.)
 - Functional categories: standard, contextual, multimodal
-- **Key finding:** No single defense is robust against all attack categories
+- **Key finding:** No single defense is effective against all attack categories
 
 Source: `https://arxiv.org/abs/2402.04249`
 
@@ -777,7 +777,7 @@ The IDEsaster CVEs (see `notes/13_AI_Application_Ecosystem_Security.md` Section 
 3. Agent now executes shell commands without user approval
 4. Full RCE with developer machine access
 
-**CVE-2025-53773** (GitHub Copilot, CVSS 9.6) and **CVE-2025-54135** (Cursor RCE) are real-world examples of agent jailbreak leading to system compromise.
+**CVE-2025-53773** (GitHub Copilot, CVSS 7.8) and **CVE-2025-54135** (Cursor RCE) are real-world examples of agent jailbreak leading to system compromise.
 
 ### Agent Defense Priorities
 
@@ -830,7 +830,7 @@ PAIR and TAP inspired production tools:
 
 #### Circuit Breakers and Internal Defenses
 
-The most promising research direction. Modify model internals rather than adding external classifiers. Early results show significant robustness improvements. Still research-stage for most deployments.
+The most promising research direction. Modify model internals rather than adding external classifiers. Early results show significant resilience gains. Still research-stage for most deployments.
 
 #### Reasoning Model Safety
 

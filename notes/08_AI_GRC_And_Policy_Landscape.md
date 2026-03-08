@@ -90,7 +90,7 @@ High-quality data foundation is critical for AI-ready GRC. If risk data is fragm
 
 ### EU AI Act
 
-The world's first comprehensive AI regulation, adopted June 2024.
+The world's first broad AI regulation, adopted June 2024.
 
 **Implementation Timeline:**
 
@@ -109,7 +109,7 @@ The world's first comprehensive AI regulation, adopted June 2024.
 
 - **Biden EO 14110** (Oct 2023): Established AI safety and security requirements, later partially rescinded
 - **Trump EO** (Dec 11, 2025): Proposes uniform federal AI policy framework that would **preempt state AI laws** deemed inconsistent -- specifically names Colorado AI Act as an example of "excessive State regulation"
-- No comprehensive federal AI legislation enacted as of Feb 2026 -- regulation remains fragmented across agencies (FTC, FDA, SEC, etc.)
+- No federal AI legislation enacted as of Feb 2026 -- regulation remains fragmented across agencies (FTC, FDA, SEC, etc.)
 
 ### United States -- State Level
 
@@ -161,7 +161,7 @@ AI security is increasingly integrated into GRC through complementary frameworks
 | Framework | Focus | AI Security Coverage |
 |-----------|-------|---------------------|
 | **OWASP Top 10 for LLMs 2025** | Risk taxonomy | Prompt injection (LLM01), insecure output handling, training data poisoning, etc. |
-| **OWASP Top 10 for Agentic Applications 2026** | Agent-specific risks | Goal hijacking, tool misuse, memory poisoning, rogue agents (see [Note 11](./09_AI_Memory_And_Corruption.md)) |
+| **OWASP Top 10 for Agentic Applications 2026** | Agent-specific risks | Goal hijacking, tool misuse, memory poisoning, rogue agents (see [Note 09](./09_AI_Memory_And_Corruption.md)) |
 | **MITRE ATLAS** | Adversary tactics/techniques | 15 tactics, 66 techniques, 46 sub-techniques, 26 mitigations, 33 case studies (Oct 2025). Added 14 new techniques in 2025 for AI agents |
 | **NIST AI RMF + GenAI Profile** | Risk management | 200+ risk actions, supply chain assessment, model provenance |
 | **NIST Cyber AI Profile** | Cybersecurity | Securing AI systems, AI for defense, thwarting AI attacks |
@@ -194,7 +194,7 @@ The March 2025 NIST AI RMF update recognizes that most organizations rely on ext
 
 Core components of enterprise AI governance:
 
-1. **AI Use Case Inventory** -- comprehensive registry of all AI applications including shadow AI (unapproved employee tools)
+1. **AI Use Case Inventory** -- full registry of all AI applications including shadow AI (unapproved employee tools)
 2. **Model Registry** -- track versions, evaluation summaries, lineage across datasets and pipelines (e.g., Databricks Unity Catalog + MLflow)
 3. **Risk Assessment** -- classify AI systems by risk level aligned to regulatory categories
 4. **Policy Framework** -- living documents reviewed quarterly as capabilities and regulations evolve
@@ -262,7 +262,7 @@ The most critical evolution in 2026 is the shift from governing **content** (wha
 
 - **Non-human and agentic identities** expected to exceed 45 billion by end of 2026 -- more than 12x the human global workforce
 - Only **10% of organizations** report having a strategy for managing autonomous AI systems
-- Professor Noam Kolt's forthcoming Notre Dame Law Review article offers the first comprehensive legal framework for AI agent governance
+- Professor Noam Kolt's forthcoming Notre Dame Law Review article offers the first full legal framework for AI agent governance
 
 ### OWASP Top 10 for Agentic Applications (2026)
 

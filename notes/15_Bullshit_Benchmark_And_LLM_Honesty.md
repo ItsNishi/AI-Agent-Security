@@ -8,11 +8,11 @@ LLMs produce outputs that are better characterized as **bullshit** than hallucin
 
 This framing was formalized by Hicks, Humphries, and Slater in their 2024 paper "ChatGPT is Bullshit" (Ethics and Information Technology). They argue LLM outputs are bullshit, not hallucination, because the models produce statistically plausible text without any internal model of what is true or false. The term "hallucination" implies perception of something absent; "bullshit" correctly captures that the model is indifferent to truth altogether.
 
-This note covers the landscape of benchmarks and research measuring LLM honesty/reliability -- factual accuracy, hallucination detection, bullshit detection, sycophancy, and abstention -- and the security implications of truth-indifferent AI systems.
+This note covers benchmarks and research measuring LLM honesty/reliability -- factual accuracy, hallucination detection, bullshit detection, sycophancy, and abstention -- and the security implications of truth-indifferent AI systems.
 
 ---
 
-## The Benchmark Landscape
+## Benchmark Overview
 
 LLM reliability is measured across multiple dimensions, each capturing a distinct failure mode. No single benchmark covers the full spectrum:
 
@@ -264,7 +264,7 @@ OpenAI rolled back a GPT-4o update after it became overly flattering and agreeab
 
 ---
 
-## Landscape Analysis
+## Field Analysis
 
 ### What Is Well-Measured
 
@@ -295,7 +295,7 @@ OpenAI rolled back a GPT-4o update after it became overly flattering and agreeab
 
 ### How These Benchmarks Relate
 
-See the [Benchmark Landscape](#the-benchmark-landscape) section at the top for how all these dimensions map together.
+See the [Benchmark Overview](#benchmark-overview) section at the top for how all these dimensions map together.
 
 ---
 

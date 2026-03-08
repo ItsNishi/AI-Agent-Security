@@ -525,7 +525,7 @@ Microsoft Defender recommended treating OpenClaw as a high-risk application.
 
 This was not a sophisticated attack -- it was a catastrophic configuration error that left sensitive data publicly accessible. The tokens could be used to control agents, access their connected services, and exfiltrate data.
 
-See [Note 15](./13_AI_Application_Ecosystem_Security.md) Section 6.2 for the Moltbook case study including data breakdown and timeline.
+See [Note 13](./13_AI_Application_Ecosystem_Security.md) Section 6.2 for the Moltbook case study including data breakdown and timeline.
 
 ---
 
@@ -658,7 +658,7 @@ Snyk built the `mcp-scan` engine combining:
 - **Deterministic rules** (for traditional code analysis)
 - Both are required because agent skills require both code analysis and language understanding
 
-This aligns with our findings in [Note 09](./07_Skill_Scanning_And_Detection_Landscape.md) -- the gap between traditional security tooling and the agent skill threat model is the central unsolved problem.
+This aligns with our findings in [Note 07](./07_Skill_Scanning_And_Detection_Landscape.md) -- the gap between traditional security tooling and the agent skill threat model is the central unsolved problem.
 
 ---
 
@@ -702,7 +702,7 @@ Anthropic maintains an official skills repository at [github.com/anthropics/skil
 
 ## 24. Competing Skill Marketplaces
 
-The skills marketplace landscape has fragmented beyond ClawHub:
+The skills marketplace has fragmented beyond ClawHub:
 
 | Platform | Scale | Notes |
 |----------|-------|-------|
@@ -864,8 +864,8 @@ The fragmentation compounds supply chain risk. Each platform has different (or n
 
 ## Cross-References
 
-- [Note 02: Skill Injection Analysis](./01_Skill_Injection_Analysis.md) -- Original skill injection research
-- [Note 05: Claude Code Skill Architecture](./03_Claude_Code_Skill_Architecture.md) -- Claude Code's implementation of the shared standard
-- [Note 09: Skill Scanning and Detection Landscape](./07_Skill_Scanning_And_Detection_Landscape.md) -- Detection tools and the ToxicSkills study
-- [Note 11: AI Memory and Corruption](./09_AI_Memory_And_Corruption.md) -- Memory architecture attacks (MINJA, RAG poisoning)
-- [Note 12: Agent Configuration Files](./10_Agent_MD_Configuration_Files.md) -- CLAUDE.md, AGENTS.md, rules file attacks
+- [Note 01: Skill Injection Analysis](./01_Skill_Injection_Analysis.md) -- Original skill injection research
+- [Note 03: Claude Code Skill Architecture](./03_Claude_Code_Skill_Architecture.md) -- Claude Code's implementation of the shared standard
+- [Note 07: Skill Scanning and Detection Landscape](./07_Skill_Scanning_And_Detection_Landscape.md) -- Detection tools and the ToxicSkills study
+- [Note 09: AI Memory and Corruption](./09_AI_Memory_And_Corruption.md) -- Memory architecture attacks (MINJA, RAG poisoning)
+- [Note 10: Agent Configuration Files](./10_Agent_MD_Configuration_Files.md) -- CLAUDE.md, AGENTS.md, rules file attacks
