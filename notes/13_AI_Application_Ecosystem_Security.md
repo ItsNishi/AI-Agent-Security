@@ -1,6 +1,6 @@
 # AI Application Ecosystem Security
 
-> **Related notes**: [01 -- Prompt Injection & Skill Injection](01_Skill_Injection_Analysis.md) (foundational concepts and case study), [14 -- AI Hacking Frameworks](14_AI_Hacking_Frameworks.md) (autonomous offensive tools exploiting these ecosystems), [16 -- AI Blue Teaming & Defensive AI](16_AI_Blue_Teaming_And_Defensive_AI.md) (defensive AI tools and landscape), [12 -- OpenClaw & ClawHub Security](12_OpenClaw_And_ClawHub_Security.md) (deep dive on one marketplace ecosystem)
+> **Related notes**: [01 -- Prompt Injection & Skill Injection](01_Skill_Injection_Analysis.md) (foundational concepts and case study), [14 -- AI Hacking Frameworks](14_AI_Hacking_Frameworks.md) (autonomous offensive tools exploiting these ecosystems), [16 -- AI Blue Teaming & Defensive AI](16_AI_Blue_Teaming_And_Defensive_AI.md) (defensive AI tools and landscape), [12 -- OpenClaw & ClawHub Security](12_OpenClaw_And_ClawHub_Security.md) (deep dive on one marketplace ecosystem), [17 -- Agent Subversion](17_Agent_Subversion.md) (infrastructure-level attacks: code-before-review, sandbox escape, API bypasses, Firecracker case study)
 
 Security research across AI marketplaces, agent frameworks, coding tools, and their interconnected attack surfaces -- organized by attack surface rather than vendor.
 
@@ -241,7 +241,7 @@ MCP's design introduces several fundamental security gaps:
 
 #### Tool Poisoning Attacks (Invariant Labs, April 2025)
 
-Invariant Labs defined and demonstrated the Tool Poisoning Attack (TPA) paradigm:
+Invariant Labs defined and demonstrated the Tool Poisoning Attack (TPA) pattern:
 
 **Mechanism**: Malicious instructions embedded in a tool's description during registration. The agent treats these instructions as required steps in the tool's legitimate operation.
 
@@ -459,7 +459,7 @@ Invariant Labs defined and demonstrated the Tool Poisoning Attack (TPA) paradigm
 
 ### 3.7 Devin (AI Software Engineer)
 
-**Comprehensive Security Testing by Embrace The Red:**
+**Full Security Testing by Embrace The Red:**
 
 *$500 Prompt Injection Research (April 2025):*
 - Complete compromise achieved via indirect prompt injection
@@ -536,7 +536,7 @@ Discovered by Ari Marzouk (MaccariTA) over six months of research. 24 CVEs assig
 - Combined prompt injection with CSP bypass to silently exfiltrate source code and secrets from private repositories
 - Remediated August 14, 2025 by disabling all image rendering in Copilot Chat
 
-**RCE via Prompt Injection (CVE-2025-53773, CVSS 9.6)**:
+**RCE via Prompt Injection (CVE-2025-53773, CVSS 7.8)**:
 - Achieved on Windows, macOS, and Linux through `.vscode/tasks.json` manipulation and malicious MCP server injection
 - Exploits Copilot's unrestricted file modification capabilities
 - Detailed attack chain:
@@ -579,7 +579,7 @@ Discovered by Ari Marzouk (MaccariTA) over six months of research. 24 CVEs assig
 - Ships with VS Code Workspace Trust disabled
 - Exposes users to silent code execution risks
 
-**Rules File Backdoor**: See [note 08](./10_Agent_MD_Configuration_Files.md) for the full deep dive on hidden Unicode characters in `.cursorrules` and similar configuration files. Pillar Security demonstrated invisible instruction injection that manipulates AI into generating malicious code.
+**Rules File Backdoor**: See [note 10](./10_Agent_MD_Configuration_Files.md) for the full deep dive on hidden Unicode characters in `.cursorrules` and similar configuration files. Pillar Security demonstrated invisible instruction injection that manipulates AI into generating malicious code.
 
 
 ### 4.4 Windsurf
@@ -661,7 +661,7 @@ Discovered by Ari Marzouk (MaccariTA) over six months of research. 24 CVEs assig
 - December 2024: Ultralytics framework supply chain compromise -- malicious code activated during model training
 
 
-### 4.8 Vibe Coding Security Landscape
+### 4.8 Vibe Coding Security
 
 **The Numbers:**
 - **45% of AI-generated code introduces security vulnerabilities** (Veracode GenAI Code Security Report 2025)
@@ -828,7 +828,7 @@ Key developments specific to agent ecosystems:
 - Agent modifies instruction files (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`)
 - Creates persistent backdoors across sessions
 
-See [note 08](./10_Agent_MD_Configuration_Files.md) for the full analysis of configuration file attack surfaces and the Rules File Backdoor.
+See [note 10](./10_Agent_MD_Configuration_Files.md) for the full analysis of configuration file attack surfaces and the Rules File Backdoor.
 
 **Source Code Poisoning:**
 - Injecting malicious code into repository files
@@ -1077,7 +1077,7 @@ For the full NIST/GRC landscape including EU AI Act and state laws, see [note 08
 - Maintains ranked list of the 25 most critical MCP vulnerabilities affecting global deployments
 
 **The Vulnerable MCP Project:**
-- Comprehensive security database tracking MCP vulnerabilities and security research
+- Full security database tracking MCP vulnerabilities and security research
 
 **Practical Mitigations for Agent Systems:**
 1. **Least privilege**: scope agent permissions to minimum required
@@ -1089,7 +1089,7 @@ For the full NIST/GRC landscape including EU AI Act and state laws, see [note 08
 7. **Configuration protection**: prevent agents from modifying their own or other agents' configs
 8. **Tool allowlisting**: only permit pre-approved tools, validate tool definitions continuously
 9. **Network segmentation**: restrict outbound connections, block C2 patterns
-10. **Observability**: comprehensive logging with anomaly detection on agent behavior
+10. **Observability**: full logging with anomaly detection on agent behavior
 
 ---
 
