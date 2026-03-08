@@ -13,7 +13,7 @@
 
 ## 1. AutoCodeBench -- Multilingual LLM Benchmarks
 
-Tencent Hunyuan's AutoCodeBench is the most comprehensive multilingual code generation
+Tencent Hunyuan's AutoCodeBench is the most thorough multilingual code generation
 benchmark to date. Prior benchmarks (HumanEval, MBPP, SWE-bench) were overwhelmingly
 Python-focused. AutoCodeBench tests 20 languages with balanced distribution.
 
