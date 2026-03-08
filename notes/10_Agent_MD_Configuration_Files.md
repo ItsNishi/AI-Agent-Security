@@ -1,5 +1,7 @@
 # Agent Configuration Files: Attack Surface, Research, and Hardening
 
+> **Related notes**: [01 -- Skill Injection Analysis](01_Skill_Injection_Analysis.md) (injection via skill files), [03 -- Claude Code Skill Architecture](03_Claude_Code_Skill_Architecture.md) (how config files are loaded), [09 -- AI Memory & Corruption](09_AI_Memory_And_Corruption.md) (persistence as memory poisoning vector), [12 -- OpenClaw & ClawHub Security](12_OpenClaw_And_ClawHub_Security.md) (real-world config-based attacks), [14 -- AI Hacking Frameworks](14_AI_Hacking_Frameworks.md) (rules file backdoor in offensive context)
+
 Agent instruction files -- CLAUDE.md, AGENTS.md, .cursorrules, .windsurfrules,
 copilot-instructions.md -- are the primary mechanism for giving persistent context to AI
 coding agents. They are also a growing attack surface.
@@ -57,8 +59,8 @@ instruction files could inject malicious instructions that:
 - Neither patched the underlying model behavior
 
 **Sources:**
-- [Pillar Security blog](https://www[.]pillar[.]security/blog/new-vulnerability-in-github-copilot-and-cursor-how-hackers-can-weaponize-code-agents)
-- [The Hacker News coverage](https://thehackernews[.]com/2025/03/new-rules-file-backdoor-attack-lets.html)
+- [Pillar Security blog](https://www.pillar.security/blog/new-vulnerability-in-github-copilot-and-cursor-how-hackers-can-weaponize-code-agents)
+- [The Hacker News coverage](https://thehackernews.com/2025/03/new-rules-file-backdoor-attack-lets.html)
 
 ### 2.2 Persistent Injection via Rules File Modification
 
@@ -78,7 +80,7 @@ security posture until someone manually audits the rules file.
 **Key insight:** The JSON formatting bypasses detection heuristics by mimicking authentic
 conversation structure.
 
-**Source:** [Secure Code Warrior](https://www[.]securecodewarrior[.]com/article/prompt-injection-and-the-security-risks-of-agentic-coding-tools)
+**Source:** [Secure Code Warrior](https://www.securecodewarrior.com/article/prompt-injection-and-the-security-risks-of-agentic-coding-tools)
 
 ### 2.3 Repository-Level Indirect Injection
 
@@ -116,7 +118,7 @@ auto-generated files.
 
 ### 3.2 HN Community Consensus
 
-From the [discussion thread](https://news[.]ycombinator[.]com/item?id=47034087) on the paper:
+From the [discussion thread](https://news.ycombinator.com/item?id=47034087) on the paper:
 
 - "4% improvement from a simple markdown file means it's a must-have" -- the value is
   in encoding tribal knowledge the LLM cannot infer from code alone
@@ -141,7 +143,7 @@ irrelevant -- the jailbreak bypassed them entirely.
 by prose instructions. CLAUDE.md says "don't delete production databases." A permission
 system physically prevents it.
 
-**Source:** [MIT Technology Review](https://www[.]technologyreview[.]com/2026/01/28/1131003/rules-fail-at-the-prompt-succeed-at-the-boundary/)
+**Source:** [MIT Technology Review](https://www.technologyreview.com/2026/01/28/1131003/rules-fail-at-the-prompt-succeed-at-the-boundary/)
 
 ### 3.4 Meta's "Agents Rule of Two"
 
@@ -155,7 +157,7 @@ If an agent requires all three, it "should not be permitted to operate autonomou
 minimum requires supervision." This framework recognizes that prompt-level instructions
 cannot prevent misuse when all three conditions are met.
 
-**Source:** [Simon Willison's coverage](https://simonw[.]substack[.]com/p/new-prompt-injection-papers-agents)
+**Source:** [Simon Willison's coverage](https://simonw.substack.com/p/new-prompt-injection-papers-agents)
 
 
 ## 4. Recommendations: Writing Better Agent Configuration Files
@@ -404,14 +406,14 @@ canonical source.
 
 ## Sources
 
-- [Evaluating AGENTS.md (arXiv:2602.11988)](https://arxiv[.]org/html/2602.11988v1)
-- [Hacker News discussion](https://news[.]ycombinator[.]com/item?id=47034087)
-- [Pillar Security: Rules File Backdoor](https://www[.]pillar[.]security/blog/new-vulnerability-in-github-copilot-and-cursor-how-hackers-can-weaponize-code-agents)
-- [The Hacker News: Rules File Backdoor](https://thehackernews[.]com/2025/03/new-rules-file-backdoor-attack-lets.html)
-- [Secure Code Warrior: Prompt Injection in Agentic Tools](https://www[.]securecodewarrior[.]com/article/prompt-injection-and-the-security-risks-of-agentic-coding-tools)
-- [MIT Technology Review: Rules Fail at the Prompt](https://www[.]technologyreview[.]com/2026/01/28/1131003/rules-fail-at-the-prompt-succeed-at-the-boundary/)
-- [Simon Willison: Agents Rule of Two](https://simonw[.]substack[.]com/p/new-prompt-injection-papers-agents)
-- [Claude Code Best Practices](https://code[.]claude[.]com/docs/en/best-practices)
-- [HumanLayer: Writing a Good CLAUDE.md](https://www[.]humanlayer[.]dev/blog/writing-a-good-claude-md)
-- [Knostic: Zero Width Unicode Risks](https://www[.]knostic[.]ai/blog/zero-width-unicode-characters-risks)
-- [Security Affairs: Rules File Backdoor](https://securityaffairs[.]com/175593/hacking/rules-file-backdoor-ai-code-editors-silent-supply-chain-attacks.html)
+- [Evaluating AGENTS.md (arXiv:2602.11988)](https://arxiv.org/html/2602.11988v1)
+- [Hacker News discussion](https://news.ycombinator.com/item?id=47034087)
+- [Pillar Security: Rules File Backdoor](https://www.pillar.security/blog/new-vulnerability-in-github-copilot-and-cursor-how-hackers-can-weaponize-code-agents)
+- [The Hacker News: Rules File Backdoor](https://thehackernews.com/2025/03/new-rules-file-backdoor-attack-lets.html)
+- [Secure Code Warrior: Prompt Injection in Agentic Tools](https://www.securecodewarrior.com/article/prompt-injection-and-the-security-risks-of-agentic-coding-tools)
+- [MIT Technology Review: Rules Fail at the Prompt](https://www.technologyreview.com/2026/01/28/1131003/rules-fail-at-the-prompt-succeed-at-the-boundary/)
+- [Simon Willison: Agents Rule of Two](https://simonw.substack.com/p/new-prompt-injection-papers-agents)
+- [Claude Code Best Practices](https://code.claude.com/docs/en/best-practices)
+- [HumanLayer: Writing a Good CLAUDE.md](https://www.humanlayer.dev/blog/writing-a-good-claude-md)
+- [Knostic: Zero Width Unicode Risks](https://www.knostic.ai/blog/zero-width-unicode-characters-risks)
+- [Security Affairs: Rules File Backdoor](https://securityaffairs.com/175593/hacking/rules-file-backdoor-ai-code-editors-silent-supply-chain-attacks.html)

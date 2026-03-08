@@ -22,21 +22,23 @@ Every attack has a defense. Every payload is annotated, defanged, and educationa
 
 | | Topic | What You'll Learn |
 |---|-------|-------------------|
-| 🎯 | [Prompt Injection Overview](notes/01_Prompt_Injection_Overview.md) | The foundational attack -- how untrusted input hijacks agent behavior |
-| 💉 | [Skill Injection Analysis](notes/02_Skill_Injection_Analysis.md) | Real-world trojanized skill teardowns, injection vectors, and detection strategies |
-| 🧱 | [Defense Patterns](notes/03_Defense_Patterns.md) | Sanitization, sandboxing, and mitigation strategies with working code |
-| 🔬 | [Research Findings](notes/04_Research_Findings.md) | Cutting-edge attacks (2024-2026): MCP poisoning, memory corruption, vibe coding risks |
-| ⚙️ | [Claude Code Skill Architecture](notes/05_Claude_Code_Skill_Architecture.md) | How Claude Code's extensibility (skills, hooks, MCP) creates attack surface |
-| 👻 | [LLM Hallucination Prevention](notes/06_LLM_Hallucination_Prevention.md) | Why models invent things, how to detect it, and how to stop it |
-| 🌐 | [AI Coding Language Performance](notes/07_AI_Coding_Language_Performance.md) | Multilingual benchmarks, token efficiency, and language-steering attacks |
-| 🔓 | [LLM Jailbreaking Deep Dive](notes/08_LLM_Jailbreaking_Deep_Dive.md) | Full taxonomy: DAN to GCG to Crescendo, defenses, benchmarks, agent implications |
-| 🔍 | [Skill Scanning & Detection Landscape](notes/09_Skill_Scanning_And_Detection_Landscape.md) | Cisco Skill Scanner, VirusTotal, ToxicSkills audit, gap analysis, what to build next |
-| 📋 | [AI GRC & Policy Landscape](notes/10_AI_GRC_And_Policy_Landscape.md) | NIST AI RMF, EU AI Act, ISO 42001, state laws, agentic governance, OWASP Agentic Top 10 |
-| 🧠 | [AI Memory & Corruption](notes/11_AI_Memory_And_Corruption.md) | Memory architectures, RAG poisoning, MINJA, persistence risks, real-world case studies, defenses |
-| 📄 | [Agent Configuration Files](notes/12_Agent_MD_Configuration_Files.md) | CLAUDE.md/AGENTS.md attack surface, Rules File Backdoor, Unicode obfuscation, hardening recommendations |
-| 🧠 | [Chatbot & AI Psychosis](notes/13_Chatbot_And_AI_Psychosis.md) | AI-induced psychosis, sycophancy mechanisms, documented deaths, folie a deux, weaponization, RAND national security analysis |
-| 🦞 | [OpenClaw & ClawHub Security](notes/14_OpenClaw_And_ClawHub_Security.md) | OpenClaw architecture, ClawHub supply chain, CVE-2026-25253, ClawHavoc campaign, AMOS stealer, memory poisoning, 42K exposed instances |
-| 🏪 | [AI Application Ecosystem Security](notes/15_AI_Application_Ecosystem_Security.md) | GPT Store, MCP tool poisoning, LangChain, HuggingFace, AutoGPT, CrewAI, Devin, IDEsaster, GlassWorm, OWASP Agentic Top 10, MITRE ATLAS |
+| 🗂️ | [Tools & Frameworks Index](notes/00_Tools_And_Frameworks_Index.md) | Quick reference for every tool, framework, benchmark, and standard mentioned across all notes |
+| 💉 | [Prompt Injection & Skill Injection](notes/01_Skill_Injection_Analysis.md) | Foundational injection concepts, agent attack surface, trojanized skill teardown, supply chain comparison |
+| 🧱 | [Defense Patterns](notes/02_Defense_Patterns.md) | Sanitization, sandboxing, and mitigation strategies with working code |
+| ⚙️ | [Claude Code Skill Architecture](notes/03_Claude_Code_Skill_Architecture.md) | How Claude Code's extensibility (skills, hooks, MCP) creates attack surface |
+| 👻 | [LLM Hallucination Prevention](notes/04_LLM_Hallucination_Prevention.md) | Why models invent things, how to detect it, and how to stop it |
+| 🌐 | [AI Coding Language Performance](notes/05_AI_Coding_Language_Performance.md) | Multilingual benchmarks, token efficiency, and language-steering attacks |
+| 🔓 | [LLM Jailbreaking Deep Dive](notes/06_LLM_Jailbreaking_Deep_Dive.md) | Full taxonomy: DAN to GCG to Crescendo, defenses, benchmarks, agent implications |
+| 🔍 | [Skill Scanning & Detection Landscape](notes/07_Skill_Scanning_And_Detection_Landscape.md) | Cisco Skill Scanner, VirusTotal, ToxicSkills audit, gap analysis, what to build next |
+| 📋 | [AI GRC & Policy Landscape](notes/08_AI_GRC_And_Policy_Landscape.md) | NIST AI RMF, EU AI Act, ISO 42001, state laws, agentic governance, OWASP Agentic Top 10 |
+| 🧠 | [AI Memory & Corruption](notes/09_AI_Memory_And_Corruption.md) | Memory architectures, RAG poisoning, MINJA, persistence risks, real-world case studies, defenses |
+| 📄 | [Agent Configuration Files](notes/10_Agent_MD_Configuration_Files.md) | CLAUDE.md/AGENTS.md attack surface, Rules File Backdoor, Unicode obfuscation, hardening recommendations |
+| 🧠 | [Chatbot & AI Psychosis](notes/11_Chatbot_And_AI_Psychosis.md) | AI-induced psychosis, sycophancy mechanisms, documented deaths, folie a deux, weaponization, RAND national security analysis |
+| 🦞 | [OpenClaw & ClawHub Security](notes/12_OpenClaw_And_ClawHub_Security.md) | OpenClaw architecture, ClawHub supply chain, CVE-2026-25253, ClawHavoc campaign, AMOS stealer, memory poisoning, 42K exposed instances |
+| 🏪 | [AI Application Ecosystem Security](notes/13_AI_Application_Ecosystem_Security.md) | GPT Store, MCP tool poisoning, LangChain, HuggingFace, AutoGPT, CrewAI, Devin, IDEsaster, GlassWorm, OWASP Agentic Top 10, MITRE ATLAS |
+| ⚔️ | [AI Hacking Frameworks](notes/14_AI_Hacking_Frameworks.md) | XBOW, Shannon, Strix, PentAGI, CAI, Reaper, Nebula, CHECKMATE, Garak, Promptfoo, PyRIT, benchmarks, architecture patterns |
+| 💩 | [Bullshit Benchmark & LLM Honesty](notes/15_Bullshit_Benchmark_And_LLM_Honesty.md) | BullshitBench, TruthfulQA, SimpleQA, sycophancy benchmarks, Bullshit Index, abstention, slopsquatting, RLHF-security tension |
+| 🛡️ | [AI Blue Teaming & Defensive AI](notes/16_AI_Blue_Teaming_And_Defensive_AI.md) | AI SOC agents, CrowdStrike Charlotte, Microsoft Security Copilot, malware RE, DARPA AIxCC, NIST AI 100-2, defender's advantage analysis |
 
 ---
 

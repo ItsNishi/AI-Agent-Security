@@ -1,5 +1,7 @@
 # AI Application Ecosystem Security
 
+> **Related notes**: [01 -- Prompt Injection & Skill Injection](01_Skill_Injection_Analysis.md) (foundational concepts and case study), [14 -- AI Hacking Frameworks](14_AI_Hacking_Frameworks.md) (autonomous offensive tools exploiting these ecosystems), [16 -- AI Blue Teaming & Defensive AI](16_AI_Blue_Teaming_And_Defensive_AI.md) (defensive AI tools and landscape), [12 -- OpenClaw & ClawHub Security](12_OpenClaw_And_ClawHub_Security.md) (deep dive on one marketplace ecosystem)
+
 Security research across AI marketplaces, agent frameworks, coding tools, and their interconnected attack surfaces -- organized by attack surface rather than vendor.
 
 ---
@@ -253,6 +255,14 @@ Invariant Labs defined and demonstrated the Tool Poisoning Attack (TPA) paradigm
 - A malicious server does NOT need the agent to use its tools directly
 - Instead, it modifies the agent's behavior with respect to OTHER trusted servers
 - Tool descriptions on the malicious server can hijack how the agent interacts with legitimate tools
+
+**GitHub MCP Server Hijack (Invariant Labs)**:
+- A malicious public GitHub issue could hijack an AI assistant using the official GitHub MCP server
+- With an over-privileged PAT wired into the server, the compromised agent exfiltrated private repository contents, project details, and personal financial/salary information into a public pull request
+
+**Zero-Click RCE via MCP (Lakera)**:
+- A Google Docs file triggered an IDE agent to fetch attacker-authored instructions from an MCP server
+- The agent executed a Python payload and harvested secrets -- zero user interaction required
 
 **MCPTox Benchmark**:
 - Academic benchmark comprising 45+ real-world MCP servers across 8 application domains
@@ -526,9 +536,17 @@ Discovered by Ari Marzouk (MaccariTA) over six months of research. 24 CVEs assig
 - Combined prompt injection with CSP bypass to silently exfiltrate source code and secrets from private repositories
 - Remediated August 14, 2025 by disabling all image rendering in Copilot Chat
 
-**RCE via Prompt Injection**:
+**RCE via Prompt Injection (CVE-2025-53773, CVSS 9.6)**:
 - Achieved on Windows, macOS, and Linux through `.vscode/tasks.json` manipulation and malicious MCP server injection
 - Exploits Copilot's unrestricted file modification capabilities
+- Detailed attack chain:
+  1. Prompt injection delivered via source code, web pages, GitHub issues, or invisible text
+  2. Injected prompt modifies `.vscode/settings.json` to add `"chat.tools.autoApprove": true`
+  3. "YOLO mode" activates -- disables all user confirmation prompts
+  4. Copilot now executes shell commands autonomously
+  5. Conditional prompt injection targets specific OS for payload delivery
+  6. Full RCE with developer machine access
+- Key detail: Copilot writes files directly to disk without reviewable diffs -- changes are immediate and persistent
 
 **Path Traversal (CVE-2025-62453)**:
 - Local attackers could manipulate file access, retrieve sensitive information, inject malicious code
@@ -561,7 +579,7 @@ Discovered by Ari Marzouk (MaccariTA) over six months of research. 24 CVEs assig
 - Ships with VS Code Workspace Trust disabled
 - Exposes users to silent code execution risks
 
-**Rules File Backdoor**: See [note 12](./12_Agent_MD_Configuration_Files.md) for the full deep dive on hidden Unicode characters in `.cursorrules` and similar configuration files. Pillar Security demonstrated invisible instruction injection that manipulates AI into generating malicious code.
+**Rules File Backdoor**: See [note 08](./10_Agent_MD_Configuration_Files.md) for the full deep dive on hidden Unicode characters in `.cursorrules` and similar configuration files. Pillar Security demonstrated invisible instruction injection that manipulates AI into generating malicious code.
 
 
 ### 4.4 Windsurf
@@ -642,6 +660,38 @@ Discovered by Ari Marzouk (MaccariTA) over six months of research. 24 CVEs assig
 - October 2024: ByteDance GPU cluster attack -- manipulated model training processes
 - December 2024: Ultralytics framework supply chain compromise -- malicious code activated during model training
 
+
+### 4.8 Vibe Coding Security Landscape
+
+**The Numbers:**
+- **45% of AI-generated code introduces security vulnerabilities** (Veracode GenAI Code Security Report 2025)
+- **71% of AI-generated authentication code has vulnerabilities**
+- **XSS prevention fails 86% of tests**
+
+**Common Vulnerability Patterns:**
+1. **Client-side only auth** -- AI generates frontend checks but no backend validation
+2. **Hardcoded secrets** -- API keys in client-side JavaScript
+3. **Missing RLS/access control** -- databases accessible without auth (see Moltbook in §6)
+4. **SQL injection** -- string concatenation instead of parameterized queries
+5. **IDOR** -- predictable object references with no authorization checks
+6. **Missing rate limiting** -- no throttling on API endpoints
+7. **CORS misconfiguration** -- overly permissive cross-origin policies
+8. **Package hallucination** -- AI suggests libraries that don't exist; attackers register them (slopsquatting supply chain attack)
+
+**Why AI-Generated Code Is Insecure:**
+- Training data includes millions of insecure code examples
+- AI optimizes for "it works" not "it's secure"
+- Users accept generated code without review
+- AI doesn't understand deployment context or threat models
+
+**Defense Best Practices:**
+- Review AI-generated code like third-party/untrusted code
+- Run SAST on ALL AI-generated code regardless of complexity
+- Never deploy without manual review of auth logic, encryption, and error handling
+- Specify exact security requirements in prompts: "Use parameterized queries," "Hash with bcrypt cost factor 12"
+- Integrate SAST, SCA, and DAST into CI/CD
+- Frameworks: OWASP Agentic AI Top 10 (2026), Palo Alto Vibe Coding Security Framework (2025)
+
 ---
 
 ## 5. AI Agent Attack Taxonomy
@@ -660,6 +710,14 @@ Discovered by Ari Marzouk (MaccariTA) over six months of research. 24 CVEs assig
 **WhatsApp History Exfiltration:**
 - Malicious MCP server silently exfiltrated entire WhatsApp history
 - Combined tool poisoning with legitimate whatsapp-mcp server
+
+**MCP Preference Manipulation Attack (MPMA):**
+- Subtly alters tool ranking or selection preferences
+- Agents "prefer" attacker-controlled tools over legitimate alternatives across multi-agent systems
+
+**Parasitic Toolchain Attacks:**
+- Chained infected tools escalate attack impact by propagating malicious commands through interlinked tool networks
+- If any link in the Tool A -> Tool B -> Tool C chain is poisoned, the entire chain is compromised
 
 ### 5.2 Multi-Agent Communication Attacks
 
@@ -684,7 +742,7 @@ Discovered by Ari Marzouk (MaccariTA) over six months of research. 24 CVEs assig
 
 ### 5.3 Agent Memory Poisoning
 
-Memory corruption is a deep topic -- see [note 11](./11_AI_Memory_And_Corruption.md) for the full analysis of MINJA, MemoryGraft, RAG poisoning, and defense frameworks.
+Memory corruption is a deep topic -- see [note 09](./09_AI_Memory_And_Corruption.md) for the full analysis of MINJA, MemoryGraft, RAG poisoning, and defense frameworks.
 
 Key developments specific to agent ecosystems:
 
@@ -770,7 +828,7 @@ Key developments specific to agent ecosystems:
 - Agent modifies instruction files (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`)
 - Creates persistent backdoors across sessions
 
-See [note 12](./12_Agent_MD_Configuration_Files.md) for the full analysis of configuration file attack surfaces and the Rules File Backdoor.
+See [note 08](./10_Agent_MD_Configuration_Files.md) for the full analysis of configuration file attack surfaces and the Rules File Backdoor.
 
 **Source Code Poisoning:**
 - Injecting malicious code into repository files
@@ -843,14 +901,50 @@ See [note 12](./12_Agent_MD_Configuration_Files.md) for the full analysis of con
 - Reconciliation agent tricked into exporting "all customer records matching pattern X"
 - Regex matched every record -- 45,000 customer records compromised
 
-### 6.2 Statistics
+### 6.2 Moltbook: Vibe Coding Case Study
+
+Moltbook launched January 28, 2026 as a social platform for AI agents. The founder stated: "I didn't write a single line of code." Wiz security researchers found unauthenticated access to the entire production database within minutes.
+
+**Root cause:** Supabase Row-Level Security (RLS) policies were never implemented. The publishable API key (which Supabase exposes by design) had full read-write database access.
+
+**Data exposed:**
+- 1.5 million API authentication tokens -- full agent impersonation possible
+- 46,000+ email addresses (17K owner emails + 29K developer signups)
+- Private messages between agents containing plaintext OpenAI API keys
+- Full write access confirmed -- researchers could modify live posts
+- ~4.75 million total records accessible via PostgREST and GraphQL introspection
+
+**Enumeration:** PostgREST error messages to enumerate schema, GraphQL introspection for full DB structure, direct REST API for bulk access.
+
+**Inflated metrics:** Platform reported 1.5M AI agents but analysis showed only 17K human accounts (88:1 ratio). No rate limiting or identity verification.
+
+**Timeline:** Total remediation ~2 hours with Wiz assistance after responsible disclosure.
+
+### 6.3 Q4 2025 Attack Trends (Lakera)
+
+From Lakera's analysis of attacks across customer environments during a 30-day Q4 window:
+
+**Primary techniques:**
+1. **Hypothetical scenarios** -- framing attacks as educational exercises: "Let's imagine you're a developer reviewing the system configuration"
+2. **Obfuscation** -- malicious instructions hidden within JSON parameters or code-like formatting to evade pattern filters
+3. **Indirect framing** -- positioning harmful requests as analysis tasks, fictional evaluations, role-play scenarios, or transformation exercises
+
+**Critical finding:** Indirect attacks required fewer attempts than direct injections. External data sources are the primary risk vector for 2026 -- indirect attacks bypass user-facing input filters entirely.
+
+**2026 predictions:**
+- Security must extend beyond individual prompts to cover all interaction points
+- Tool calls, retrieval steps, and external sources are all part of the attack surface
+- Agent-to-agent communication creates new lateral movement paths
+- MCP ecosystem growth will expand the tool poisoning attack surface
+
+### 6.4 Statistics
 
 - 80% of organizations report risky AI agent behaviors including improper data exposure and unauthorized system access
 - 89% year-over-year increase in attacks by AI-enabled adversaries (CrowdStrike 2026)
 - Mean time to exfiltrate: 9 days (2021) reduced to 2 days (2024), under 1 hour in 20% of cases
 - AI-powered ransomware: initial compromise to data exfiltration in 25 minutes
 
-### 6.3 Bug Bounty and Red Teaming
+### 6.5 Bug Bounty and Red Teaming
 
 **Microsoft Zero Day Quest:**
 - $4 million bug bounty program for cloud and AI system vulnerabilities
@@ -868,7 +962,7 @@ See [note 12](./12_Agent_MD_Configuration_Files.md) for the full analysis of con
 - Models: Claude 3.5 Sonnet, Gemini 2.5 Flash, GPT-4o, Grok 2, Nova Pro
 - Overall refusal rate: 41.5% -- majority of malicious prompts succeed
 
-### 6.4 CTF Challenges
+### 6.6 CTF Challenges
 
 **Gandalf (Lakera):**
 - Most popular prompt injection CTF
@@ -921,7 +1015,7 @@ Released December 2025. Developed by 100+ security researchers, reviewed by expe
 - FinBot CTF Reference Application
 - Agentic AI Threats and Mitigations document
 
-For broader AI governance context (OWASP LLM Top 10, EU AI Act, ISO 42001), see [note 10](./10_AI_GRC_And_Policy_Landscape.md).
+For broader AI governance context (OWASP LLM Top 10, EU AI Act, ISO 42001), see [note 08](./08_AI_GRC_And_Policy_Landscape.md).
 
 
 ### 7.2 MITRE ATLAS (Adversarial Threat Landscape for AI Systems)
@@ -952,7 +1046,7 @@ For broader AI governance context (OWASP LLM Top 10, EU AI Act, ISO 42001), see 
 - COSAIS (August 2025): Control Overlays for Securing AI Systems
 - NISTIR 8596 (December 2025): Cybersecurity Framework Profile for AI using CSF 2.0
 
-For the full NIST/GRC landscape including EU AI Act and state laws, see [note 10](./10_AI_GRC_And_Policy_Landscape.md).
+For the full NIST/GRC landscape including EU AI Act and state laws, see [note 08](./08_AI_GRC_And_Policy_Landscape.md).
 
 
 ### 7.4 Industry Best Practices
@@ -1061,244 +1155,272 @@ Common patterns observed across ecosystems:
 ### Security Research Organizations
 
 - Salt Security -- ChatGPT Plugin Vulnerabilities:
-  https://salt[.]security/blog/security-flaws-within-chatgpt-extensions-allowed-access-to-accounts-on-third-party-websites-and-sensitive-data
+  https://salt.security/blog/security-flaws-within-chatgpt-extensions-allowed-access-to-accounts-on-third-party-websites-and-sensitive-data
 - Invariant Labs -- MCP Tool Poisoning:
-  https://invariantlabs[.]ai/blog/mcp-security-notification-tool-poisoning-attacks
+  https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks
 - Trail of Bits -- MCP Security Layer:
-  https://blog[.]trailofbits[.]com/2025/07/28/we-built-the-security-layer-mcp-always-needed/
+  https://blog.trailofbits.com/2025/07/28/we-built-the-security-layer-mcp-always-needed/
 - Elastic Security Labs -- MCP Attack Vectors:
-  https://www[.]elastic[.]co/security-labs/mcp-tools-attack-defense-recommendations
+  https://www.elastic.co/security-labs/mcp-tools-attack-defense-recommendations
 - Palo Alto Unit 42 -- MCP Sampling:
-  https://unit42[.]paloaltonetworks[.]com/model-context-protocol-attack-vectors/
+  https://unit42.paloaltonetworks.com/model-context-protocol-attack-vectors/
 - Palo Alto Unit 42 -- LangChain:
-  https://unit42[.]paloaltonetworks[.]com/langchain-vulnerabilities/
+  https://unit42.paloaltonetworks.com/langchain-vulnerabilities/
 - Palo Alto Unit 42 -- Agentic AI Threats:
-  https://unit42[.]paloaltonetworks[.]com/agentic-ai-threats/
+  https://unit42.paloaltonetworks.com/agentic-ai-threats/
 - Checkmarx -- MCP Risks:
-  https://checkmarx[.]com/zero-post/11-emerging-ai-security-risks-with-mcp-model-context-protocol/
+  https://checkmarx.com/zero-post/11-emerging-ai-security-risks-with-mcp-model-context-protocol/
 - JFrog -- HuggingFace Malicious Models:
-  https://jfrog[.]com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/
+  https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/
 - JFrog -- CVE-2025-6514:
-  https://jfrog[.]com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/
+  https://jfrog.com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/
 - JFrog -- PickleScan Zero-Days:
-  https://jfrog[.]com/blog/unveiling-3-zero-day-vulnerabilities-in-picklescan/
+  https://jfrog.com/blog/unveiling-3-zero-day-vulnerabilities-in-picklescan/
 - ReversingLabs -- nullifAI:
-  https://www[.]reversinglabs[.]com/blog/rl-identifies-malware-ml-model-hosted-on-hugging-face
+  https://www.reversinglabs.com/blog/rl-identifies-malware-ml-model-hosted-on-hugging-face
 - Lasso Security -- HuggingFace Tokens:
-  https://www[.]lasso[.]security/blog/1500-huggingface-api-tokens-were-exposed-leaving-millions-of-meta-llama-bloom-and-pythia-users-for-supply-chain-attacks
+  https://www.lasso.security/blog/1500-huggingface-api-tokens-were-exposed-leaving-millions-of-meta-llama-bloom-and-pythia-users-for-supply-chain-attacks
 - Pillar Security -- Rules File Backdoor:
-  https://www[.]pillar[.]security/blog/new-vulnerability-in-github-copilot-and-cursor-how-hackers-can-weaponize-code-agents
+  https://www.pillar.security/blog/new-vulnerability-in-github-copilot-and-cursor-how-hackers-can-weaponize-code-agents
 - Mindgard -- Cline Vulnerabilities:
-  https://mindgard[.]ai/blog/cline-coding-agent-vulnerabilities
+  https://mindgard.ai/blog/cline-coding-agent-vulnerabilities
 - Snyk -- Clinejection:
-  https://snyk[.]io/blog/cline-supply-chain-attack-prompt-injection-github-actions/
+  https://snyk.io/blog/cline-supply-chain-attack-prompt-injection-github-actions/
 - Snyk -- Copilot Amplification:
-  https://labs[.]snyk[.]io/resources/copilot-amplifies-insecure-codebases-by-replicating-vulnerabilities/
+  https://labs.snyk.io/resources/copilot-amplifies-insecure-codebases-by-replicating-vulnerabilities/
 - LayerX -- ChatGPT Atlas:
-  https://layerxsecurity[.]com/blog/layerx-identifies-vulnerability-in-new-chatgpt-atlas-browser/
+  https://layerxsecurity.com/blog/layerx-identifies-vulnerability-in-new-chatgpt-atlas-browser/
 - LayerX -- AiFrame Campaign:
-  https://layerxsecurity[.]com/blog/aiframe-fake-ai-assistant-extensions-targeting-260000-chrome-users-via-injected-iframes/
+  https://layerxsecurity.com/blog/aiframe-fake-ai-assistant-extensions-targeting-260000-chrome-users-via-injected-iframes/
 - Koi Security -- Namespace Squatting:
-  https://www[.]koi[.]ai/blog/how-we-prevented-cursor-windsurf-google-antigravity-from-recommending-malware
+  https://www.koi.ai/blog/how-we-prevented-cursor-windsurf-google-antigravity-from-recommending-malware
 - Wiz -- VS Code Marketplace:
-  https://www[.]wiz[.]io/blog/supply-chain-risk-in-vscode-extension-marketplaces
+  https://www.wiz.io/blog/supply-chain-risk-in-vscode-extension-marketplaces
 - OX Security -- Chromium Flaws:
-  https://www[.]ox[.]security/blog/94-vulnerabilities-in-cursor-and-windsurf-put-1-8m-developers-at-risk/
+  https://www.ox.security/blog/94-vulnerabilities-in-cursor-and-windsurf-put-1-8m-developers-at-risk/
 - Oligo Security -- MCP Inspector:
-  https://www[.]oligo[.]security/blog/critical-rce-vulnerability-in-anthropic-mcp-inspector-cve-2025-49596
+  https://www.oligo.security/blog/critical-rce-vulnerability-in-anthropic-mcp-inspector-cve-2025-49596
 - Cymulate -- Anthropic Filesystem MCP:
-  https://cymulate[.]com/blog/cve-2025-53109-53110-escaperoute-anthropic/
+  https://cymulate.com/blog/cve-2025-53109-53110-escaperoute-anthropic/
 - Noma Security -- CrewAI Token:
-  https://noma[.]security/blog/uncrew-the-risk-behind-a-leaked-internal-github-token-at-crewai/
+  https://noma.security/blog/uncrew-the-risk-behind-a-leaked-internal-github-token-at-crewai/
 - Embrace The Red -- Devin:
-  https://embracethered[.]com/blog/posts/2025/devin-i-spent-usd500-to-hack-devin/
+  https://embracethered.com/blog/posts/2025/devin-i-spent-usd500-to-hack-devin/
 - Embrace The Red -- OpenHands:
-  https://embracethered[.]com/blog/posts/2025/openhands-the-lethal-trifecta-strikes-again/
+  https://embracethered.com/blog/posts/2025/openhands-the-lethal-trifecta-strikes-again/
 - Embrace The Red -- Windsurf:
-  https://embracethered[.]com/blog/posts/2025/windsurf-data-exfiltration-vulnerabilities/
+  https://embracethered.com/blog/posts/2025/windsurf-data-exfiltration-vulnerabilities/
 - Embrace The Red -- Cross-Agent Escalation:
-  https://embracethered[.]com/blog/posts/2025/cross-agent-privilege-escalation-agents-that-free-each-other/
+  https://embracethered.com/blog/posts/2025/cross-agent-privilege-escalation-agents-that-free-each-other/
 - CrowdStrike -- AI-Coded Software Vulnerabilities:
-  https://www[.]crowdstrike[.]com/en-us/blog/crowdstrike-researchers-identify-hidden-vulnerabilities-ai-coded-software/
+  https://www.crowdstrike.com/en-us/blog/crowdstrike-researchers-identify-hidden-vulnerabilities-ai-coded-software/
 - Microsoft -- AI Recommendation Poisoning:
-  https://www[.]microsoft[.]com/en-us/security/blog/2026/02/10/ai-recommendation-poisoning/
+  https://www.microsoft.com/en-us/security/blog/2026/02/10/ai-recommendation-poisoning/
 - PromptArmor -- Slack AI:
-  https://www[.]promptarmor[.]com/resources/data-exfiltration-from-slack-ai-via-indirect-prompt-injection
+  https://www.promptarmor.com/resources/data-exfiltration-from-slack-ai-via-indirect-prompt-injection
 - Lakera -- Agentic AI Threats:
-  https://www[.]lakera[.]ai/blog/agentic-ai-threats-p1
+  https://www.lakera.ai/blog/agentic-ai-threats-p1
 - Simon Willison -- MCP Prompt Injection:
-  https://simonwillison[.]net/2025/Apr/9/mcp-prompt-injection/
+  https://simonwillison.net/2025/Apr/9/mcp-prompt-injection/
+
+### Moltbook / Vibe Coding
+
+- Wiz -- Exposed Moltbook Database Reveals 1.5M API Keys:
+  https://www.wiz.io/blog/exposed-moltbook-database-reveals-millions-of-api-keys
+- Infosecurity Magazine -- Vibe-Coded Moltbook Exposes User Data:
+  https://www.infosecurity-magazine.com/news/moltbook-exposes-user-data-api/
+- CyberIndemnity -- When Vibe Coding Fails: Moltbook Breach:
+  https://cyberindemnity.org/2026/02/when-vibe-coding-fails-security-lessons-from-the-moltbook-breach/
+- Fortune -- AI Leaders Warn Against Moltbook:
+  https://fortune.com/2026/02/02/moltbook-security-agents-singularity-disaster-gary-marcus-andrej-karpathy/
+- Veracode -- Vibe Coding and GenAI Security:
+  https://www.veracode.com/blog/genai-security-and-vibe-coding/
+- Veracode -- Base44 Vulnerability:
+  https://www.veracode.com/blog/base44-vulnerability-sparks-conversations-on-securing-vibe-coding/
+- Palo Alto Unit 42 -- Securing Vibe Coding Tools:
+  https://unit42.paloaltonetworks.com/securing-vibe-coding-tools/
+- Apiiro -- Vibe Coding Security Best Practices:
+  https://apiiro.com/blog/vibe-coding-security-best-practices/
+- Lakera -- Q4 2025 Attack Trends:
+  https://www.lakera.ai/blog/the-year-of-the-agent-what-recent-attacks-revealed-in-q4-2025-and-what-it-means-for-2026
 
 ### Research Papers
 
 - Penetration Testing of Agentic AI (arxiv 2512.14860):
-  https://arxiv[.]org/abs/2512.14860
+  https://arxiv.org/abs/2512.14860
 - EchoLeak (arxiv 2509.10540):
-  https://arxiv[.]org/abs/2509.10540
+  https://arxiv.org/abs/2509.10540
 - MINJA Memory Injection Attack (NeurIPS 2025):
-  https://arxiv[.]org/html/2601.05504v2
+  https://arxiv.org/html/2601.05504v2
 - From Prompt Injections to Protocol Exploits (arxiv 2506.23260):
-  https://arxiv[.]org/abs/2506.23260
+  https://arxiv.org/abs/2506.23260
 - Prompt Infection: LLM-to-LLM in Multi-Agent Systems:
-  https://openreview[.]net/forum?id=NAbqM2cMjD
+  https://openreview.net/forum?id=NAbqM2cMjD
 - MASpi Multi-Agent Prompt Injection Evaluation:
-  https://openreview[.]net/forum?id=1khmNRuIf9
+  https://openreview.net/forum?id=1khmNRuIf9
 - Copilot Security Weaknesses (ACM TOSEM):
-  https://dl[.]acm[.]org/doi/10.1145/3716848
+  https://dl.acm.org/doi/10.1145/3716848
 - Backdoor Attacks in Code LLMs:
-  https://www[.]sciencedirect[.]com/science/article/abs/pii/S0950584925000461
+  https://www.sciencedirect.com/science/article/abs/pii/S0950584925000461
 - CAI Bug Bounty-Ready Cybersecurity AI:
-  https://arxiv[.]org/abs/2504.06017
+  https://arxiv.org/abs/2504.06017
 - MCPTox Benchmark:
-  https://arxiv[.]org/html/2508.14925v1
+  https://arxiv.org/html/2508.14925v1
 - Systematic Analysis of MCP Security:
-  https://arxiv[.]org/html/2508.12538v1
+  https://arxiv.org/html/2508.12538v1
 - When MCP Servers Attack:
-  https://arxiv[.]org/html/2509.24272v1
+  https://arxiv.org/html/2509.24272v1
 - Securing MCP: Risks, Controls, and Governance:
-  https://arxiv[.]org/html/2511.20920v1
+  https://arxiv.org/html/2511.20920v1
 - ETDI: Mitigating Tool Squatting and Rug Pull:
-  https://arxiv[.]org/html/2506.01333v1
+  https://arxiv.org/html/2506.01333v1
 - PickleBall: Secure Deserialization:
-  https://arxiv[.]org/html/2508.15987v1
+  https://arxiv.org/html/2508.15987v1
+
+- Comprehensive Review of Prompt Injection (MDPI 2025):
+  https://www.mdpi.com/2078-2489/17/1/54
+- Threats in LLM-Powered AI Agent Workflows (ScienceDirect):
+  https://www.sciencedirect.com/science/article/pii/S2405959525001997
+- Prompt Injection in Agentic Coding Assistants (arXiv SoK, Jan 2026):
+  https://arxiv.org/html/2601.17548v1
 
 ### Security Advisories & CVEs
 
 - CVE-2024-6091 (AutoGPT CVSS 9.8):
-  https://nvd[.]nist[.]gov/vuln/detail/CVE-2024-6091
+  https://nvd.nist.gov/vuln/detail/CVE-2024-6091
 - CVE-2025-68664 (LangChain CVSS 9.3):
-  https://nvd[.]nist[.]gov/vuln/detail/CVE-2025-68664
+  https://nvd.nist.gov/vuln/detail/CVE-2025-68664
 - CVE-2025-68665 (LangChain.js CVSS 8.6):
-  https://github[.]com/advisories/GHSA-r399-636x-v7f6
+  https://github.com/advisories/GHSA-r399-636x-v7f6
 - CVE-2025-32711 (EchoLeak CVSS 9.3):
-  https://nvd[.]nist[.]gov/vuln/detail/CVE-2025-32711
+  https://nvd.nist.gov/vuln/detail/CVE-2025-32711
 - CVE-2025-59944 (Cursor):
-  https://www[.]lakera[.]ai/blog/cursor-vulnerability-cve-2025-59944
+  https://www.lakera.ai/blog/cursor-vulnerability-cve-2025-59944
 - CVE-2025-54135 (Cursor MCP):
-  https://www[.]tenable[.]com/blog/faq-cve-2025-54135-cve-2025-54136-vulnerabilities-in-cursor-curxecute-mcpoison
+  https://www.tenable.com/blog/faq-cve-2025-54135-cve-2025-54136-vulnerabilities-in-cursor-curxecute-mcpoison
 - CVE-2025-6514 (mcp-remote CVSS 9.6):
-  https://jfrog[.]com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/
+  https://jfrog.com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/
 - CVE-2025-49596 (MCP Inspector CVSS 9.4):
-  https://www[.]oligo[.]security/blog/critical-rce-vulnerability-in-anthropic-mcp-inspector-cve-2025-49596
+  https://www.oligo.security/blog/critical-rce-vulnerability-in-anthropic-mcp-inspector-cve-2025-49596
 - CVE-2026-27952 (Agenta-API CVSS 8.8):
-  https://www[.]thehackerwire[.]com/agenta-api-sandbox-escape-leads-to-arbitrary-code-execution-cve-2026-27952/
+  https://www.thehackerwire.com/agenta-api-sandbox-escape-leads-to-arbitrary-code-execution-cve-2026-27952/
 - IDEsaster CVEs (24 total):
-  https://maccarita[.]com/posts/idesaster/
+  https://maccarita.com/posts/idesaster/
 
 ### Frameworks & Standards
 
 - OWASP Top 10 for Agentic Applications 2026:
-  https://genai[.]owasp[.]org/resource/owasp-top-10-for-agentic-applications-for-2026/
+  https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/
 - OWASP MCP Top 10:
-  https://owasp[.]org/www-project-mcp-top-10/
+  https://owasp.org/www-project-mcp-top-10/
 - MITRE ATLAS:
-  https://atlas[.]mitre[.]org/
+  https://atlas.mitre.org/
 - NIST AI RMF:
-  https://www[.]nist[.]gov/itl/ai-risk-management-framework
+  https://www.nist.gov/itl/ai-risk-management-framework
 - OpenSSF AI Code Assistant Guide:
-  https://best[.]openssf[.]org/Security-Focused-Guide-for-AI-Code-Assistant-Instructions.html
+  https://best.openssf.org/Security-Focused-Guide-for-AI-Code-Assistant-Instructions.html
 - CoSAI (Coalition for Secure AI):
-  https://www[.]coalitionforsecureai[.]org/
+  https://www.coalitionforsecureai.org/
 - Adversa AI MCP Top 25:
-  https://adversa[.]ai/mcp-security-top-25-mcp-vulnerabilities/
+  https://adversa.ai/mcp-security-top-25-mcp-vulnerabilities/
 - Vulnerable MCP Project:
-  https://vulnerablemcp[.]info/
+  https://vulnerablemcp.info/
 - MCP Security Best Practices (Official Spec):
-  https://modelcontextprotocol[.]io/specification/draft/basic/security_best_practices
+  https://modelcontextprotocol.io/specification/draft/basic/security_best_practices
 
 ### News Coverage & Blogs
 
 - The Hacker News -- IDEsaster:
-  https://thehackernews[.]com/2025/12/researchers-uncover-30-flaws-in-ai.html
+  https://thehackernews.com/2025/12/researchers-uncover-30-flaws-in-ai.html
 - The Hacker News -- LangGrinch:
-  https://thehackernews[.]com/2025/12/critical-langchain-core-vulnerability.html
+  https://thehackernews.com/2025/12/critical-langchain-core-vulnerability.html
 - The Hacker News -- Cline Supply Chain:
-  https://thehackernews[.]com/2026/02/cline-cli-230-supply-chain-attack.html
+  https://thehackernews.com/2026/02/cline-cli-230-supply-chain-attack.html
 - The Hacker News -- ChatGPT Atlas:
-  https://thehackernews[.]com/2025/10/chatgpt-atlas-browser-can-be-tricked-by.html
+  https://thehackernews.com/2025/10/chatgpt-atlas-browser-can-be-tricked-by.html
 - The Hacker News -- Namespace Squatting:
-  https://thehackernews[.]com/2026/01/vs-code-forks-recommend-missing.html
+  https://thehackernews.com/2026/01/vs-code-forks-recommend-missing.html
 - The Hacker News -- GlassWorm:
-  https://thehackernews[.]com/2025/10/self-spreading-glassworm-infects-vs.html
+  https://thehackernews.com/2025/10/self-spreading-glassworm-infects-vs.html
 - The Hacker News -- Chrome Extensions:
-  https://thehackernews[.]com/2026/01/two-chrome-extensions-caught-stealing.html
+  https://thehackernews.com/2026/01/two-chrome-extensions-caught-stealing.html
 - BleepingComputer -- AI Chrome Extensions:
-  https://www[.]bleepingcomputer[.]com/news/security/fake-ai-chrome-extensions-with-300k-users-steal-credentials-emails/
+  https://www.bleepingcomputer.com/news/security/fake-ai-chrome-extensions-with-300k-users-steal-credentials-emails/
 - BleepingComputer -- VS Code Forks:
-  https://www[.]bleepingcomputer[.]com/news/security/vscode-ide-forks-expose-users-to-recommended-extension-attacks/
+  https://www.bleepingcomputer.com/news/security/vscode-ide-forks-expose-users-to-recommended-extension-attacks/
 - Fortune -- AI Coding Tools:
-  https://fortune[.]com/2025/12/15/ai-coding-tools-security-exploit-software/
+  https://fortune.com/2025/12/15/ai-coding-tools-security-exploit-software/
 - GlassWorm -- Fluid Attacks:
-  https://fluidattacks[.]com/blog/glassworm-vs-code-extensions-supply-chain-attack
+  https://fluidattacks.com/blog/glassworm-vs-code-extensions-supply-chain-attack
 - GlassWorm -- Truesec:
-  https://www[.]truesec[.]com/hub/blog/glassworm-self-propagating-vscode-extension
+  https://www.truesec.com/hub/blog/glassworm-self-propagating-vscode-extension
 - Cyata -- LangGrinch:
-  https://cyata[.]ai/blog/langgrinch-langchain-core-cve-2025-68664/
+  https://cyata.ai/blog/langgrinch-langchain-core-cve-2025-68664/
 - Docker -- MCP WhatsApp:
-  https://www[.]docker[.]com/blog/mcp-horror-stories-whatsapp-data-exfiltration-issue/
+  https://www.docker.com/blog/mcp-horror-stories-whatsapp-data-exfiltration-issue/
 - Acuvity -- MCP Rug Pulls:
-  https://acuvity[.]ai/rug-pulls-silent-redefinition-when-tools-turn-malicious-over-time/
+  https://acuvity.ai/rug-pulls-silent-redefinition-when-tools-turn-malicious-over-time/
 - Palo Alto -- Custom GPTs:
-  https://www[.]paloaltonetworks[.]com/blog/cloud-security/openai-custom-gpts-security/
+  https://www.paloaltonetworks.com/blog/cloud-security/openai-custom-gpts-security/
 - Tenable -- HackedGPT:
-  https://www[.]tenable[.]com/blog/hackedgpt-novel-ai-vulnerabilities-open-the-door-for-private-data-leakage
+  https://www.tenable.com/blog/hackedgpt-novel-ai-vulnerabilities-open-the-door-for-private-data-leakage
 - PromptArmor -- OpenAI Exfiltration:
-  https://www[.]promptarmor[.]com/resources/openai-api-logs-unpatched-data-exfiltration
+  https://www.promptarmor.com/resources/openai-api-logs-unpatched-data-exfiltration
 - Splunk -- Pickle Jar:
-  https://www[.]splunk[.]com/en_us/blog/security/paws-in-the-pickle-jar-risk-vulnerability-in-the-model-sharing-ecosystem.html
+  https://www.splunk.com/en_us/blog/security/paws-in-the-pickle-jar-risk-vulnerability-in-the-model-sharing-ecosystem.html
 - Malwarebytes -- Chrome Extension:
-  https://www[.]malwarebytes[.]com/blog/news/2025/12/chrome-extension-slurps-up-ai-chats-after-users-installed-it-for-privacy
+  https://www.malwarebytes.com/blog/news/2025/12/chrome-extension-slurps-up-ai-chats-after-users-installed-it-for-privacy
 - Checkmarx -- VS Code Extensions:
-  https://checkmarx[.]com/zero-post/how-we-take-down-malicious-visual-studio-code-extensions/
+  https://checkmarx.com/zero-post/how-we-take-down-malicious-visual-studio-code-extensions/
 - Veracode -- GlassWorm:
-  https://www[.]veracode[.]com/blog/glassworm-vs-code-extension/
+  https://www.veracode.com/blog/glassworm-vs-code-extension/
 - Snyk -- GlassWorm:
-  https://snyk[.]io/articles/defending-against-glassworm/
+  https://snyk.io/articles/defending-against-glassworm/
 - Infosecurity Magazine -- ChatGPT Plugins:
-  https://www[.]infosecurity-magazine[.]com/news/security-risks-chatgpt-plugins/
+  https://www.infosecurity-magazine.com/news/security-risks-chatgpt-plugins/
 - Dark Reading -- ChatGPT Plugins:
-  https://www[.]darkreading[.]com/vulnerabilities-threats/critical-chatgpt-plugin-vulnerabilities-expose-sensitive-data
+  https://www.darkreading.com/vulnerabilities-threats/critical-chatgpt-plugin-vulnerabilities-expose-sensitive-data
 - InfoQ -- Custom GPTs:
-  https://www[.]infoq[.]com/news/2024/01/gpts-may-leak-sensitive-info/
+  https://www.infoq.com/news/2024/01/gpts-may-leak-sensitive-info/
 - Security Affairs -- LangChain:
-  https://securityaffairs[.]com/186185/hacking/langchain-core-vulnerability-allows-prompt-injection-and-data-exposure.html
+  https://securityaffairs.com/186185/hacking/langchain-core-vulnerability-allows-prompt-injection-and-data-exposure.html
 - SC Media -- HuggingFace Spaces:
-  https://www[.]scworld[.]com/news/ai-firm-hugging-face-discloses-leak-of-secrets-on-its-spaces-platform
+  https://www.scworld.com/news/ai-firm-hugging-face-discloses-leak-of-secrets-on-its-spaces-platform
 - SecurityWeek -- HuggingFace Tokens:
-  https://www[.]securityweek[.]com/major-organizations-using-hugging-face-ai-tools-put-at-risk-by-leaked-api-tokens/
+  https://www.securityweek.com/major-organizations-using-hugging-face-ai-tools-put-at-risk-by-leaked-api-tokens/
 - GitGuardian -- Copilot:
-  https://blog[.]gitguardian[.]com/github-copilot-security-and-privacy/
+  https://blog.gitguardian.com/github-copilot-security-and-privacy/
 - CyberPress -- Copilot:
-  https://cyberpress[.]org/github-copilot-and-visual-studio-vulnerabilities/
+  https://cyberpress.org/github-copilot-and-visual-studio-vulnerabilities/
 - Cybersecurity News -- Copilot:
-  https://cybersecuritynews[.]com/github-copilot-vulnerability/
+  https://cybersecuritynews.com/github-copilot-vulnerability/
 - GBHackers -- Copilot RCE:
-  https://gbhackers[.]com/github-copilot-rce-vulnerability/
+  https://gbhackers.com/github-copilot-rce-vulnerability/
 - Check Point -- MCPoison:
-  https://research[.]checkpoint[.]com/2025/cursor-vulnerability-mcpoison/
+  https://research.checkpoint.com/2025/cursor-vulnerability-mcpoison/
 - MaccariTA -- IDEsaster:
-  https://maccarita[.]com/posts/idesaster/
+  https://maccarita.com/posts/idesaster/
 - Adnan Khan -- Clinejection:
-  https://adnanthekhan[.]com/posts/clinejection/
+  https://adnanthekhan.com/posts/clinejection/
 
 ### CTF & Red Teaming
 
 - Gandalf (Lakera):
-  https://gandalf[.]lakera[.]ai/
+  https://gandalf.lakera.ai/
 - Agent ODIN:
-  https://0din[.]ai/blog/agent-0din
+  https://0din.ai/blog/agent-0din
 - HackerOne AI Red Teaming:
-  https://www[.]hackerone[.]com/product/ai-red-teaming
+  https://www.hackerone.com/product/ai-red-teaming
 - Microsoft Zero Day Quest:
-  https://www[.]geekwire[.]com/2024/embrace-the-red-microsoft-puts-up-another-4m-for-cloud-and-ai-bugs-in-broader-security-push/
+  https://www.geekwire.com/2024/embrace-the-red-microsoft-puts-up-another-4m-for-cloud-and-ai-bugs-in-broader-security-push/
 
 ### Databases and Trackers
 
 - Vulnerable MCP Project Database:
-  https://vulnerablemcp[.]info/
+  https://vulnerablemcp.info/
 - AuthZed MCP Breach Timeline:
-  https://authzed[.]com/blog/timeline-mcp-breaches
+  https://authzed.com/blog/timeline-mcp-breaches
 - HuggingFace Pickle Scanning Docs:
-  https://huggingface[.]co/docs/hub/en/security-pickle
+  https://huggingface.co/docs/hub/en/security-pickle
 - Acutis -- AI Coding Security Verification:
-  https://acutis[.]dev/
+  https://acutis.dev/
