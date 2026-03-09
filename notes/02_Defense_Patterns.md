@@ -1,6 +1,6 @@
 # Defense Patterns for AI Agent Security
 
-> **Related notes**: [07 -- Skill Scanning & Detection](07_Skill_Scanning_And_Detection_Landscape.md) (scanning tools that apply these patterns), [16 -- AI Blue Teaming & Defensive AI](16_AI_Blue_Teaming_And_Defensive_AI.md) (SOC-level defensive AI tools and operations), [17 -- Agent Subversion](17_Agent_Subversion.md) (infrastructure-level attack surface and sandbox hardening checklist)
+> **Related notes**: [07 -- Skill Scanning & Detection](07_Skill_Scanning_And_Detection_Landscape.md) (scanning tools that apply these patterns), [16 -- AI Blue Teaming & Defensive AI](16_AI_Blue_Teaming_And_Defensive_AI.md) (SOC-level defensive AI tools and operations)
 
 ## 1. Input Sanitization
 
