@@ -1,6 +1,6 @@
 # AI Application Ecosystem Security
 
-> **Related notes**: [01 -- Prompt Injection & Skill Injection](01_Skill_Injection_Analysis.md) (foundational concepts and case study), [14 -- AI Hacking Frameworks](14_AI_Hacking_Frameworks.md) (autonomous offensive tools exploiting these ecosystems), [16 -- AI Blue Teaming & Defensive AI](16_AI_Blue_Teaming_And_Defensive_AI.md) (defensive AI tools and landscape), [12 -- OpenClaw & ClawHub Security](12_OpenClaw_And_ClawHub_Security.md) (deep dive on one marketplace ecosystem), [17 -- Agent Subversion](17_Agent_Subversion.md) (infrastructure-level attacks: code-before-review, sandbox escape, API bypasses, Firecracker case study)
+> **Related notes**: [01 -- Prompt Injection & Skill Injection](01_Skill_Injection_Analysis.md) (foundational concepts and case study), [14 -- AI Hacking Frameworks](14_AI_Hacking_Frameworks.md) (autonomous offensive tools exploiting these ecosystems), [16 -- AI Blue Teaming & Defensive AI](16_AI_Blue_Teaming_And_Defensive_AI.md) (defensive AI tools and landscape), [12 -- OpenClaw & ClawHub Security](12_OpenClaw_And_ClawHub_Security.md) (deep dive on one marketplace ecosystem)
 
 Security research across AI marketplaces, agent frameworks, coding tools, and their interconnected attack surfaces -- organized by attack surface rather than vendor.
 

@@ -1,6 +1,6 @@
 # Prompt Injection & Skill Injection Analysis
 
-> **Related notes**: [02 -- Defense Patterns](02_Defense_Patterns.md) (countermeasures), [06 -- LLM Jailbreaking](06_LLM_Jailbreaking_Deep_Dive.md) (alignment bypass techniques), [09 -- AI Memory & Corruption](09_AI_Memory_And_Corruption.md) (memory poisoning), [13 -- AI Application Ecosystem Security](13_AI_Application_Ecosystem_Security.md) (full ecosystem context, MCP attacks, IDEsaster CVEs, vibe coding), [17 -- Agent Subversion](17_Agent_Subversion.md) (infrastructure-level attacks that bypass prompt injection defenses entirely)
+> **Related notes**: [02 -- Defense Patterns](02_Defense_Patterns.md) (countermeasures), [06 -- LLM Jailbreaking](06_LLM_Jailbreaking_Deep_Dive.md) (alignment bypass techniques), [09 -- AI Memory & Corruption](09_AI_Memory_And_Corruption.md) (memory poisoning), [13 -- AI Application Ecosystem Security](13_AI_Application_Ecosystem_Security.md) (full ecosystem context, MCP attacks, IDEsaster CVEs, vibe coding)
 
 ---
 
