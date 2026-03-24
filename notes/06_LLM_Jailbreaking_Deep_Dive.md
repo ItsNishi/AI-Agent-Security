@@ -260,6 +260,10 @@ A variant where false premises are gradually introduced into the conversation co
 
 Replace characters with visually similar alternatives (l33t speak, Cyrillic homoglyphs, Unicode lookalikes) to evade keyword-based filters.
 
+#### Invisible Variation Selector Suffixes
+
+Append invisible Unicode variation selectors (256 characters across U+FE00--U+FE0F and U+E0100--U+E01EF) to craft adversarial suffixes that alter tokenization without changing visible text. Achieves 80--100% ASR against aligned open-source models. See [note 18](./18_Unicode_Variation_Selector_Attacks.md) for the full deep dive.
+
 #### Payload Splitting
 
 Break the harmful request into fragments distributed across multiple messages or variables:
