@@ -42,3 +42,14 @@ Structured report with severity-ranked findings and specific recommendations per
 - Before installing a skill from a public repository or marketplace
 - When reviewing a skill contributed by an external party
 - As part of security review before adding skills to your agent configuration
+
+## Advisory hooks
+
+The repository's `.claude/settings.json` includes PreToolUse hooks that warn on
+dangerous Bash and Write operations. These hooks are **advisory only** -- they
+produce warnings but do not block execution.
+
+- scan-skill is the detection layer for individual skill threats
+- The hooks provide supplementary runtime warnings during agent operation
+- To enforce blocking, hooks must return `{"decision": "block"}`
+  instead of warning messages
