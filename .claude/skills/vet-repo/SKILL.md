@@ -36,3 +36,19 @@ Structured report with findings grouped by severity (CRITICAL, HIGH, MEDIUM, LOW
 - Before trusting a cloned repository's agent configurations
 - After pulling changes that modify `.claude/` or `.mcp.json`
 - As part of a security review of any codebase with agent integration
+
+## Advisory hooks
+
+This repository includes PreToolUse hooks in `.claude/settings.json` that warn on
+dangerous Bash commands (pipe-to-shell, `rm -rf /`, `chmod 777`, eval with variables,
+base64-to-execution) and sensitive file writes (`.ssh/`, `.aws/`, `.gnupg/`, shell
+profiles, `settings.json`).
+
+These hooks are **advisory only** -- they produce warning messages but do not block
+execution. An agent or user can proceed past the warning.
+
+- The hooks are a supplementary signal, not an enforcement layer
+- vet-repo is the primary detection mechanism for repo-level threats
+- Deterministic blocking requires changing the hook to return
+  `{"decision": "block"}` instead of a warning message
+- See `.claude/settings.json` for the current hook definitions
