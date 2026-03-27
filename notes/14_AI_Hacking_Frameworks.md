@@ -206,27 +206,68 @@ Automates adversarial testing probing ML models for model extraction, evasion, d
 
 ## Benchmarks and Competitions
 
-### XBOW Benchmark
+### Offensive / Exploitation Benchmarks
+
+#### XBOW Benchmark
 Shannon Lite achieved 96.15% success rate on the hint-free, source-aware version. XBOW itself solved 75%+ of industry-standard web security benchmarks.
 
-### AutoPenBench
+#### AutoPenBench
 33 penetration testing tasks (22 in-vitro, 11 real-world CVEs). Used by xOffense and CHECKMATE for evaluation.
 
-### Wiz Research: AI Agents vs. Humans (2026)
+#### CyberGym (2025)
+- **Paper**: https://arxiv.org/abs/2506.02548
+- **Authors**: Wang, Shi, He, Cai, Zhang, Song
+- 1,507 actual vulnerabilities from 188 software projects. Agents write PoC exploits given only the vulnerability description and codebase.
+- **Result**: Best agent combinations achieve ~20% success rate -- substantial room for improvement
+- **Side benefit**: discovered 34 previously unknown vulnerabilities and 18 historically incomplete patches during benchmark creation
+- Demonstrates that large-scale real-world benchmarks capture genuine complexity better than small static CTF sets
+
+#### Cybench (2024)
+- **Paper**: https://arxiv.org/abs/2408.08926
+- **Authors**: Zhang, Liang, Boneh, Ho et al. (Stanford)
+- 40 professional-level CTF challenges from 4 competitions, each with descriptions, starter files, and executable environments. Includes subtask breakdowns for intermediate evaluation.
+- Evaluated GPT-4o, Claude 3.5 Sonnet, o1-preview, Llama variants with different agent scaffolds
+- **Result**: top models solved tasks that human teams completed in ~11 minutes, but the hardest challenge took human teams 24h54m and no model solved it
+- Code and data publicly available
+
+### Knowledge and Meta-Benchmarks
+
+#### CyberMetric (IEEE 2024)
+- **Source**: https://github.com/cybermetric/CyberMetric
+- 10,000 multiple-choice questions evaluating LLM cybersecurity knowledge. Curated from industry standards, certifications, research papers, validated by experts.
+- Four tiers: CyberMetric-80 (with 30-participant human baseline), 500, 2,000, 10,000
+- Uses RAG with multiple LLMs and human expert validation in the creation pipeline
+- Measures knowledge breadth, not operational capability
+
+#### CAIBench (2025)
+- **Paper**: https://arxiv.org/abs/2510.24317
+- **Authors**: Sanz-Gomez, Mayoral-Vilches, Balassone et al.
+- Meta-benchmark spanning 5 evaluation categories with 10,000+ test instances: Jeopardy CTFs, Attack/Defense CTFs, Cyber Range simulations, Knowledge benchmarks, Privacy assessments
+- **Key finding**: LLMs score ~70% on knowledge assessments but drop to 20-40% in adversarial scenarios and just 22% against robotic targets. "Pre-trained knowledge of cybersecurity does not imply attack and defense abilities."
+- Proper framework scaffolding + model selection improves performance variance by up to 2.6x
+- Uniquely combines offensive and defensive evaluation, and introduces robotics-focused security challenges
+
+### Competitions and Live Evaluations
+
+#### Wiz Research: AI Agents vs. Humans (2026)
 - **Source**: https://www.wiz.io/blog/ai-agents-vs-humans-who-wins-at-web-hacking-in-2026
 - Tested Claude Sonnet 4.5, GPT-5, Gemini 2.5 Pro on 10 lab challenges modeled after real prevented breaches
 - **Result**: AI won 9/10 challenges, all for less than $10 per exploit
 - **Caveat**: When given broad scope with no guidance, performance decreased and cost increased 2-2.5x. AI agents "spread efforts haphazardly" while human testers prioritize promising leads
 - Claude cracked a multi-step auth bypass in 23 moves
 
-### DARPA AIxCC
+#### DARPA AIxCC
 Autonomous AI systems securing open-source software at DEF CON 2025. Teams discovered 86% of synthetic vulnerabilities and patched 68% across 54M lines of code. See [note 16](16_AI_Blue_Teaming_And_Defensive_AI.md#darpa-ai-cyber-challenge-aixcc) for full analysis.
 
-### UK AISI / Gray Swan Challenge
+#### UK AISI / Gray Swan Challenge
 1.8 million attacks across 22 models. **Every model broke.** No current frontier system resists determined, well-resourced attacks.
 
-### Anthropic at Competitions
+#### Anthropic at Competitions
 Anthropic entered Claude into 7 major cybersecurity competitions. Claude often landed in the top quarter, matched elite human teams on simple challenges, but lagged on the hardest problems. Got derailed by ASCII art.
+
+### Benchmark Takeaway
+
+The benchmarks converge on one finding: **knowledge != capability**. LLMs score well on cybersecurity trivia (~70%) but drop to 20-40% on operational tasks. CyberGym's ~20% PoC success rate and CAIBench's 22% robotic target rate show the gap. Scaffolding, tool access, and framework design matter as much as model quality.
 
 ---
 
