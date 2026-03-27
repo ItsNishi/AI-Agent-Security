@@ -28,6 +28,7 @@ from patterns import (
 	Category,
 	Scan_Content,
 	Format_Report,
+	Verify_Install_Findings,
 )
 
 
@@ -297,6 +298,9 @@ def Main() -> None:
 	gitignore_findings = Check_Gitignore_Coverage(target_path)
 	all_findings.extend(gitignore_findings)
 	print(f"    {len(gitignore_findings)} issue(s)")
+
+	# Verify package install commands against registries
+	all_findings = Verify_Install_Findings(all_findings)
 
 	print()
 

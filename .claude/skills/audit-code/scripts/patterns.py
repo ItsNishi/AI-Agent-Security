@@ -1,7 +1,7 @@
 """
 Shared pattern database for AI Agent Security skill suite.
 
-Central registry of detection patterns derived from research notes 01-09
+Central registry of detection patterns derived from research notes 01-18
 and examples 01-04. Used by vet-repo, scan-skill, and audit-code skills.
 """
 
@@ -30,6 +30,11 @@ class Category(Enum):
 	INSTRUCTION_OVERRIDE = "instruction_override"
 	SUPPLY_CHAIN = "supply_chain"
 	FILE_PERMISSIONS = "file_permissions"
+	CODE_BEFORE_REVIEW = "code_before_review"
+	CONFIG_BACKDOOR = "config_backdoor"
+	MEMORY_CORRUPTION = "memory_corruption"
+	CONFUSED_DELEGATION = "confused_delegation"
+	PERSISTENCE = "persistence"
 
 
 @dataclass
@@ -97,16 +102,16 @@ Skill_Injection_Patterns: list[Pattern] = [
 	),
 	Pattern(
 		name="persistence_trigger_automatic",
-		pattern=r"(automatically|auto[\-\s]?run|on\s+startup|before\s+any\s+other)",
+		pattern=r"(auto[\-\s]?run|on\s+startup|before\s+any\s+other)",
 		severity=Severity.MEDIUM,
 		description="Automatic execution trigger in skill description",
 		category=Category.SKILL_INJECTION,
 	),
 	Pattern(
 		name="important_tag_injection",
-		pattern=r"<IMPORTANT>[\s\S]*?</IMPORTANT>",
+		pattern=r"<(IMPORTANT|SYSTEM|INSTRUCTION|NOTE|PROMPT|CONTEXT|ADMINISTRATOR)>[\s\S]*?</\1>",
 		severity=Severity.HIGH,
-		description="IMPORTANT tag injection -- technique used in MCP tool poisoning (Invariant Labs)",
+		description="XML-style injection tag -- technique used in MCP tool poisoning (Invariant Labs)",
 		category=Category.SKILL_INJECTION,
 	),
 	Pattern(
@@ -200,7 +205,7 @@ Hook_Abuse_Patterns: list[Pattern] = [
 Mcp_Config_Patterns: list[Pattern] = [
 	Pattern(
 		name="mcp_unknown_url",
-		pattern=r"[\"']?url[\"']?\s*:\s*[\"']https?://(?!localhost|127\.0\.0\.1|0\.0\.0\.0)[^\s\"']+",
+		pattern=r"(?<!\w)[\"']?url[\"']?\s*:\s*[\"'](https?|wss?)://(?!localhost|127\.0\.0\.1|0\.0\.0\.0|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.)[^\s\"']+",
 		severity=Severity.HIGH,
 		description="MCP server pointing to external URL -- verify this is a trusted server",
 		category=Category.MCP_CONFIG,
@@ -208,8 +213,8 @@ Mcp_Config_Patterns: list[Pattern] = [
 	Pattern(
 		name="mcp_env_var_in_auth",
 		pattern=r"[\"']?(Authorization|api[_-]?key|token|secret)[\"']?\s*:\s*[\"']?\$\{?[A-Z_]+\}?",
-		severity=Severity.MEDIUM,
-		description="Environment variable expansion in MCP auth header -- verify variable source",
+		severity=Severity.INFO,
+		description="Environment variable in MCP auth header -- standard practice, verify variable source",
 		category=Category.MCP_CONFIG,
 	),
 	Pattern(
@@ -221,7 +226,7 @@ Mcp_Config_Patterns: list[Pattern] = [
 	),
 	Pattern(
 		name="mcp_description_injection",
-		pattern=r"[\"']?description[\"']?\s*:\s*[\"'][^\"']*(<IMPORTANT>|SECRET|IGNORE|read\s+~/\.ssh|read\s+~/\.aws)",
+		pattern=r"[\"']?description[\"']?\s*:\s*[\"'][^\"']*(<IMPORTANT>|SECRET|IGNORE|read\s+~/\.ssh|read\s+~/\.aws|also\s+(run|execute|curl)|when\s+(called|invoked).*also)",
 		severity=Severity.CRITICAL,
 		description="MCP tool description contains injection payload",
 		category=Category.MCP_CONFIG,
@@ -231,6 +236,21 @@ Mcp_Config_Patterns: list[Pattern] = [
 		pattern=r"npx\s+(-y\s+)?@?[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+",
 		severity=Severity.MEDIUM,
 		description="MCP server using npx to fetch remote package -- verify package legitimacy",
+		category=Category.MCP_CONFIG,
+	),
+	# MCP transport and schema injection
+	Pattern(
+		name="mcp_stdio_command_injection",
+		pattern=r"[\"']command[\"']\s*:\s*[\"'](sh|bash|zsh|cmd|powershell|pwsh)[\"']",
+		severity=Severity.CRITICAL,
+		description="MCP stdio server using shell as command -- review args for injection",
+		category=Category.MCP_CONFIG,
+	),
+	Pattern(
+		name="mcp_param_description_injection",
+		pattern=r"inputSchema[\s\S]*?description[\s\S]*?(<IMPORTANT>|read\s+~/\.ssh|also\s+(run|execute)|IGNORE\s+PREVIOUS)",
+		severity=Severity.HIGH,
+		description="MCP tool parameter description contains injection payload (Invariant Labs technique)",
 		category=Category.MCP_CONFIG,
 	),
 ]
@@ -324,10 +344,10 @@ Secrets_Patterns: list[Pattern] = [
 Dangerous_Call_Patterns: list[Pattern] = [
 	# Python
 	Pattern(
-		name="python_eval",
+		name="eval_call",
 		pattern=r"\beval\s*\(",
 		severity=Severity.HIGH,
-		description="eval() call -- arbitrary code execution risk",
+		description="eval() call -- arbitrary code execution risk (Python/JavaScript)",
 		category=Category.DANGEROUS_CALLS,
 	),
 	Pattern(
@@ -346,7 +366,7 @@ Dangerous_Call_Patterns: list[Pattern] = [
 	),
 	Pattern(
 		name="python_subprocess_shell",
-		pattern=r"subprocess\.(call|run|Popen)\s*\([^)]*shell\s*=\s*True",
+		pattern=r"subprocess\.(call|run|Popen|check_output|getoutput|getstatusoutput)\s*\([^)]*shell\s*=\s*True",
 		severity=Severity.HIGH,
 		description="subprocess with shell=True -- command injection risk",
 		category=Category.DANGEROUS_CALLS,
@@ -367,19 +387,12 @@ Dangerous_Call_Patterns: list[Pattern] = [
 	),
 	Pattern(
 		name="python_yaml_load",
-		pattern=r"yaml\.load\s*\([^)]*(?!Loader\s*=\s*yaml\.SafeLoader)",
+		pattern=r"yaml\.load\s*\((?![^)]*Loader\s*=\s*yaml\.SafeLoader)[^)]*\)",
 		severity=Severity.MEDIUM,
 		description="yaml.load() without SafeLoader -- arbitrary code execution risk",
 		category=Category.DANGEROUS_CALLS,
 	),
 	# JavaScript/Node
-	Pattern(
-		name="js_eval",
-		pattern=r"\beval\s*\(",
-		severity=Severity.HIGH,
-		description="eval() call -- arbitrary code execution",
-		category=Category.DANGEROUS_CALLS,
-	),
 	Pattern(
 		name="js_function_constructor",
 		pattern=r"\bFunction\s*\(",
@@ -468,6 +481,59 @@ Dangerous_Call_Patterns: list[Pattern] = [
 		description=".NET BinaryFormatter -- insecure deserialization",
 		category=Category.DANGEROUS_CALLS,
 	),
+	# Supply chain relevant
+	Pattern(
+		name="python_os_popen",
+		pattern=r"os\.popen\s*\(",
+		severity=Severity.HIGH,
+		description="os.popen() -- shell command execution and output capture",
+		category=Category.DANGEROUS_CALLS,
+	),
+	Pattern(
+		name="python_dunder_import",
+		pattern=r"__import__\s*\(\s*['\"]",
+		severity=Severity.MEDIUM,
+		description="__import__() with string literal -- hides module dependency from static analysis",
+		category=Category.DANGEROUS_CALLS,
+	),
+	Pattern(
+		name="python_ctypes_load",
+		pattern=r"ctypes\.(cdll|windll|CDLL)\b",
+		severity=Severity.MEDIUM,
+		description="ctypes library loading -- native code execution from Python",
+		category=Category.DANGEROUS_CALLS,
+	),
+	Pattern(
+		name="python_marshal_loads",
+		pattern=r"marshal\.loads\s*\(",
+		severity=Severity.MEDIUM,
+		description="marshal.loads() -- deserializes Python code objects, rarely needed in normal code",
+		category=Category.DANGEROUS_CALLS,
+	),
+	# Java / .NET / PowerShell
+	Pattern(
+		name="java_runtime_exec",
+		pattern=r"Runtime\.getRuntime\(\)\.exec\s*\(|new\s+ProcessBuilder\s*\(",
+		severity=Severity.HIGH,
+		description="Java Runtime.exec() or ProcessBuilder -- shell command execution",
+		category=Category.DANGEROUS_CALLS,
+	),
+	# Environment variable hijacking
+	Pattern(
+		name="env_var_hijack",
+		pattern=r"(LD_PRELOAD|PYTHONSTARTUP|NODE_OPTIONS|GIT_SSH_COMMAND|PYTHONPATH|RUBYOPT|JAVA_TOOL_OPTIONS)\s*=",
+		severity=Severity.HIGH,
+		description="Environment variable hijack -- can intercept library loads, force code execution, or redirect commands",
+		category=Category.DANGEROUS_CALLS,
+	),
+	# Credential store access
+	Pattern(
+		name="crypto_wallet_browser_creds",
+		pattern=r"(Exodus|MetaMask|Electrum|wallet\.dat|Login Data|Cookies|Web Data|chrome.*User Data|\.mozilla/firefox)",
+		severity=Severity.HIGH,
+		description="Crypto wallet or browser credential store access -- credential harvesting indicator",
+		category=Category.DANGEROUS_CALLS,
+	),
 ]
 
 
@@ -518,9 +584,68 @@ Exfiltration_Patterns: list[Pattern] = [
 	),
 	Pattern(
 		name="credential_path_access",
-		pattern=r"(~/\.ssh/|~/\.aws/|~/\.gnupg/|~/\.kube/|/etc/shadow)",
+		pattern=r"(~/\.ssh/|~/\.aws/|~/\.gnupg/|~/\.kube/|~/\.netrc|~/\.docker/config\.json|~/\.npmrc|~/\.git-credentials|~/\.pypirc|/etc/shadow)",
 		severity=Severity.MEDIUM,
 		description="Reference to sensitive credential file paths",
+		category=Category.EXFILTRATION,
+	),
+	# Supply chain exfiltration channels
+	Pattern(
+		name="requests_post_env",
+		pattern=r"requests\.(post|put)\s*\([^)]*os\.(environ|getenv)",
+		severity=Severity.CRITICAL,
+		description="HTTP POST/PUT with environment variable data -- credential exfiltration (fabrice, W4SP)",
+		category=Category.EXFILTRATION,
+	),
+	Pattern(
+		name="discord_webhook",
+		pattern=r"discord(app)?\.com/api/webhooks/",
+		severity=Severity.HIGH,
+		description="Discord webhook URL -- C2/exfiltration channel in supply chain malware (W4SP, Shai-Hulud)",
+		category=Category.EXFILTRATION,
+	),
+	Pattern(
+		name="telegram_bot_exfil",
+		pattern=r"api\.telegram\.org/bot",
+		severity=Severity.HIGH,
+		description="Telegram Bot API URL -- C2/exfiltration channel in supply chain malware",
+		category=Category.EXFILTRATION,
+	),
+	Pattern(
+		name="transfer_sh_upload",
+		pattern=r"transfer\.sh",
+		severity=Severity.MEDIUM,
+		description="transfer.sh reference -- file upload service used for exfiltration (W4SP, Colour-Blind RAT)",
+		category=Category.EXFILTRATION,
+	),
+	# Cloud metadata / IMDS
+	Pattern(
+		name="cloud_metadata_endpoint",
+		pattern=r"169\.254\.169\.254",
+		severity=Severity.CRITICAL,
+		description="Cloud metadata endpoint (AWS IMDS / GCP / Azure) -- credential theft vector (TeamPCP, fabrice)",
+		category=Category.EXFILTRATION,
+	),
+	Pattern(
+		name="webhook_exfil_services",
+		pattern=r"(webhook\.site|pipedream\.net|requestbin\.com|0x0\.st|hooks\.slack\.com/services|paste\.ee|sprunge\.us)",
+		severity=Severity.HIGH,
+		description="Attacker-controlled callback/paste service -- exfiltration endpoint",
+		category=Category.EXFILTRATION,
+	),
+	# Reverse shells
+	Pattern(
+		name="reverse_shell_bash",
+		pattern=r"(bash\s+-i\s*>&?\s*/dev/tcp/|/dev/(tcp|udp)/[^\s]+/\d+)",
+		severity=Severity.CRITICAL,
+		description="Bash reverse shell via /dev/tcp -- no legitimate use in packages",
+		category=Category.EXFILTRATION,
+	),
+	Pattern(
+		name="python_reverse_shell",
+		pattern=r"pty\.spawn\s*\(\s*[\"']/bin/(ba)?sh",
+		severity=Severity.HIGH,
+		description="Python pty.spawn() reverse shell -- interactive shell spawning",
 		category=Category.EXFILTRATION,
 	),
 ]
@@ -545,9 +670,37 @@ Encoding_Obfuscation_Patterns: list[Pattern] = [
 	),
 	Pattern(
 		name="zero_width_characters",
-		pattern=r"[\u200b\ufeff\u200c\u200d\u2060\u180e]",
+		pattern=r"[\u200b-\u200f\ufeff\u180e]",
 		severity=Severity.HIGH,
-		description="Zero-width characters detected -- hidden text or instructions",
+		description="Zero-width or direction-control characters -- hidden text or instruction injection",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	Pattern(
+		name="variation_selectors",
+		pattern=r"[\ufe00-\ufe0f]",
+		severity=Severity.HIGH,
+		description="Unicode variation selectors (VS1-VS16) -- invisible adversarial suffix or glyph manipulation",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	Pattern(
+		name="variation_selectors_supplement",
+		pattern=r"[\U000e0100-\U000e01ef]",
+		severity=Severity.HIGH,
+		description="Unicode variation selectors supplement (VS17-VS256) -- GlassWorm encoding or adversarial suffix",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	Pattern(
+		name="unicode_tags_block",
+		pattern=r"[\U000e0001-\U000e007f]",
+		severity=Severity.HIGH,
+		description="Unicode Tags block characters -- ASCII smuggling or hidden payload encoding",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	Pattern(
+		name="bidi_and_invisible_operators",
+		pattern=r"[\u202a-\u202e\u2060-\u2064]",
+		severity=Severity.MEDIUM,
+		description="Bidi embedding markers or invisible math operators -- Sneaky Bits encoding or text direction attack",
 		category=Category.ENCODING_OBFUSCATION,
 	),
 	Pattern(
@@ -562,6 +715,56 @@ Encoding_Obfuscation_Patterns: list[Pattern] = [
 		pattern=r"(\\u[0-9a-fA-F]{4}){4,}",
 		severity=Severity.MEDIUM,
 		description="Multiple unicode escape sequences -- potential obfuscation",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	# Supply chain obfuscation techniques
+	Pattern(
+		name="reversed_string_exec",
+		pattern=r"(exec|eval)\s*\([^)]*\[::\s*-1\s*\]",
+		severity=Severity.HIGH,
+		description="Reversed string passed to exec/eval -- string reversal obfuscation",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	Pattern(
+		name="chr_concat_payload",
+		pattern=r"(chr\s*\(\s*\d+\s*\)\s*\+\s*){3,}",
+		severity=Severity.HIGH,
+		description="chr() concatenation chain -- character-by-character payload construction",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	Pattern(
+		name="codecs_rot13",
+		pattern=r"codecs\.decode\s*\([^)]*['\"]rot.?13['\"]",
+		severity=Severity.HIGH,
+		description="codecs.decode() with rot13 -- obfuscated import names or strings",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	Pattern(
+		name="zlib_decompress_exec",
+		pattern=r"(exec|eval)\s*\([^)]*zlib\.decompress",
+		severity=Severity.CRITICAL,
+		description="zlib.decompress() passed to exec/eval -- compressed payload execution (W4SP Hyperion)",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	Pattern(
+		name="marshal_loads_exec",
+		pattern=r"(exec|eval)\s*\([^)]*marshal\.loads",
+		severity=Severity.CRITICAL,
+		description="marshal.loads() passed to exec/eval -- deserialized bytecode execution",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	Pattern(
+		name="hex_bytes_exec",
+		pattern=r"(exec|eval)\s*\(\s*bytes\.fromhex\s*\(",
+		severity=Severity.CRITICAL,
+		description="bytes.fromhex() passed to exec/eval -- hex-encoded payload execution",
+		category=Category.ENCODING_OBFUSCATION,
+	),
+	Pattern(
+		name="compile_exec_chain",
+		pattern=r"exec\s*\(\s*compile\s*\(",
+		severity=Severity.HIGH,
+		description="exec(compile(...)) -- dynamic code compilation and execution",
 		category=Category.ENCODING_OBFUSCATION,
 	),
 ]
@@ -605,6 +808,34 @@ Instruction_Override_Patterns: list[Pattern] = [
 		description="Anti-analysis payload -- forces false-negative response (Skynet malware pattern)",
 		category=Category.INSTRUCTION_OVERRIDE,
 	),
+	Pattern(
+		name="homoglyph_mixed_script",
+		pattern=r"[\u0400-\u04ff][a-zA-Z]|[a-zA-Z][\u0400-\u04ff]",
+		severity=Severity.MEDIUM,
+		description="Mixed Cyrillic and Latin characters -- homoglyph substitution for keyword filter evasion",
+		category=Category.INSTRUCTION_OVERRIDE,
+	),
+	Pattern(
+		name="authority_impersonation",
+		pattern=r"(i\s+am\s+(the|a)\s+(developer|admin|owner|maintainer|engineer)|authorized\s+by\s+(the\s+)?(team|admin|management)|admin\s+override|security\s+team\s+approv)",
+		severity=Severity.MEDIUM,
+		description="Authority impersonation -- claims elevated identity to bypass safety restrictions",
+		category=Category.INSTRUCTION_OVERRIDE,
+	),
+	Pattern(
+		name="hypothetical_framing",
+		pattern=r"(hypothetically|in\s+a\s+fictional\s+scenario|for\s+educational\s+purposes\s+only|imagine\s+you\s+are\s+not\s+bound|in\s+theory\s+only)",
+		severity=Severity.LOW,
+		description="Hypothetical framing -- technique to bypass safety alignment via fictional context",
+		category=Category.INSTRUCTION_OVERRIDE,
+	),
+	Pattern(
+		name="multi_encoding_pivot",
+		pattern=r"(rot13|base85|base32|decode\s+this\s+(hex|binary|ascii)|convert\s+from\s+(hex|binary|base))",
+		severity=Severity.MEDIUM,
+		description="Multi-encoding pivot instruction -- obfuscation to hide payloads across encoding layers",
+		category=Category.INSTRUCTION_OVERRIDE,
+	),
 ]
 
 
@@ -612,24 +843,165 @@ Instruction_Override_Patterns: list[Pattern] = [
 
 Supply_Chain_Patterns: list[Pattern] = [
 	Pattern(
-		name="hallucinated_package_reference",
-		pattern=r"react-codeshift",
-		severity=Severity.CRITICAL,
-		description="Known hallucinated package name -- supply chain injection vector",
-		category=Category.SUPPLY_CHAIN,
-	),
-	Pattern(
 		name="npm_install_unknown",
 		pattern=r"npm\s+install\s+(?!-)[^\s]+",
-		severity=Severity.LOW,
-		description="npm package installation -- verify package exists and is legitimate",
+		severity=Severity.INFO,
+		description="npm package installation -- verify package exists and is legitimate (Shai-Hulud, SANDWORM_MODE)",
 		category=Category.SUPPLY_CHAIN,
 	),
 	Pattern(
 		name="pip_install_unknown",
 		pattern=r"pip3?\s+install\s+(?!-)[^\s]+",
+		severity=Severity.INFO,
+		description="pip package installation -- verify package exists and is legitimate (slopsquatting risk)",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="npm_lifecycle_exec_payload",
+		pattern=r"[\"'](preinstall|postinstall)[\"']\s*:\s*[\"'][^\"']*(node\s+-e|curl|wget|bash|sh\s+-c|exec|eval)",
+		severity=Severity.CRITICAL,
+		description="npm lifecycle script with execution payload -- supply chain attack vector",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="cargo_build_script",
+		pattern=r"\bbuild\.rs\b",
 		severity=Severity.LOW,
-		description="pip package installation -- verify package exists and is legitimate",
+		description="Cargo build script reference -- executes arbitrary Rust code during cargo build",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="github_actions_secrets_in_run",
+		pattern=r"run:.*?\$\{\{\s*secrets\.",
+		severity=Severity.INFO,
+		description="GitHub Actions run step accessing secrets -- verify secrets are not exposed to untrusted code",
+		category=Category.SUPPLY_CHAIN,
+	),
+	# -- LiteLLM / TeamPCP gap patterns --
+	Pattern(
+		name="python_b64decode_exec",
+		pattern=r"(exec|eval)\s*\(\s*(base64\.b64decode|b64decode)\s*\(",
+		severity=Severity.CRITICAL,
+		description="base64.b64decode() passed to exec/eval -- encoded payload execution (TeamPCP, W4SP)",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="subprocess_sys_executable",
+		pattern=r"subprocess\.\w+\s*\([^)]*sys\.executable",
+		severity=Severity.HIGH,
+		description="subprocess with sys.executable -- re-invokes Python interpreter to run hidden payload",
+		category=Category.SUPPLY_CHAIN,
+	),
+	# -- Build system hooks --
+	Pattern(
+		name="hatchling_build_hook",
+		pattern=r"\[tool\.hatch\.build\.hooks\.custom\]",
+		severity=Severity.MEDIUM,
+		description="Hatchling custom build hook -- executes hatch_build.py during pip install",
+		category=Category.SUPPLY_CHAIN,
+	),
+	# -- GitHub Actions supply chain --
+	Pattern(
+		name="github_actions_pull_request_target",
+		pattern=r"pull_request_target:",
+		severity=Severity.HIGH,
+		description="GitHub Actions pull_request_target trigger -- grants write/secrets access to fork PR code (Ultralytics compromise)",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="github_actions_expression_injection",
+		pattern=r"\$\{\{\s*github\.(head_ref|event\.pull_request\.(title|body|head\.ref))",
+		severity=Severity.HIGH,
+		description="Unescaped GitHub context in run step -- branch/PR title injection (Ultralytics, Nx attacks)",
+		category=Category.SUPPLY_CHAIN,
+	),
+	# -- JavaScript/npm supply chain --
+	Pattern(
+		name="js_buffer_base64_eval",
+		pattern=r"eval\s*\(\s*Buffer\.from\s*\([^)]*['\"]base64['\"]",
+		severity=Severity.CRITICAL,
+		description="eval(Buffer.from(..., 'base64')) -- base64 payload execution in Node.js",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="js_eval_atob",
+		pattern=r"eval\s*\(\s*atob\s*\(",
+		severity=Severity.CRITICAL,
+		description="eval(atob(...)) -- base64 decode and execute in JavaScript",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="js_new_function_iife",
+		pattern=r"new\s+Function\s*\([^)]+\)\s*\(",
+		severity=Severity.HIGH,
+		description="new Function(...)() IIFE -- dynamic code execution in JavaScript (npm supply chain malware)",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="js_require_child_process",
+		pattern=r"require\s*\(\s*['\"]child_process['\"]\s*\)\s*\.\s*(exec|spawn|execSync|spawnSync)",
+		severity=Severity.HIGH,
+		description="require('child_process') with exec/spawn -- shell execution in Node.js packages",
+		category=Category.SUPPLY_CHAIN,
+	),
+	# -- Dynamic module loading --
+	Pattern(
+		name="importlib_dynamic_load",
+		pattern=r"importlib\.(import_module|util\.spec_from_file_location)\s*\(",
+		severity=Severity.HIGH,
+		description="importlib dynamic loading -- bypasses static import analysis (BeaverTail, TeamPCP)",
+		category=Category.SUPPLY_CHAIN,
+	),
+	# -- Dependency confusion --
+	Pattern(
+		name="pip_extra_index_url",
+		pattern=r"pip.*--extra-index-url|--index-url\s+(?!https://pypi\.org)",
+		severity=Severity.HIGH,
+		description="pip with non-default index URL -- dependency confusion vector (Birsan technique)",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="lockfile_external_url",
+		pattern=r"[\"']resolved[\"']\s*:\s*[\"']https?://(?!registry\.npmjs\.org)|git\+https?://[^\s\"']+",
+		severity=Severity.HIGH,
+		description="Lock file or requirements pointing to external URL -- verify dependency source",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="gha_unpinned_action",
+		pattern=r"uses:\s+[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+@(?![0-9a-f]{40})[a-zA-Z]",
+		severity=Severity.MEDIUM,
+		description="GitHub Action pinned to branch/tag, not SHA -- vulnerable to tag re-pointing (Trivy/LiteLLM vector)",
+		category=Category.SUPPLY_CHAIN,
+	),
+	# -- Go supply chain --
+	Pattern(
+		name="go_mod_replace",
+		pattern=r"replace\s+\S+\s+=>\s+",
+		severity=Severity.MEDIUM,
+		description="Go replace directive -- can redirect dependency to attacker-controlled fork",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="go_generate_shell",
+		pattern=r"//go:generate\s+(bash|sh|curl|wget|python|node)",
+		severity=Severity.MEDIUM,
+		description="go:generate with shell command -- executes during go generate",
+		category=Category.SUPPLY_CHAIN,
+	),
+	# -- CI/CD supply chain --
+	Pattern(
+		name="gitlab_ci_remote_include",
+		pattern=r"include:.*remote:\s*[\"']?https?://",
+		severity=Severity.HIGH,
+		description="GitLab CI remote include -- fetches external CI config at pipeline runtime",
+		category=Category.SUPPLY_CHAIN,
+	),
+	Pattern(
+		name="gha_github_env_poisoning",
+		pattern=r">>\s*\$GITHUB_(ENV|PATH|OUTPUT)",
+		severity=Severity.MEDIUM,
+		description="Write to GITHUB_ENV/PATH/OUTPUT -- can poison runner environment (Ultralytics vector)",
 		category=Category.SUPPLY_CHAIN,
 	),
 ]
@@ -655,6 +1027,213 @@ File_Permission_Patterns: list[Pattern] = [
 ]
 
 
+# -- Code-Before-Review Patterns --
+
+Code_Before_Review_Patterns: list[Pattern] = [
+	Pattern(
+		name="conftest_autouse_fixture",
+		pattern=r"@pytest\.fixture\s*\([^)]*autouse\s*=\s*True",
+		severity=Severity.MEDIUM,
+		description="Autouse pytest fixture -- executes during test collection before agent review",
+		category=Category.CODE_BEFORE_REVIEW,
+	),
+	Pattern(
+		name="npm_lifecycle_script",
+		pattern=r"[\"'](preinstall|postinstall|prepack|prepare)[\"']\s*:\s*[\"'][^\"']+[\"']",
+		severity=Severity.MEDIUM,
+		description="npm lifecycle script in package.json -- executes automatically during npm install",
+		category=Category.CODE_BEFORE_REVIEW,
+	),
+	Pattern(
+		name="makefile_sudo_command",
+		pattern=r"\tsudo\s+",
+		severity=Severity.HIGH,
+		description="Makefile command using sudo -- privileged execution from build target",
+		category=Category.CODE_BEFORE_REVIEW,
+	),
+	Pattern(
+		name="makefile_pipe_to_shell",
+		pattern=r"\t[^\n]*(curl|wget)\s+[^\n]*\|\s*(bash|sh|python|node)",
+		severity=Severity.CRITICAL,
+		description="Makefile target pipes remote content to shell -- code-before-review RCE",
+		category=Category.CODE_BEFORE_REVIEW,
+	),
+	Pattern(
+		name="envrc_with_execution",
+		pattern=r"(eval\s+\"|source\s+|export\s+\w+=\$\(|PATH_add|layout\s+python)",
+		severity=Severity.MEDIUM,
+		description="direnv .envrc with execution patterns -- auto-sourced on directory entry",
+		category=Category.CODE_BEFORE_REVIEW,
+	),
+	Pattern(
+		name="setup_py_cmdclass",
+		pattern=r"cmdclass\s*=\s*\{",
+		severity=Severity.MEDIUM,
+		description="setup.py custom command class -- arbitrary code execution during pip install",
+		category=Category.CODE_BEFORE_REVIEW,
+	),
+	Pattern(
+		name="git_hook_persistence",
+		pattern=r"\.git/hooks/(pre-commit|post-commit|post-checkout|pre-push|prepare-commit-msg)|core\.hooksPath",
+		severity=Severity.HIGH,
+		description="Git hook write or hooksPath manipulation -- code execution on git operations (CVE-2024-32002)",
+		category=Category.CODE_BEFORE_REVIEW,
+	),
+]
+
+
+# -- Config Backdoor Patterns --
+
+Config_Backdoor_Patterns: list[Pattern] = [
+	Pattern(
+		name="self_modify_config",
+		pattern=r"(write\s+to|modify|update|append\s+to|add\s+to)\s+[^\n]*(\.cursorrules|\.clinerules|CLAUDE\.md|copilot-instructions|AGENTS\.md|\.windsurfrules|\.roo/rules|\.aider|\.continue/config|\.kodu/instructions)",
+		severity=Severity.CRITICAL,
+		description="Instruction to modify agent config file -- persistence mechanism for injection",
+		category=Category.CONFIG_BACKDOOR,
+	),
+	Pattern(
+		name="output_suppression",
+		pattern=r"(don'?t\s+(show|display|mention|reveal|log|print|output)|hide\s+this|suppress\s+(output|logging|warnings)|do\s+not\s+(mention|reveal|show))",
+		severity=Severity.HIGH,
+		description="Output suppression instruction -- hides malicious activity from user",
+		category=Category.CONFIG_BACKDOOR,
+	),
+	Pattern(
+		name="conversation_turn_mimicry",
+		pattern=r"\{[\"']role[\"']\s*:\s*[\"'](assistant|user|system)[\"']",
+		severity=Severity.MEDIUM,
+		description="JSON conversation turn structure in content -- faking dialogue to manipulate agent behavior",
+		category=Category.CONFIG_BACKDOOR,
+	),
+	Pattern(
+		name="ssh_authorized_keys_write",
+		pattern=r">>\s*[^\n]*\.ssh/authorized_keys",
+		severity=Severity.HIGH,
+		description="Append to SSH authorized_keys -- persistent backdoor access",
+		category=Category.CONFIG_BACKDOOR,
+	),
+]
+
+
+# -- Memory Corruption Patterns --
+
+Memory_Corruption_Patterns: list[Pattern] = [
+	Pattern(
+		name="memory_injection_framing",
+		pattern=r"(store\s+this\s+as|remember\s+that|save\s+(this\s+)?to\s+memory|add\s+to\s+(your\s+)?(experience|memory|knowledge))",
+		severity=Severity.HIGH,
+		description="Memory injection framing -- attempts to plant persistent instructions in agent memory",
+		category=Category.MEMORY_CORRUPTION,
+	),
+	Pattern(
+		name="rag_document_instrumentation",
+		pattern=r"(when\s+retrieved|if\s+this\s+(document|text)\s+is\s+(found|retrieved)|for\s+the\s+AI\s+(reading|processing)\s+this)",
+		severity=Severity.HIGH,
+		description="RAG-targeted instruction -- payload designed to activate when retrieved by a RAG system",
+		category=Category.MEMORY_CORRUPTION,
+	),
+	Pattern(
+		name="session_summary_manipulation",
+		pattern=r"(when\s+summariz|in\s+your\s+summary|include\s+in\s+(the\s+)?summary|your\s+summary\s+should)",
+		severity=Severity.MEDIUM,
+		description="Session summary manipulation -- attempts to influence what persists across agent sessions",
+		category=Category.MEMORY_CORRUPTION,
+	),
+]
+
+
+# -- Confused Delegation Patterns --
+
+Confused_Delegation_Patterns: list[Pattern] = [
+	Pattern(
+		name="cross_agent_forwarding",
+		pattern=r"(tell\s+(agent|the\s+other\s+agent)\s+\w+\s+to|pass\s+this\s+to\s+(agent|the\s+other)|forward\s+(this\s+)?to\s+(agent|the\s+next))",
+		severity=Severity.HIGH,
+		description="Cross-agent instruction forwarding -- may enable privilege escalation via delegation",
+		category=Category.CONFUSED_DELEGATION,
+	),
+	Pattern(
+		name="capability_probing",
+		pattern=r"(what\s+tools\s+do\s+you\s+have|list\s+your\s+(capabilities|tools|functions)|can\s+you\s+access\s+(the\s+)?(file|shell|network|internet)|what\s+permissions\s+do\s+you)",
+		severity=Severity.LOW,
+		description="Capability probing -- reconnaissance of agent tools and permissions",
+		category=Category.CONFUSED_DELEGATION,
+	),
+	Pattern(
+		name="scope_escalation",
+		pattern=r"(also\s+do|while\s+you'?re\s+at\s+it|extend\s+your\s+task\s+to|additionally\s+perform|and\s+also\s+(run|execute|access))",
+		severity=Severity.LOW,
+		description="Scope escalation attempt -- expanding agent task beyond original boundaries",
+		category=Category.CONFUSED_DELEGATION,
+	),
+]
+
+
+# -- Persistence Patterns --
+
+Persistence_Patterns: list[Pattern] = [
+	Pattern(
+		name="bashrc_profile_append",
+		pattern=r">>\s*~?/?\.(bashrc|bash_profile|profile|zshrc|zprofile)",
+		severity=Severity.HIGH,
+		description="Append to shell profile -- persistence mechanism (Colorama campaign)",
+		category=Category.PERSISTENCE,
+	),
+	Pattern(
+		name="crontab_manipulation",
+		pattern=r"\|\s*crontab\b|crontab\s+-[eru]|/etc/cron\.\w+/|/var/spool/cron",
+		severity=Severity.HIGH,
+		description="Crontab write/edit -- scheduled persistence for C2 polling",
+		category=Category.PERSISTENCE,
+	),
+	Pattern(
+		name="systemd_user_service",
+		pattern=r"systemctl\s+(--user\s+)?enable|\.config/systemd/user/[^\s]*\.service",
+		severity=Severity.HIGH,
+		description="Systemd user service install -- persistent auto-restart backdoor (TeamPCP sysmon.service)",
+		category=Category.PERSISTENCE,
+	),
+	Pattern(
+		name="windows_registry_run",
+		pattern=r"CurrentVersion\\+Run\b|winreg\.SetValueEx\s*\(",
+		severity=Severity.HIGH,
+		description="Windows registry Run key -- auto-start persistence (W4SP, Colour-Blind RAT)",
+		category=Category.PERSISTENCE,
+	),
+	Pattern(
+		name="startup_folder_persistence",
+		pattern=r"Start Menu\\+Programs\\+Startup|AppData\\+Roaming\\+Microsoft\\+Windows\\+Start",
+		severity=Severity.HIGH,
+		description="Windows Startup folder reference -- startup directory persistence (Colour-Blind RAT)",
+		category=Category.PERSISTENCE,
+	),
+	# macOS
+	Pattern(
+		name="launchd_persistence",
+		pattern=r"launchctl\s+(load|bootstrap)|Library/LaunchAgents/[^\s]*\.plist",
+		severity=Severity.HIGH,
+		description="macOS launchd persistence -- auto-start via LaunchAgents plist",
+		category=Category.PERSISTENCE,
+	),
+	# Windows expanded
+	Pattern(
+		name="schtasks_persistence",
+		pattern=r"schtasks\s+/create",
+		severity=Severity.HIGH,
+		description="Windows scheduled task creation -- persistence via Task Scheduler",
+		category=Category.PERSISTENCE,
+	),
+	Pattern(
+		name="powershell_iex_download",
+		pattern=r"(Invoke-Expression|IEX)\s*\(?\s*(New-Object\s+Net\.WebClient|\(New-Object)",
+		severity=Severity.CRITICAL,
+		description="PowerShell IEX with WebClient download -- standard dropper pattern",
+		category=Category.PERSISTENCE,
+	),
+]
+
+
 # -- Pattern collections by use case --
 
 All_Patterns: list[Pattern] = (
@@ -668,6 +1247,11 @@ All_Patterns: list[Pattern] = (
 	+ Instruction_Override_Patterns
 	+ Supply_Chain_Patterns
 	+ File_Permission_Patterns
+	+ Code_Before_Review_Patterns
+	+ Config_Backdoor_Patterns
+	+ Memory_Corruption_Patterns
+	+ Confused_Delegation_Patterns
+	+ Persistence_Patterns
 )
 
 # Patterns relevant to agent config scanning (vet-repo)
@@ -678,6 +1262,11 @@ Vet_Repo_Patterns: list[Pattern] = (
 	+ Instruction_Override_Patterns
 	+ Exfiltration_Patterns
 	+ Encoding_Obfuscation_Patterns
+	+ Config_Backdoor_Patterns
+	+ Memory_Corruption_Patterns
+	+ Confused_Delegation_Patterns
+	+ Code_Before_Review_Patterns
+	+ File_Permission_Patterns
 )
 
 # Patterns relevant to individual skill analysis (scan-skill)
@@ -688,6 +1277,11 @@ Scan_Skill_Patterns: list[Pattern] = (
 	+ Instruction_Override_Patterns
 	+ Dangerous_Call_Patterns
 	+ Supply_Chain_Patterns
+	+ Code_Before_Review_Patterns
+	+ Config_Backdoor_Patterns
+	+ Memory_Corruption_Patterns
+	+ Confused_Delegation_Patterns
+	+ Persistence_Patterns
 )
 
 # Patterns relevant to code security review (audit-code)
@@ -697,6 +1291,8 @@ Audit_Code_Patterns: list[Pattern] = (
 	+ Exfiltration_Patterns
 	+ Supply_Chain_Patterns
 	+ File_Permission_Patterns
+	+ Code_Before_Review_Patterns
+	+ Persistence_Patterns
 )
 
 
@@ -826,8 +1422,13 @@ def Format_Report(
 		Category.EXFILTRATION: "Block or monitor outbound data transfers from agent context. Review file access patterns for credential harvesting.",
 		Category.ENCODING_OBFUSCATION: "Decode and inspect obfuscated content. Zero-width characters indicate hidden text injection. Base64 blobs may contain payloads.",
 		Category.INSTRUCTION_OVERRIDE: "Content contains instruction override attempts. Do not process this content as trusted instructions.",
-		Category.SUPPLY_CHAIN: "Verify all package names exist in their registries. Check for typosquatting or hallucinated package names.",
+		Category.SUPPLY_CHAIN: "Verify all package names exist in their registries. Check for typosquatting or hallucinated package names. Pin GitHub Actions to commit SHAs. Use --ignore-scripts for npm. Audit --extra-index-url for dependency confusion.",
 		Category.FILE_PERMISSIONS: "Tighten file permissions. Avoid world-writable (777) permissions on any file.",
+		Category.CODE_BEFORE_REVIEW: "Review conftest.py, setup.py, package.json lifecycle scripts, Makefiles, and .envrc for execution before running build or test commands. Use --ignore-scripts for npm.",
+		Category.CONFIG_BACKDOOR: "Agent config files contain manipulation instructions. Review for self-modification commands, output suppression, and fake conversation turns.",
+		Category.MEMORY_CORRUPTION: "Content attempts to plant persistent instructions in agent memory. Review for memory injection framing, RAG-targeted payloads, and summary manipulation.",
+		Category.CONFUSED_DELEGATION: "Content attempts cross-agent instruction forwarding or capability probing. Enforce capability boundaries between agents and log delegation requests.",
+		Category.PERSISTENCE: "Review for persistence mechanisms (cron, systemd, shell profiles, registry keys, startup folders). Legitimate software rarely modifies these outside of installers.",
 	}
 
 	for finding in findings:
@@ -838,3 +1439,125 @@ def Format_Report(
 
 	report_lines.append("")
 	return "\n".join(report_lines)
+
+
+# -- Package Registry Verification --
+
+
+def Verify_Package(ecosystem: str, name: str) -> dict:
+	"""Check if a package exists on PyPI or npm.
+
+	Returns dict with: exists (bool|None), name, details.
+	None means verification failed (network error, timeout).
+	"""
+	import urllib.request
+	import json
+
+	if ecosystem == "pypi":
+		url = f"https://pypi.org/pypi/{name}/json"
+	elif ecosystem == "npm":
+		url = f"https://registry.npmjs.org/{name}"
+	else:
+		return {"exists": None, "name": name, "details": f"Unknown ecosystem: {ecosystem}"}
+
+	try:
+		req = urllib.request.Request(url, headers={"User-Agent": "ai-agent-security-scanner/1.0"})
+		with urllib.request.urlopen(req, timeout=5) as resp:
+			data = json.loads(resp.read())
+			if ecosystem == "pypi":
+				info = data.get("info", {})
+				return {
+					"exists": True,
+					"name": info.get("name", name),
+					"details": f"v{info.get('version', '?')} -- {info.get('summary', '')[:80]}",
+				}
+			else:
+				latest = data.get("dist-tags", {}).get("latest", "?")
+				return {
+					"exists": True,
+					"name": data.get("name", name),
+					"details": f"v{latest}",
+				}
+	except Exception as e:
+		# urllib.error.HTTPError with code 404 = package not found
+		err_name = type(e).__name__
+		if hasattr(e, "code") and e.code == 404:
+			return {"exists": False, "name": name, "details": "Package does not exist on registry"}
+		return {"exists": None, "name": name, "details": f"{err_name}: {e}"}
+
+
+def Verify_Install_Findings(findings: list[Finding]) -> list[Finding]:
+	"""Post-process pip/npm install findings with live registry verification.
+
+	Replaces generic pip_install_unknown/npm_install_unknown findings:
+	- Package not found on registry -> CRITICAL (hallucinated/typosquatted)
+	- Verification failed (network error) -> MEDIUM (manual check needed)
+	- Package exists -> finding removed (legitimate)
+	"""
+	verified: list[Finding] = []
+	install_findings: list[Finding] = []
+
+	for f in findings:
+		if f.pattern_name in ("pip_install_unknown", "npm_install_unknown"):
+			install_findings.append(f)
+		else:
+			verified.append(f)
+
+	if not install_findings:
+		return verified
+
+	# Deduplicate by (ecosystem, package_name)
+	seen: set[tuple[str, str]] = set()
+	to_check: list[tuple[str, str, Finding]] = []
+
+	for f in install_findings:
+		ecosystem = "pypi" if f.pattern_name == "pip_install_unknown" else "npm"
+
+		# Extract package name from matched text
+		parts = f.matched_text.strip().split()
+		name = parts[-1].strip("'\"") if len(parts) >= 3 else ""
+		# Strip version specifiers
+		name = re.split(r"[=<>!\[,;]", name)[0].rstrip("'\"")
+
+		if not name or name.startswith("-"):
+			continue
+
+		key = (ecosystem, name.lower())
+		if key not in seen:
+			seen.add(key)
+			to_check.append((ecosystem, name, f))
+
+	if not to_check:
+		return verified
+
+	print(f"[*] Verifying {len(to_check)} package(s) against registries...")
+
+	for ecosystem, name, original in to_check:
+		result = Verify_Package(ecosystem, name)
+
+		if result["exists"] is False:
+			print(f"    CRITICAL: {name} not found on {ecosystem.upper()}")
+			verified.append(Finding(
+				pattern_name="package_not_found",
+				severity=Severity.CRITICAL,
+				category=Category.SUPPLY_CHAIN,
+				description=f"Package '{name}' does not exist on {ecosystem.upper()} -- hallucinated or typosquatted name (slopsquatting)",
+				file_path=original.file_path,
+				line_number=original.line_number,
+				matched_text=original.matched_text,
+			))
+		elif result["exists"] is None:
+			print(f"    UNVERIFIED: {name} ({result['details']})")
+			verified.append(Finding(
+				pattern_name="package_unverified",
+				severity=Severity.MEDIUM,
+				category=Category.SUPPLY_CHAIN,
+				description=f"Could not verify '{name}' on {ecosystem.upper()} -- {result['details']}",
+				file_path=original.file_path,
+				line_number=original.line_number,
+				matched_text=original.matched_text,
+			))
+		else:
+			print(f"    OK: {name} ({result['details']})")
+
+	return verified
