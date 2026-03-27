@@ -262,7 +262,7 @@ Replace characters with visually similar alternatives (l33t speak, Cyrillic homo
 
 #### Invisible Variation Selector Suffixes
 
-Append invisible Unicode variation selectors (256 characters across U+FE00--U+FE0F and U+E0100--U+E01EF) to craft adversarial suffixes that alter tokenization without changing visible text. Achieves 80--100% ASR against aligned open-source models. See [note 18](./18_Unicode_Variation_Selector_Attacks.md) for the full deep dive.
+Append invisible Unicode variation selectors (256 characters across U+FE00--U+FE0F and U+E0100--U+E01EF) to craft adversarial suffixes that alter tokenization without changing visible text. Achieves 80--100% ASR against aligned open-source models. See [note 17](./17_Unicode_Variation_Selector_Attacks.md) for the full deep dive.
 
 #### Payload Splitting
 
