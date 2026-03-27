@@ -31,6 +31,7 @@ from patterns import (
 	Category,
 	Scan_Content,
 	Format_Report,
+	Verify_Install_Findings,
 )
 
 
@@ -299,6 +300,9 @@ def Main() -> None:
 	support_findings = Scan_Supporting_Files(skill_dir)
 	all_findings.extend(support_findings)
 	print(f"    {len(support_findings)} issue(s)")
+
+	# Verify package install commands against registries
+	all_findings = Verify_Install_Findings(all_findings)
 
 	# Deduplicate findings (same pattern + same line)
 	seen: set[tuple[str, str, int]] = set()
