@@ -27,10 +27,10 @@ Quick reference for every tool, framework, benchmark, and standard mentioned acr
 
 | Tool | Description | Source | Notes |
 |------|-------------|--------|-------|
-| Garak | NVIDIA; 37+ probe modules; 23 backends; prompt injection/jailbreak/data leakage testing | Open-source (NVIDIA) | [14](14_AI_Hacking_Frameworks.md), [18](18_Unicode_Variation_Selector_Attacks.md) |
-| Promptfoo | 300K+ devs; 50+ vuln types; YAML CI/CD; OWASP/NIST/MITRE compliance mapping | https://www.promptfoo.dev | [14](14_AI_Hacking_Frameworks.md), [18](18_Unicode_Variation_Selector_Attacks.md) |
-| ASCII Smuggler | Encode/decode hidden text via Tags block and variation selectors | [embracethered.com](https://embracethered.com/blog/posts/2025/sneaky-bits-and-ascii-smuggler/) | [18](18_Unicode_Variation_Selector_Attacks.md) |
-| noseeum | Offensive framework for Unicode steganography and VS-based jailbreaking | [GitHub](https://github.com/umpolungfish/noseeum) | [18](18_Unicode_Variation_Selector_Attacks.md) |
+| Garak | NVIDIA; 37+ probe modules; 23 backends; prompt injection/jailbreak/data leakage testing | Open-source (NVIDIA) | [14](14_AI_Hacking_Frameworks.md), [17](17_Unicode_Variation_Selector_Attacks.md) |
+| Promptfoo | 300K+ devs; 50+ vuln types; YAML CI/CD; OWASP/NIST/MITRE compliance mapping | https://www.promptfoo.dev | [14](14_AI_Hacking_Frameworks.md), [17](17_Unicode_Variation_Selector_Attacks.md) |
+| ASCII Smuggler | Encode/decode hidden text via Tags block and variation selectors | [embracethered.com](https://embracethered.com/blog/posts/2025/sneaky-bits-and-ascii-smuggler/) | [17](17_Unicode_Variation_Selector_Attacks.md) |
+| noseeum | Offensive framework for Unicode steganography and VS-based jailbreaking | [GitHub](https://github.com/umpolungfish/noseeum) | [17](17_Unicode_Variation_Selector_Attacks.md) |
 | PyRIT | Microsoft; multi-turn/multi-modal; Crescendo attacks; TAP | Open-source (Microsoft) | [14](14_AI_Hacking_Frameworks.md) |
 | FuzzyAI | CyberArk; automated LLM fuzzing; adversarial prompt generation | Open-source (CyberArk) | [14](14_AI_Hacking_Frameworks.md) |
 | DeepTeam / DeepEval | Jailbreaking + prompt injection probing before deployment | Open-source | [14](14_AI_Hacking_Frameworks.md) |

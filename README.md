@@ -39,6 +39,7 @@ Every attack has a defense. Every payload is annotated, defanged, and educationa
 | ⚔️ | [AI Hacking Frameworks](notes/14_AI_Hacking_Frameworks.md) | XBOW, Shannon, Strix, PentAGI, CAI, Reaper, Nebula, CHECKMATE, Garak, Promptfoo, PyRIT, benchmarks, architecture patterns |
 | 💩 | [Bullshit Benchmark & LLM Honesty](notes/15_Bullshit_Benchmark_And_LLM_Honesty.md) | BullshitBench, TruthfulQA, SimpleQA, sycophancy benchmarks, Bullshit Index, abstention, slopsquatting, RLHF-security tension |
 | 🛡️ | [AI Blue Teaming & Defensive AI](notes/16_AI_Blue_Teaming_And_Defensive_AI.md) | AI SOC agents, CrowdStrike Charlotte, Microsoft Security Copilot, malware RE, DARPA AIxCC, NIST AI 100-2, defender's advantage analysis |
+| 🔤 | [Unicode Variation Selector Attacks](notes/17_Unicode_Variation_Selector_Attacks.md) | Invisible jailbreaking, guardrail evasion, Sneaky Bits encoding, GlassWorm malware, token expansion DoS, defense: explicit stripping required |
 
 ---
 
