@@ -1087,7 +1087,7 @@ Code_Before_Review_Patterns: list[Pattern] = [
 Config_Backdoor_Patterns: list[Pattern] = [
 	Pattern(
 		name="self_modify_config",
-		pattern=r"(write\s+to|modify|update|append\s+to|add\s+to)\s+[^\n]*(\.cursorrules|\.clinerules|CLAUDE\.md|copilot-instructions|AGENTS\.md|\.windsurfrules|\.roo/rules|\.aider|\.continue/config|\.kodu/instructions)",
+		pattern=r"(write\s+to|modify|update|append\s+to|add\s+to)\s+[^\n]*(\.cursorrules|\.cursor/rules/|\.clinerules|CLAUDE\.md|GEMINI\.md|copilot-instructions|\.github/instructions/|AGENTS\.md|\.windsurfrules|\.windsurf/rules/|\.claude/rules/|\.roo/rules|\.aider|\.continue/config|\.kodu/instructions)",
 		severity=Severity.CRITICAL,
 		description="Instruction to modify agent config file -- persistence mechanism for injection",
 		category=Category.CONFIG_BACKDOOR,
@@ -1486,6 +1486,22 @@ def Verify_Package(ecosystem: str, name: str) -> dict:
 		return {"exists": None, "name": name, "details": f"{err_name}: {e}"}
 
 
+def Extract_Install_Target(ecosystem: str, matched_text: str) -> str:
+	"""Extract a package name from a matched install command snippet."""
+	if ecosystem == "pypi":
+		pattern = r"\bpip3?\s+install\s+['\"`([{]*([A-Za-z0-9][A-Za-z0-9._/-]*)"
+	else:
+		pattern = r"\bnpm\s+install\s+['\"`([{]*(@?[A-Za-z0-9][A-Za-z0-9._/-]*)"
+
+	match = re.search(pattern, matched_text)
+	if not match:
+		return ""
+
+	name = match.group(1).strip("\"'`([{")
+	name = re.split(r"[=<>!~;\[,]", name, maxsplit=1)[0]
+	return name.rstrip("\"'`)]},.:")
+
+
 def Verify_Install_Findings(findings: list[Finding]) -> list[Finding]:
 	"""Post-process pip/npm install findings with live registry verification.
 
@@ -1514,10 +1530,7 @@ def Verify_Install_Findings(findings: list[Finding]) -> list[Finding]:
 		ecosystem = "pypi" if f.pattern_name == "pip_install_unknown" else "npm"
 
 		# Extract package name from matched text
-		parts = f.matched_text.strip().split()
-		name = parts[-1].strip("'\"") if len(parts) >= 3 else ""
-		# Strip version specifiers
-		name = re.split(r"[=<>!\[,;]", name)[0].rstrip("'\"")
+		name = Extract_Install_Target(ecosystem, f.matched_text)
 
 		if not name or name.startswith("-"):
 			continue

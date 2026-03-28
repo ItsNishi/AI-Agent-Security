@@ -32,7 +32,7 @@ Every attack has a defense. Every payload is annotated, defanged, and educationa
 | 🔍 | [Skill Scanning & Detection Landscape](notes/07_Skill_Scanning_And_Detection_Landscape.md) | Cisco Skill Scanner, VirusTotal, ToxicSkills audit, gap analysis, what to build next |
 | 📋 | [AI GRC & Policy Landscape](notes/08_AI_GRC_And_Policy_Landscape.md) | NIST AI RMF, EU AI Act, ISO 42001, state laws, agentic governance, OWASP Agentic Top 10 |
 | 🧠 | [AI Memory & Corruption](notes/09_AI_Memory_And_Corruption.md) | Memory architectures, RAG poisoning, MINJA, persistence risks, real-world case studies, defenses |
-| 📄 | [Agent Configuration Files](notes/10_Agent_MD_Configuration_Files.md) | CLAUDE.md/AGENTS.md attack surface, Rules File Backdoor, Unicode obfuscation, hardening recommendations |
+| 📄 | [Agent Configuration Files](notes/10_Agent_MD_Configuration_Files.md) | Cross-tool instruction file attack surface: CLAUDE.md, AGENTS.md, Copilot, Cursor, Unicode obfuscation, hardening recommendations |
 | 🧠 | [Chatbot & AI Psychosis](notes/11_Chatbot_And_AI_Psychosis.md) | AI-induced psychosis, sycophancy mechanisms, documented deaths, folie a deux, weaponization, RAND national security analysis |
 | 🦞 | [OpenClaw & ClawHub Security](notes/12_OpenClaw_And_ClawHub_Security.md) | OpenClaw architecture, ClawHub supply chain, CVE-2026-25253, ClawHavoc campaign, AMOS stealer, memory poisoning, 42K exposed instances |
 | 🏪 | [AI Application Ecosystem Security](notes/13_AI_Application_Ecosystem_Security.md) | GPT Store, MCP tool poisoning, LangChain, HuggingFace, AutoGPT, CrewAI, Devin, IDEsaster, GlassWorm, OWASP Agentic Top 10, MITRE ATLAS |

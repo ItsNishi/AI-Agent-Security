@@ -7,6 +7,7 @@ Verify_Install_Findings, pattern groups, and enums.
 
 import re
 import urllib.error
+from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 from patterns import (
@@ -18,6 +19,7 @@ from patterns import (
 	Format_Report,
 	Verify_Install_Findings,
 	Verify_Package,
+	Extract_Install_Target,
 	Skill_Injection_Patterns,
 	Hook_Abuse_Patterns,
 	Mcp_Config_Patterns,
@@ -341,6 +343,30 @@ class Test_Verify_Install_Findings:
 		assert result[0].severity == Severity.CRITICAL
 		Mock_Verify.assert_called_once_with("npm", "react-codeshift")
 
+	@patch("patterns.Verify_Package")
+	def Test_Pip_Install_With_Trailing_Punctuation(self, Mock_Verify):
+		Mock_Verify.return_value = {
+			"exists": True,
+			"name": "requests",
+			"details": "v2.32.0",
+		}
+		findings = [self._Make_Install_Finding("pip_install_unknown", 'pip install "requests")]')]
+		result = Verify_Install_Findings(findings)
+		assert result == []
+		Mock_Verify.assert_called_once_with("pypi", "requests")
+
+	@patch("patterns.Verify_Package")
+	def Test_Npm_Scoped_Package_Preserved(self, Mock_Verify):
+		Mock_Verify.return_value = {
+			"exists": True,
+			"name": "@openai/codex",
+			"details": "v1.0.0",
+		}
+		findings = [self._Make_Install_Finding("npm_install_unknown", 'npm install @openai/codex"],')]
+		result = Verify_Install_Findings(findings)
+		assert result == []
+		Mock_Verify.assert_called_once_with("npm", "@openai/codex")
+
 	def Test_Mixed_Findings_Preserved(self):
 		"""Non-install findings survive alongside install findings."""
 		non_install = Finding(
@@ -360,6 +386,31 @@ class Test_Verify_Install_Findings:
 
 		assert len(result) == 1
 		assert result[0].pattern_name == "eval_call"
+
+
+class Test_Extract_Install_Target:
+	"""Test package name extraction from matched install snippets."""
+
+	def Test_Pip_Target_Strips_Trailing_Punctuation(self):
+		assert Extract_Install_Target("pypi", 'pip install "requests")]') == "requests"
+
+	def Test_Npm_Target_Preserves_Scoped_Package(self):
+		assert Extract_Install_Target("npm", 'npm install @openai/codex"],') == "@openai/codex"
+
+
+class Test_Pattern_Copy_Integrity:
+	"""patterns.py copies must stay identical across skills."""
+
+	def Test_All_Pattern_Files_Are_Identical(self):
+		repo_root = Path(__file__).parent.parent
+		pattern_paths = [
+			repo_root / ".claude" / "skills" / "audit-code" / "scripts" / "patterns.py",
+			repo_root / ".claude" / "skills" / "scan-skill" / "scripts" / "patterns.py",
+			repo_root / ".claude" / "skills" / "vet-repo" / "scripts" / "patterns.py",
+		]
+		baseline = pattern_paths[0].read_text(encoding="utf-8")
+		for path in pattern_paths[1:]:
+			assert path.read_text(encoding="utf-8") == baseline
 
 
 # -- Finding Dataclass --

@@ -21,6 +21,7 @@ from audit_code import (
 	Find_Env_Files,
 	Check_File_Permissions,
 	Check_Gitignore_Coverage,
+	Main,
 )
 from patterns import Severity, Category
 
@@ -288,3 +289,18 @@ class Test_Check_Gitignore_Coverage:
 			and "*.pem" in f.matched_text
 			for f in findings
 		)
+
+
+# -- Main --
+
+class Test_Main:
+	"""Test CLI entrypoint behavior."""
+
+	def Test_Defaults_To_Current_Directory(self, tmp_path, monkeypatch, capsys):
+		monkeypatch.chdir(tmp_path)
+		monkeypatch.setattr(sys, "argv", ["audit_code.py"])
+
+		Main()
+
+		out = capsys.readouterr().out
+		assert f"Auditing code: {tmp_path.resolve()}" in out

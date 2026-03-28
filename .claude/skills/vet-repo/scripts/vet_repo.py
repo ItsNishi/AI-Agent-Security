@@ -2,12 +2,11 @@
 """
 vet-repo: Repository agent configuration scanner.
 
-Scans .claude/, .mcp.json, CLAUDE.md, and related agent config files
+Scans .claude/, .mcp.json, and related agent instruction/config files
 for known malicious patterns (injection, hook abuse, MCP poisoning, etc.)
 """
 
 import sys
-import os
 from pathlib import Path
 
 # Add the script directory to path so patterns.py can be imported
@@ -103,8 +102,8 @@ def Scan_Mcp_Config(repo_root: Path) -> list[Finding]:
 	return findings
 
 
-def Scan_Claude_Md(repo_root: Path) -> list[Finding]:
-	"""Scan CLAUDE.md files for instruction injection."""
+def Scan_Agent_Instruction_Files(repo_root: Path) -> list[Finding]:
+	"""Scan common agent instruction files across coding-agent ecosystems."""
 	findings: list[Finding] = []
 	patterns = (
 		Instruction_Override_Patterns
@@ -112,15 +111,31 @@ def Scan_Claude_Md(repo_root: Path) -> list[Finding]:
 		+ Encoding_Obfuscation_Patterns
 	)
 
-	claude_md_paths = [
-		repo_root / "CLAUDE.md",
-		repo_root / ".claude" / "CLAUDE.md",
+	glob_patterns = [
+		"CLAUDE.md",
+		".claude/CLAUDE.md",
+		".claude/rules/**/*.md",
+		"**/AGENTS.md",
+		"GEMINI.md",
+		".github/copilot-instructions.md",
+		".github/instructions/**/*.instructions.md",
+		".cursorrules",
+		".cursor/rules/**/*",
+		".windsurfrules",
+		".windsurf/rules/**/*",
+		".clinerules",
 	]
+	seen: set[Path] = set()
 
-	for md_path in claude_md_paths:
-		if md_path.exists():
-			print(f"  Scanning {md_path}")
-			findings.extend(Scan_File(md_path, patterns))
+	for glob_pattern in glob_patterns:
+		for file_path in repo_root.glob(glob_pattern):
+			if not file_path.is_file():
+				continue
+			if file_path in seen:
+				continue
+			seen.add(file_path)
+			print(f"  Scanning {file_path}")
+			findings.extend(Scan_File(file_path, patterns))
 
 	return findings
 
@@ -169,7 +184,7 @@ def Main() -> None:
 		("Hook Configuration", Scan_Settings_Json),
 		("Skill Files", Scan_Skill_Files),
 		("MCP Configuration", Scan_Mcp_Config),
-		("CLAUDE.md Instructions", Scan_Claude_Md),
+		("Agent Instruction Files", Scan_Agent_Instruction_Files),
 		("VSCode Settings", Scan_Vscode_Settings),
 		("Cursor Configuration", Scan_Cursor_Config),
 	]

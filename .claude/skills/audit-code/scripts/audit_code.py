@@ -267,11 +267,9 @@ def Check_Gitignore_Coverage(target_path: Path) -> list[Finding]:
 
 def Main() -> None:
 	if len(sys.argv) < 2:
-		print("Usage: audit_code.py <path>", file=sys.stderr)
-		print("\nDefaults to project root if called without arguments.", file=sys.stderr)
-		sys.exit(1)
-
-	target_path = Path(sys.argv[1]).resolve()
+		target_path = Path.cwd().resolve()
+	else:
+		target_path = Path(sys.argv[1]).resolve()
 	if not target_path.exists():
 		print(f"Error: {target_path} does not exist", file=sys.stderr)
 		sys.exit(1)
