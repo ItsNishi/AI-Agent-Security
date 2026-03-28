@@ -140,13 +140,13 @@ ML-based intelligence gathering tool for web servers. Identifies products (CMS, 
 
 - **Paper**: https://arxiv.org/abs/2512.11143
 
-Integrates LLM agents with classical AI planning using a Planner-Executor-Perceptor (PEP) design paradigm. Predefined attack actions encode Metasploit modules, NSE scripts, and Nuclei templates as structured command templates with parameter placeholders.
+Integrates LLM agents with classical AI planning using a Planner-Executor-Perceptor (PEP) architecture. Predefined attack actions encode Metasploit modules, NSE scripts, and Nuclei templates as structured command templates with parameter placeholders.
 
 **Key innovation**: Neuro-symbolic hybrid -- classical planner provides built-in logical reasoning that offloads complex multi-step reasoning from the LLM.
 
 **Results**: Outperforms Claude Code by 20%+ on benchmarks while cutting time and monetary costs by 50%+. In one demonstration, selected a Metasploit module for CVE-2023-46604 and obtained a root shell.
 
-**Significance**: Shows that pure LLM approaches are suboptimal. Hybrid neuro-symbolic is the cutting edge.
+**Significance**: Shows that pure LLM approaches are suboptimal. Hybrid neuro-symbolic is the current best approach.
 
 ### xOffense (September 2025)
 

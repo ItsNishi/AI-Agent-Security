@@ -70,7 +70,7 @@ DeepSeek V3.2 is ~36x cheaper than GPT-5 on output. Self-hosting open models at 
 
 ### Key Ratio
 
-Output tokens cost **3-5x more** than input tokens across all providers. Output length control is the single highest-leverage optimization.
+Output tokens cost **3-5x more** than input tokens across all providers. Output length control is the single highest-impact optimization.
 
 ---
 

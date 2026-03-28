@@ -51,7 +51,7 @@ grep -Pzo '<!--[\s\S]*?(curl|wget|bash|sh|exec)[\s\S]*?-->' *.md
 
 ## Mitigation
 
-See [03_Defense_Patterns.md](../../notes/03_Defense_Patterns.md) for comprehensive defenses. Key mitigations for this technique:
+See [03_Defense_Patterns.md](../../notes/03_Defense_Patterns.md) for full defense coverage. Key mitigations for this technique:
 
 1. **Always review raw source** of skills before installing -- not the rendered preview
 2. **Strip HTML comments** from skill files during loading
