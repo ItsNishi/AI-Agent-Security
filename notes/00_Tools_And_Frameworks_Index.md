@@ -103,6 +103,7 @@ Quick reference for every tool, framework, benchmark, and standard mentioned acr
 |------|-------------|--------|-------|
 | IBM ART | Adversarial Robustness Toolbox; evasion/poisoning/extraction/inference defense | Linux Foundation | [16](16_AI_Blue_Teaming_And_Defensive_AI.md) |
 | AIDEFEND Framework | Defensive countermeasure knowledge base; MITRE ATLAS/MAESTRO/OWASP mapped | Open-source | [16](16_AI_Blue_Teaming_And_Defensive_AI.md) |
+| A2AS Framework | Runtime agent protection; source verification, sandboxing, defensive prompts | Open-source | [21](21_Multi_Agent_Security.md) |
 
 ## Specialized Security LLMs
 
@@ -110,6 +111,14 @@ Quick reference for every tool, framework, benchmark, and standard mentioned acr
 |-------|-------------|-------|
 | Foundation-Sec-8B-Reasoning | Open-weight 8B instruction-tuned security LLM | [16](16_AI_Blue_Teaming_And_Defensive_AI.md) |
 | VulnLLM-R-7B | 7B reasoning LLM; outperforms Claude-3.7-Sonnet on vuln detection | [16](16_AI_Blue_Teaming_And_Defensive_AI.md) |
+
+## Token Abuse Defense / Cost Management
+
+| Tool | Description | Source | Notes |
+|------|-------------|--------|-------|
+| LiteLLM | Cost-aware rate limiting proxy; token budgeting; per-key spend caps | https://docs.litellm.ai | [19](19_Token_Based_Attacks_And_Resource_Exploitation.md) |
+| RouteLLM | Model routing framework; cost optimization via complexity classification | https://github.com/lm-sys/RouteLLM | [18](18_Token_Optimization_And_LLM_Efficiency.md), [20](20_LLM_Landscape_Tokens_And_Pricing.md) |
+| LLMLingua-2 | Prompt compression via BERT token classification; 3-6x faster; reduces DoW attack surface | https://github.com/microsoft/LLMLingua | [18](18_Token_Optimization_And_LLM_Efficiency.md) |
 
 ## Skill / Agent Config Scanning
 
@@ -135,6 +144,8 @@ Quick reference for every tool, framework, benchmark, and standard mentioned acr
 | Wiz AI vs Humans | AI agent performance on 10 real-world-modeled web challenges | [14](14_AI_Hacking_Frameworks.md) |
 | DARPA AIxCC | Autonomous vulnerability discovery + patching at scale | [14](14_AI_Hacking_Frameworks.md), [16](16_AI_Blue_Teaming_And_Defensive_AI.md) |
 | UK AISI / Gray Swan | 1.8M attacks across 22 models (every model broke) | [14](14_AI_Hacking_Frameworks.md) |
+| Agent Security Bench (ASB) | 27 attack types across 13 LLM backbones; multi-agent security; 84.30% max ASR | [21](21_Multi_Agent_Security.md) |
+| BAD-ACTS | 188 scenarios in 4 agentic environments; communication-based attacks; 80% ASR | [21](21_Multi_Agent_Security.md) |
 
 ### LLM Honesty / Reliability Benchmarks
 
@@ -163,6 +174,14 @@ Quick reference for every tool, framework, benchmark, and standard mentioned acr
 | BrokenMath | Sycophancy in theorem proving with perturbed problems | [15](15_Bullshit_Benchmark_And_LLM_Honesty.md) |
 | Syco-Bench | Four-part sycophancy benchmark (Picking Sides, Mirroring, etc.) | [15](15_Bullshit_Benchmark_And_LLM_Honesty.md) |
 | Spiral-Bench | Sycophancy and delusion reinforcement in 20-turn conversations | [15](15_Bullshit_Benchmark_And_LLM_Honesty.md) |
+
+### Writing Quality Benchmarks
+
+| Benchmark | What It Measures | Notes |
+|-----------|-----------------|-------|
+| EQ-Bench Creative Writing | Narrative quality, emotional depth, prose style; Elo ranking | [20](20_LLM_Landscape_Tokens_And_Pricing.md) |
+| WritingBench | 6 domains (academic, finance, law, literature, education, advertising); 1,239 queries | [20](20_LLM_Landscape_Tokens_And_Pricing.md) |
+| LongGenBench | Long-form generation quality at 16K-32K tokens; coherence + instruction adherence | [20](20_LLM_Landscape_Tokens_And_Pricing.md) |
 
 ### Code Performance Benchmarks
 

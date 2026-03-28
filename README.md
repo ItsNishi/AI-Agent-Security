@@ -40,6 +40,10 @@ Every attack has a defense. Every payload is annotated, defanged, and educationa
 | 💩 | [Bullshit Benchmark & LLM Honesty](notes/15_Bullshit_Benchmark_And_LLM_Honesty.md) | BullshitBench, TruthfulQA, SimpleQA, sycophancy benchmarks, Bullshit Index, abstention, slopsquatting, RLHF-security tension |
 | 🛡️ | [AI Blue Teaming & Defensive AI](notes/16_AI_Blue_Teaming_And_Defensive_AI.md) | AI SOC agents, CrowdStrike Charlotte, Microsoft Security Copilot, malware RE, DARPA AIxCC, NIST AI 100-2, defender's advantage analysis |
 | 🔤 | [Unicode Variation Selector Attacks](notes/17_Unicode_Variation_Selector_Attacks.md) | Invisible jailbreaking, guardrail evasion, Sneaky Bits encoding, GlassWorm malware, token expansion DoS, defense: explicit stripping required |
+| 🪙 | [Token Optimization & LLM Efficiency](notes/18_Token_Optimization_And_LLM_Efficiency.md) | Context engineering, prompt structure, model routing, caching, batching, agent loop optimization, Claude Code cost management |
+| 💸 | [Token-Based Attacks & Resource Exploitation](notes/19_Token_Based_Attacks_And_Resource_Exploitation.md) | Denial of wallet, sponge examples, reasoning exhaustion (ThinkTrap/ReasoningBomb), context window poisoning, token smuggling, tokenizer security, model extraction, LLMjacking |
+| 📊 | [LLM Landscape & Token Economics](notes/20_LLM_Landscape_Tokens_And_Pricing.md) | Security-framed model reference: tokenization attack surface, cost economics for threat modeling, model selection for security work, open model supply chain risks, Chinese censorship implications |
+| 🤝 | [Multi-Agent Security](notes/21_Multi_Agent_Security.md) | Agent-to-agent attacks, A2A protocol spoofing, 82.4% peer compliance bypass, delegation chain injection, memory contagion, cross-agent config attacks, offensive swarms, defense patterns |
 
 ---
 
@@ -54,6 +58,8 @@ Hands-on annotated scenarios -- each one shows the attack **and** the fix.
 | 📤 | [Data Exfiltration Via Agent](examples/03_Data_Exfiltration_Via_Agent/) | The agent becomes an unwitting mule for your secrets, keys, and credentials |
 | 📦 | [Hallucinated Package Injection](examples/04_Hallucinated_Package_Skill_Injection/) | LLM invents a package name, attacker registers it -- instant supply chain attack |
 | 🔧 | [MCP Tool Poisoning](examples/05_MCP_Tool_Poisoning/) | Malicious instructions hidden in tool descriptions hijack agent behavior silently |
+| 💸 | [Resource Exhaustion & Denial of Wallet](examples/06_Resource_Exhaustion_And_Denial_Of_Wallet/) | Reasoning bombs, context saturation, and cost math -- drain API budgets without crashing the service |
+| 🔤 | [Unicode Invisible Injection](examples/07_Unicode_Invisible_Injection/) | Variation selectors and Tags block encode hidden instructions that survive diff review and Unicode normalization |
 
 ---
 
@@ -75,16 +81,25 @@ Hands-on annotated scenarios -- each one shows the attack **and** the fix.
 │  steering    │  squatting       │ IDE telemetry     │                               │
 │ Sampling     │ GlassWorm        │                   │                               │
 │  injection   │  extension worm  │                   │                               │
-├──────────────┴──────────────────┴───────────────────┴───────────────────────────────┤
-│ 🏗️ Framework & Platform                    │ 🛡️ Bypass & Escalation              │
-│                                             │                                      │
-│ MCP server compromise (CVE-2025-6514)      │ Sandbox escape (numpy allowlist)     │
-│ OpenClaw gateway exposure (42K+ instances) │ Cross-agent privilege escalation     │
-│ GPT Store plugin OAuth flaws               │ Tool confusion / confused deputy     │
-│ HuggingFace pickle deserialization         │ Rug pull / bait-and-switch           │
-│ IDE Chromium CVEs (94+ in Cursor/Windsurf) │ IDEsaster (30+ CVEs across AI IDEs) │
-│ ClawHub malicious skills (1184+)           │ Agent-to-agent prompt injection      │
-└─────────────────────────────────────────────┴──────────────────────────────────────┘
+├──────────────┬──────────────────┴───────────────────┴───────────────────────────────┤
+│ 💸 Resource  │ 🏗️ Framework & Platform                                            │
+│   Attacks    │                                                                     │
+│              │ MCP server compromise (CVE-2025-6514)                              │
+│ Denial of    │ OpenClaw gateway exposure (42K+ instances)                         │
+│  wallet      │ GPT Store plugin OAuth flaws                                       │
+│ Sponge       │ HuggingFace pickle deserialization                                 │
+│  examples    │ IDE Chromium CVEs (94+ in Cursor/Windsurf)                         │
+│ Reasoning    │ ClawHub malicious skills (1184+)                                   │
+│  exhaustion  ├─────────────────────────────────────────────────────────────────────┤
+│ Model routing│ 🛡️ Bypass & Escalation                                             │
+│  manipulation│                                                                     │
+│ Token        │ Sandbox escape (numpy allowlist)                                   │
+│  smuggling   │ Cross-agent privilege escalation                                   │
+│ LLMjacking   │ Tool confusion / confused deputy                                   │
+│              │ Rug pull / bait-and-switch                                          │
+│              │ IDEsaster (30+ CVEs across AI IDEs)                                │
+│              │ Agent-to-agent prompt injection                                     │
+└──────────────┴─────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -149,11 +164,12 @@ To install the hooks, copy `.claude/settings.json` into your project's `.claude/
 
 ### Shared Pattern Database
 
-70+ detection patterns across 10 categories. Each skill bundles its own copy of `patterns.py` so it works standalone:
+151 detection patterns across 15 categories. Each skill bundles its own copy of `patterns.py` so it works standalone:
 
 ```
 skill_injection | hook_abuse | mcp_config | secrets | dangerous_calls
 exfiltration | encoding_obfuscation | instruction_override | supply_chain | file_permissions
+code_before_review | config_backdoor | memory_corruption | confused_delegation | persistence
 ```
 
 All patterns derived from the research notes and examples in this repo.
