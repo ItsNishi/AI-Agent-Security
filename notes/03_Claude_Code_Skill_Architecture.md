@@ -454,8 +454,8 @@ Enterprise admins can deploy:
 
 ## Sources
 
-- Claude Code Skills Documentation: `https://code.claude.com/docs/en/skills.md`
-- Claude Code Hooks Reference: `https://code.claude.com/docs/en/hooks.md`
-- Claude Code MCP Integration: `https://code.claude.com/docs/en/mcp.md`
-- Claude Code Permissions: `https://code.claude.com/docs/en/permissions.md`
-- Claude Code Security: `https://code.claude.com/docs/en/security.md`
+- Claude Code Skills Documentation: `https://code.claude.com/docs/en/skills`
+- Claude Code Hooks Reference: `https://code.claude.com/docs/en/hooks`
+- Claude Code MCP Integration: `https://code.claude.com/docs/en/mcp`
+- Claude Code Permissions: `https://code.claude.com/docs/en/permissions`
+- Claude Code Security: `https://code.claude.com/docs/en/security`

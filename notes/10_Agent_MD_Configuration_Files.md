@@ -16,12 +16,12 @@ Every major AI coding tool now supports some form of persistent instruction file
 
 | Tool | File(s) | Location |
 |---|---|---|
-| Claude Code | CLAUDE.md, CLAUDE.local.md | Project root, parent dirs, ~/.claude/ |
+| Claude Code | CLAUDE.md, CLAUDE.local.md, .claude/rules/*.md | Project root, parent dirs, ~/.claude/ |
 | Cursor | .cursor/rules/*.mdc, .cursorrules | Project root |
-| Windsurf | .windsurf/rules/rules.md | Project root |
-| GitHub Copilot | .github/copilot-instructions.md | Project root |
+| Windsurf | .windsurf/rules/rules.md, .windsurfrules | Project root |
+| GitHub Copilot | .github/copilot-instructions.md, .github/instructions/*.instructions.md, AGENTS.md, CLAUDE.md, GEMINI.md | `.github/`, repo root, nearest directory tree for `AGENTS.md` |
 | Cline | .clinerules | Project root |
-| Generic | AGENTS.md | Project root |
+| Cross-tool / emerging standard | AGENTS.md | Project root or nearest directory, depending on tool |
 
 All operate on the same principle: the agent reads the file at session start and treats its
 contents as authoritative project guidelines. This is by design -- but it means anyone who
@@ -92,7 +92,7 @@ the highest-value targets because:
 - Pull requests modifying them may not receive the same scrutiny as code changes
 
 Attack flow:
-1. Attacker submits a PR modifying CLAUDE.md / .cursorrules with hidden instructions
+1. Attacker submits a PR modifying `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`, or `.cursorrules` with hidden instructions
 2. Reviewer sees only benign-looking formatting changes
 3. Merge contaminates all future agent sessions for every developer on the project
 
@@ -368,8 +368,9 @@ Every line addresses something the agent would get wrong without it.
 
 ## 6. Cross-Tool Portability
 
-If you maintain projects used with multiple AI coding tools, consider an AGENTS.md
-that serves as a single source of truth, with tool-specific files importing from it:
+If you maintain projects used with multiple AI coding tools, use AGENTS.md as the
+canonical policy file and layer tool-specific files on top only when the tool needs
+extra metadata or a different load path:
 
 ```markdown
 # CLAUDE.md
@@ -381,9 +382,15 @@ that serves as a single source of truth, with tool-specific files importing from
 (Copy or reference AGENTS.md content -- Cursor does not support imports)
 ```
 
-Note that Cursor's .mdc format supports richer metadata (glob triggers, auto-attachment)
+GitHub Copilot now documents native `AGENTS.md` support alongside
+`.github/copilot-instructions.md` and path-specific `.github/instructions/*.instructions.md`
+files. If both a repository-wide Copilot instruction file and a matching path-specific
+instruction file apply, Copilot uses both. For `AGENTS.md`, GitHub documents nearest-file
+precedence in the directory tree.
+
+Cursor's `.mdc` format still supports richer metadata (glob triggers, auto-attachment)
 than plain markdown. For Cursor-heavy teams, maintain both but keep AGENTS.md as the
-canonical source.
+canonical source when possible.
 
 
 ## 7. Open Questions
@@ -400,8 +407,9 @@ canonical source.
   is a step toward this.
 
 - **Cross-agent standardization:** The fragmented ecosystem (.cursorrules, CLAUDE.md,
-  copilot-instructions.md) means teams maintain multiple files with the same content.
-  AGENTS.md attempts to standardize but adoption is uneven.
+  copilot-instructions.md, `.github/instructions/*.instructions.md`) still forces
+  duplicate policy files. AGENTS.md adoption is improving, but load order and precedence
+  still differ by tool.
 
 
 ## Sources
@@ -414,6 +422,7 @@ canonical source.
 - [MIT Technology Review: Rules Fail at the Prompt](https://www.technologyreview.com/2026/01/28/1131003/rules-fail-at-the-prompt-succeed-at-the-boundary/)
 - [Simon Willison: Agents Rule of Two](https://simonw.substack.com/p/new-prompt-injection-papers-agents)
 - [Claude Code Best Practices](https://code.claude.com/docs/en/best-practices)
+- [GitHub Docs: Adding Repository Custom Instructions for GitHub Copilot](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions)
 - [HumanLayer: Writing a Good CLAUDE.md](https://www.humanlayer.dev/blog/writing-a-good-claude-md)
 - [Knostic: Zero Width Unicode Risks](https://www.knostic.ai/blog/zero-width-unicode-characters-risks)
 - [Security Affairs: Rules File Backdoor](https://securityaffairs.com/175593/hacking/rules-file-backdoor-ai-code-editors-silent-supply-chain-attacks.html)

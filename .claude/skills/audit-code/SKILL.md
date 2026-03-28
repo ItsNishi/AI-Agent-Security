@@ -49,5 +49,5 @@ produce warnings but do not block execution.
 
 - audit-code is the detection layer for source code security issues
 - The hooks provide supplementary runtime warnings during agent operation
-- To enforce blocking, hooks must return `{"decision": "block"}`
-  instead of warning messages
+- To enforce `PreToolUse` blocking or escalation, hooks must return
+  `hookSpecificOutput.permissionDecision: "deny"` or `"ask"` instead of warning messages

@@ -25,7 +25,7 @@ Where `$SKILL_DIR` is the directory containing this SKILL.md, and `$PROJECT_ROOT
 - `.claude/settings.json` -- hook configs (auto-approve, stop loops, env persistence)
 - `.claude/skills/` -- all SKILL.md files (hidden comments, curl|bash, persistence triggers)
 - `.mcp.json` -- MCP server configs (unknown URLs, env var expansion, broad tools)
-- `CLAUDE.md` / `.claude/CLAUDE.md` -- instruction injection in project config
+- Agent instruction files -- `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.claude/rules/*.md`, `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, Cursor rules, Windsurf rules, and `.clinerules`
 
 ## Output
 
@@ -49,6 +49,6 @@ execution. An agent or user can proceed past the warning.
 
 - The hooks are a supplementary signal, not an enforcement layer
 - vet-repo is the primary detection mechanism for repo-level threats
-- Deterministic blocking requires changing the hook to return
-  `{"decision": "block"}` instead of a warning message
+- Deterministic `PreToolUse` blocking requires returning
+  `hookSpecificOutput.permissionDecision: "deny"` or `"ask"` instead of only showing a warning message
 - See `.claude/settings.json` for the current hook definitions
