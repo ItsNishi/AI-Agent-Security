@@ -16,7 +16,7 @@ This note covers AI-powered defensive tools, commercial platforms, autonomous SO
 
 LLMs are being integrated into SIEM platforms for:
 - **Alert triage**: LLMs analyze detection context (IP addresses, port info, hostnames) and answer initial triage questions, cutting first-response time dramatically
-- **Threat intelligence summarization**: LLM document summarization helps CTI teams digest more information and streamline intel deliverables
+- **Threat intelligence summarization**: LLM document summarization helps CTI teams digest more information and speed up intel delivery
 - **Detection engineering**: Tools like DIANA convert threat intelligence from natural language descriptions into detection logic, investigation steps, and response procedures
 - **Natural language querying**: Analysts query security data lakes in plain English instead of writing complex search queries
 

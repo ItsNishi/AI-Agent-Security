@@ -133,4 +133,4 @@ This is particularly dangerous because:
 
 ## General Defense Framework
 
-See [03_Defense_Patterns.md](../../notes/03_Defense_Patterns.md) for comprehensive preventive, detective, and response controls including sandboxing, permission models, runtime monitoring, and detection patterns.
+See [03_Defense_Patterns.md](../../notes/03_Defense_Patterns.md) for preventive, detective, and response controls including sandboxing, permission models, runtime monitoring, and detection patterns.
