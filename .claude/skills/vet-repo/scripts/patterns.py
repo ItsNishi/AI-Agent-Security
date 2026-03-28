@@ -1,7 +1,7 @@
 """
 Shared pattern database for AI Agent Security skill suite.
 
-Central registry of detection patterns derived from research notes 01-18
+Central registry of detection patterns derived from research notes 01-20
 and examples 01-04. Used by vet-repo, scan-skill, and audit-code skills.
 """
 

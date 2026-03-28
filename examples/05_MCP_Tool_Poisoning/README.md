@@ -53,7 +53,7 @@ Testing of MCP implementations revealed:
 
 ## Cross-References
 
-- [Note 15: AI Application Ecosystem Security](../../notes/15_AI_Application_Ecosystem_Security.md) -- Full MCP security coverage including CVE table, rug pull attacks, tool poisoning in agent framework context, and ETDI proposals
+- [Note 13: AI Application Ecosystem Security](../../notes/13_AI_Application_Ecosystem_Security.md) -- Full MCP security coverage including CVE table, rug pull attacks, tool poisoning in agent framework context, and ETDI proposals
 - [Example 03: Data Exfiltration Via Agent](../03_Data_Exfiltration_Via_Agent/) -- General exfiltration techniques that tool poisoning enables as a delivery mechanism
 
 ## Key Sources
